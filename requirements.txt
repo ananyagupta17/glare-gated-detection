@@ -1,0 +1,21 @@
+# Glare-Gated Object Detection — this repo's scope (data + synthesis + detection + eval)
+# Python 3.11+ (dev venv is 3.14). Install: pip install -r requirements.txt
+
+# Detection — COCO-pretrained YOLOv8, inference only (no training, see §3)
+ultralytics>=8.3,<9
+torch>=2.2
+torchvision>=0.17
+
+# Image I/O + glare synthesis (linear-space Gaussian compositing, §6)
+numpy>=1.26
+opencv-python>=4.9
+pillow>=10.0
+
+# Evaluation + reporting
+pandas>=2.1
+matplotlib>=3.8
+pyyaml>=6.0
+tqdm>=4.66
+
+# Notebooks (P0 step 1/2: visualise boxes and inspect glare realism)
+jupyter>=1.0

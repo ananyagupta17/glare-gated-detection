@@ -1,6 +1,30 @@
+# Datasets (390 MB, re-downloadable via datasets/kitti/kitti.yaml)
 datasets/
-data/clean/
-data/glared/
+
+# Regenerable image data — labels/ and subset_ids.txt ARE committed (team contract, §10)
+# (glob the contents, not the dir — git can't re-include a file inside an excluded dir)
+data/clean/*
+data/glared/*
+data/restored/*
+!data/clean/.gitkeep
+!data/glared/.gitkeep
+
+# Model weights, training/inference artifacts
 *.pt
+runs/
+
+# Results — keep the directory, ignore bulky per-run dumps
+results/**/predictions/
+
+# Python
+venv/
+.venv/
 __pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# macOS
 .DS_Store
+
+# Local-only project context (untracked on purpose)
+CLAUDE.md

@@ -1,0 +1,6 @@
+datasets/
+data/clean/
+data/glared/
+*.pt
+__pycache__/
+.DS_Store

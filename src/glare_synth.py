@@ -94,6 +94,7 @@ import csv
 import itertools
 import math
 import random
+import shutil
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -236,24 +237,65 @@ TYPE_PLACEMENT = {
 }
 
 
+# Two targets. The 400-image subset is the committed team contract (SS10); the full split
+# is the scale-up. Their outputs are kept side by side under distinct names so a run of one
+# can never overwrite the other.
+MODES = {
+    "subset": dict(
+        clean_dir=REPO_ROOT / "data" / "clean",
+        labels_dir=REPO_ROOT / "data" / "labels",
+        glared_dir=REPO_ROOT / "data" / "glared",
+        clean_out=REPO_ROOT / "data" / "clean",           # already populated
+        csv_out=REPO_ROOT / "data" / "glare_labels.csv",
+        ids_file=REPO_ROOT / "data" / "subset_ids.txt",
+        example_prefix="glare_example",
+    ),
+    "full": dict(
+        clean_dir=REPO_ROOT / "datasets" / "kitti" / "images" / "val",
+        labels_dir=REPO_ROOT / "datasets" / "kitti" / "labels" / "val",
+        glared_dir=REPO_ROOT / "data" / "glared_full",
+        clean_out=REPO_ROOT / "data" / "clean_full",
+        csv_out=REPO_ROOT / "data" / "glare_labels_full.csv",
+        ids_file=None,                                    # no fixed subset to check against
+        example_prefix="glare_full_example",
+    ),
+}
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--clean-dir", type=Path, default=REPO_ROOT / "data" / "clean")
-    p.add_argument("--labels-dir", type=Path, default=REPO_ROOT / "data" / "labels")
-    p.add_argument("--glared-dir", type=Path, default=REPO_ROOT / "data" / "glared")
-    p.add_argument("--ids-file", type=Path, default=REPO_ROOT / "data" / "subset_ids.txt")
-    p.add_argument("--csv-out", type=Path, default=REPO_ROOT / "data" / "glare_labels.csv")
+    p.add_argument("--full", action="store_true",
+                   help="run over the whole KITTI val split (1496) rather than the "
+                        "400-image subset; writes to data/glared_full and "
+                        "data/glare_labels_full.csv")
+    p.add_argument("--copy-clean", action="store_true",
+                   help="also copy the untouched originals into the mode's clean dir. Off "
+                        "by default in --full: they are byte-identical to "
+                        "datasets/kitti/images/val, and a second copy can only drift")
+    # Paths default to None and are filled from MODES, so an explicit flag always wins.
+    p.add_argument("--clean-dir", type=Path, default=None)
+    p.add_argument("--labels-dir", type=Path, default=None)
+    p.add_argument("--glared-dir", type=Path, default=None)
+    p.add_argument("--clean-out", type=Path, default=None)
+    p.add_argument("--ids-file", type=Path, default=None)
+    p.add_argument("--csv-out", type=Path, default=None)
     p.add_argument("--results-dir", type=Path, default=REPO_ROOT / "results")
-    p.add_argument("--n-glared", type=int, default=200,
-                   help="how many images to glare (default: %(default)s)")
+    p.add_argument("--n-glared", type=int, default=None,
+                   help="how many images to glare (default: exactly half the population)")
     p.add_argument("--examples", type=int, default=len(GLARE_TYPES),
                    help="comparison figures; at least one per type (default: %(default)s)")
     p.add_argument("--only", type=str, default=None,
                    help="restrict to one glare type, for visual tuning")
     p.add_argument("--seed", type=int, default=42, help="master seed (default: %(default)s)")
     p.add_argument("--dry-run", action="store_true", help="report the plan, write nothing")
-    return p.parse_args(argv)
+
+    args = p.parse_args(argv)
+    args.mode = "full" if args.full else "subset"
+    for key, value in MODES[args.mode].items():
+        if getattr(args, key, None) is None:
+            setattr(args, key, value)
+    return args
 
 
 def rel(path: Path) -> str:
@@ -279,7 +321,7 @@ def load_subset(clean_dir: Path, labels_dir: Path, ids_file: Path) -> list[tuple
 
     # All three components must run on the same IDs; a silent drift here would break the
     # C1/C2/C3 comparison rather than raise an error, so check it loudly.
-    if ids_file.is_file():
+    if ids_file and ids_file.is_file():
         expected = {ln.strip() for ln in ids_file.read_text().splitlines() if ln.strip()}
         found = {p.stem for p in images}
         if expected != found:
@@ -425,9 +467,13 @@ def main(argv: list[str] | None = None) -> int:
     subset = load_subset(args.clean_dir, args.labels_dir, args.ids_file)
     ids = [image_id for image_id, _ in subset]
     paths = dict(subset)
-    print(f"subset: {len(ids)} images in {rel(args.clean_dir)} "
+    print(f"{args.mode}: {len(ids)} images in {rel(args.clean_dir)} "
           f"(labels verified in {rel(args.labels_dir)})")
 
+    # Exactly half by default. The 50/50 split is the load-bearing property, not the
+    # literal count, so it scales with the population instead of being hardcoded.
+    if args.n_glared is None:
+        args.n_glared = len(ids) // 2
     if args.n_glared > len(ids):
         sys.exit(f"error: asked to glare {args.n_glared} of only {len(ids)} images")
 
@@ -460,14 +506,24 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  removed {removed} stale file(s) from a previous run")
 
     example_slots = choose_examples(types_by_id, args.examples, args.seed)
-    for old in args.results_dir.glob("glare_example_*.png"):
+    for old in args.results_dir.glob(f"{args.example_prefix}_*.png"):
         # A shorter run must not leave figures from a longer one lying around.
         if int(old.stem.rsplit("_", 1)[1]) >= len(example_slots):
             old.unlink()
 
+    copy_clean = args.copy_clean and args.clean_out.resolve() != args.clean_dir.resolve()
+    if copy_clean:
+        args.clean_out.mkdir(parents=True, exist_ok=True)
+
     rows: list[tuple[str, int, str]] = []
     written = 0
+    copied = 0
     for image_id, path in subset:
+        # Every original is copied, not just the un-glared ones: the clean counterpart of
+        # a glared frame is the restoration teammate's ground truth (SS10).
+        if copy_clean:
+            shutil.copy2(path, args.clean_out / path.name)
+            copied += 1
         if image_id not in glared_ids:
             rows.append((image_id, 0, ""))
             continue
@@ -483,10 +539,15 @@ def main(argv: list[str] | None = None) -> int:
         rows.append((image_id, 1, spec.type_name))
 
         if image_id in example_slots:
-            out = args.results_dir / f"glare_example_{example_slots[image_id]}.png"
+            out = args.results_dir / f"{args.example_prefix}_{example_slots[image_id]}.png"
             save_comparison(out, image_id, clean, glared, spec)
 
     print(f"\n  wrote {written} glared images -> {rel(args.glared_dir)}/")
+    if copy_clean:
+        print(f"  copied {copied} untouched originals -> {rel(args.clean_out)}/")
+    elif args.mode == "full":
+        print(f"  clean originals left in place at {rel(args.clean_dir)}/ "
+              f"(use --copy-clean to duplicate them)")
 
     with args.csv_out.open("w", newline="") as fh:
         writer = csv.writer(fh)
@@ -494,6 +555,12 @@ def main(argv: list[str] | None = None) -> int:
         writer.writerows(rows)
     print(f"  wrote {rel(args.csv_out)}  ({len(rows)} rows)  <-- commit this")
     print(f"  wrote {len(example_slots)} comparison figure(s) -> {rel(args.results_dir)}/")
+
+    if args.mode == "full":
+        print("\nNOTE: this realisation is independent of the 400-image subset run. An image\n"
+              "      in both may be glared in one and clean in the other, with a different\n"
+              "      type and parameters. Pick ONE and use it for all three components\n"
+              "      (CLAUDE.md SS10) -- mixing them silently breaks the C1/C2/C3 comparison.")
 
     print("\nNext (build order): src/detect.py -> YOLOv8 inference + latency, then the C1 arm.")
     return 0

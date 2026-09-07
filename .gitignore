@@ -8,6 +8,9 @@ data/glared/*
 data/restored/*
 !data/clean/.gitkeep
 !data/glared/.gitkeep
+# full-val scale-up (--full): 340 MB of glared PNGs, regenerable from seed 42
+data/clean_full/
+data/glared_full/
 
 # Model weights, training/inference artifacts
 *.pt

@@ -1,0 +1,60 @@
+{
+  "mean_ms": 15.13,
+  "std_ms": 12.357,
+  "min_ms": 12.758,
+  "max_ms": 469.493,
+  "fps": 66.09,
+  "device": "cpu",
+  "note": "Warm-up 50 frames excluded; wall-clock includes device + CPU overhead",
+  "config": {
+    "model": "models/yolo_baseline.pt",
+    "imgsz": 640,
+    "batch": 1,
+    "conf": 0.001,
+    "n_profiled": 1446,
+    "n_frames_total": 1496,
+    "warmup_frames": 50,
+    "io_excluded": true
+  },
+  "median_ms": 14.251,
+  "ultralytics_breakdown_ms": {
+    "preprocess_ms": 0.431,
+    "inference_ms": 14.261,
+    "postprocess_ms": 0.249
+  },
+  "percentiles": {
+    "p50_ms": 14.251,
+    "p90_ms": 16.35,
+    "p95_ms": 17.473,
+    "p99_ms": 22.213,
+    "outliers_over_2x_median": 8,
+    "outlier_note": "spikes are OS scheduling, not model behaviour; see p95/p99"
+  },
+  "warmup": {
+    "n": 50,
+    "mean_ms": 26.313,
+    "first_frame_ms": 644.105,
+    "cold_start_penalty_x": 42.57
+  },
+  "stability": {
+    "first_decile_mean_ms": 13.876,
+    "last_decile_mean_ms": 14.588,
+    "delta_ms": 0.712,
+    "slope_ms_per_1000_frames": 1.4053
+  },
+  "validation_mAP50": 0.8184,
+  "validation_mAP5095": 0.5717,
+  "validation_scope": "all 1496 clean val frames",
+  "regression_check": {
+    "subset": "full.clean",
+    "n": 748,
+    "baseline_mAP50": 0.8354,
+    "measured_mAP50": 0.8354,
+    "delta_mAP50": 0.0,
+    "baseline_mAP50_95": 0.5844,
+    "measured_mAP50_95": 0.5844,
+    "tolerance": 0.01,
+    "passed": true,
+    "note": "baseline was scored on mps, this on cpu; small float drift is expected"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "accuracy": 100.0,
+  "precision": 100.0,
+  "recall": 100.0,
+  "f1": 100.0,
+  "trigger_rate": 49.66,
+  "confusion_matrix": {
+    "tp": 148,
+    "tn": 150,
+    "fp": 0,
+    "fn": 0
+  },
+  "latency_ms_per_frame": 4.2684,
+  "latency_pct_of_detection": 28.21,
+  "baseline_comparison": {
+    "brightness_v1": {
+      "accuracy": 80.87,
+      "precision": 78.26,
+      "recall": 85.14,
+      "trigger_rate": 54.03,
+      "latency_ms": 0.114
+    }
+  },
+  "config": {
+    "n_images": 1496,
+    "n_train": 1198,
+    "n_val": 298,
+    "val_frac": 0.2,
+    "seed": 42,
+    "epochs": 200,
+    "batch": 64,
+    "lr": 0.01,
+    "features": [
+      "mean_luma",
+      "std_luma",
+      "max_luma",
+      "min_luma",
+      "sat_frac",
+      "p95_luma",
+      "p99_luma",
+      "upper_third_mean_luma",
+      "rb_diff",
+      "hsv_sat_mean"
+    ],
+    "model": "10 hand-engineered features -> tiny MLP",
+    "device": "cpu"
+  }
+}

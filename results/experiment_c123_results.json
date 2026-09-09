@@ -5,9 +5,9 @@
     "device": "cpu",
     "seed": 42,
     "model": "models/yolo_baseline.pt",
-    "restore": "identity (plumbing check)",
-    "gate": "brightness_v1:threshold=0.5534",
-    "detect_ms_per_frame": 15.13
+    "restore": "missing",
+    "gate": "disabled",
+    "detect_ms_per_frame": 14.157
   },
   "c1": {
     "status": "complete",
@@ -34,39 +34,17 @@
         "count": 37
       }
     },
-    "latency_ms": 15.13,
+    "latency_ms": 14.157,
     "trigger_rate": 0.0
   },
   "c2": {
-    "status": "complete",
-    "mAP50": 0.4915,
-    "mAP50_95": 0.3164,
-    "latency_ms": 15.131,
-    "restore_ms_per_frame": 0.001,
-    "trigger_rate": 100.0,
-    "restored": 298,
-    "plumbing_check": {
-      "identical_to_c1": true,
-      "c1_mAP50": 0.4915,
-      "note": "identity restoration must reproduce C1 exactly"
-    }
+    "status": "waiting",
+    "reason": "missing",
+    "expected_interface": "src/restore.py :: restore(image) -> image"
   },
   "c3": {
-    "status": "complete",
-    "mAP50": 0.4915,
-    "mAP50_95": 0.3164,
-    "trigger_rate": 54.03,
-    "latency_ms": 15.244,
-    "gate_ms_per_frame": 0.1118,
-    "restore_ms_per_frame": 0.0025,
-    "restored": 161
-  },
-  "comparison": {
-    "recovery_of_c2_gain": null,
-    "share_of_c2_added_cost": 114.0,
-    "c3_beats_c1": true,
-    "c3_cheaper_than_c2": false,
-    "c3_above_c2": false,
-    "note": "C3 restores a subset of C2, so C3 <= C2 on mAP is EXPECTED, not a bug. C3 above C2 happens only when restoring clean frames hurts them. The claim being tested is efficiency: keep most of C2's gain for a fraction of its cost."
+    "status": "waiting",
+    "reason": "missing: restoration, gate",
+    "expected_interface": "gate.predict(image) -> (bool, float) | bool"
   }
 }

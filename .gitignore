@@ -12,9 +12,9 @@ data/restored/*
 data/clean_full/
 data/glared_full/
 
-# Model weights, training/inference artifacts
-*.pt
-runs/
+# Model weights — ignore checkpoints, track final baseline
+runs/**/*.pt
+!models/yolo_baseline.pt
 
 # Results — keep the directory, ignore bulky per-run dumps
 results/**/predictions/

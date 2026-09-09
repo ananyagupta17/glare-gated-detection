@@ -10,8 +10,8 @@
     "fp": 0,
     "fn": 0
   },
-  "latency_ms_per_frame": 4.2684,
-  "latency_pct_of_detection": 28.21,
+  "latency_ms_per_frame": 4.3097,
+  "latency_pct_of_detection": 28.48,
   "baseline_comparison": {
     "brightness_v1": {
       "accuracy": 80.87,
@@ -34,7 +34,6 @@
       "mean_luma",
       "std_luma",
       "max_luma",
-      "min_luma",
       "sat_frac",
       "p95_luma",
       "p99_luma",
@@ -42,7 +41,13 @@
       "rb_diff",
       "hsv_sat_mean"
     ],
-    "model": "10 hand-engineered features -> tiny MLP",
+    "model": "9 hand-engineered features -> tiny MLP",
     "device": "cpu"
+  },
+  "leakage_review": {
+    "removed_feature": "min_luma",
+    "reason": "Ananya's review: glare_synth.py's black-lift adds a deterministic per-frame floor, so every glared frame's darkest pixel sat at 31-121 vs 0-2 for every clean frame -- zero overlap across all 298 held-out frames, confirmed directly against this repo's data. min_pixel > 2 alone was a 100%-accurate classifier; it reflects a real physical effect (veiling glare does lift black level) made artificially deterministic by the synthesis, not real generalizable signal.",
+    "sanity_check_after_removal": "accuracy stayed ~100% (MLP: 100%, plain logistic regression: 99.66%, 1 error). Checked this is NOT a second hidden leak: logistic regression coefficients have no single dominant weight, and every remaining feature has genuine class-range overlap on this data (verified per-feature) -- consistent with legitimate combined signal (mean brightness + contrast + chromatic shift + upper-region brightness), not another shortcut.",
+    "open_caveat": "this validation set is still synthetic and deterministic (four fixed glare recipes, no sensor noise), so near-100% here does not guarantee the same held up against real glare photos (CLAUDE.md section 13, the GLARE dataset). Retraining once glare_synth.py adds sensor noise / floor jitter (Ananya's proposed fix) would give a more trustworthy number."
   }
 }

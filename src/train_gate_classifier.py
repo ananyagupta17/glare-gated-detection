@@ -6,17 +6,24 @@ WHY HAND-ENGINEERED FEATURES, NOT A CNN
 A gate that costs what it saves is pointless (the brief is explicit about this). A first
 version transfer-learned a frozen MobileNetV2 backbone and measured 68 ms/frame on this
 CPU -- 4.5x the cost of detection itself (15.13 ms) and ~600x the brightness baseline
-(0.114 ms). That fails "cheap" outright, so it was replaced with 10 hand-engineered
+(0.114 ms). That fails "cheap" outright, so it was replaced with 9 hand-engineered
 features computed directly off the BGR frame with OpenCV/numpy (histogram-based
 percentiles instead of a full sort, cv2.mean instead of numpy's slower strided reduction):
-mean/std luma, max/min luma, saturated-pixel fraction, 95th/99th percentile luma, upper-
-third mean luma (the baseline's own signal), R-B channel diff (chromatic halo, CLAUDE.md
+mean/std luma, max luma, saturated-pixel fraction, 95th/99th percentile luma, upper-third
+mean luma (the baseline's own signal), R-B channel diff (chromatic halo, CLAUDE.md
 section 6), and HSV saturation mean (glare desaturates). Measured ~1.6 ms/frame -- about
-11% of detection cost, and the classifier is a tiny MLP on 10 floats (sub-millisecond).
+11% of detection cost, and the classifier is a tiny MLP on 9 floats (sub-millisecond).
 
 This also targets the baseline's known failure mode directly: it catches only 51% of
 direct_sun because a small saturated core barely moves mean brightness. The 95th/99th
 percentile and max-luma features see that core even when the mean doesn't move.
+
+DROPPED FEATURE: min_luma (Ananya's review, see git history) -- glare_synth.py's black-
+lift adds a deterministic per-frame floor, so every glared frame's darkest pixel sat at
+31-121 while every clean frame's sat at 0-2: zero overlap, a free 100%-accurate shortcut
+that had nothing to do with real glare cues and would collapse on real photos. Confirmed
+directly against this repo's data before removing it; every remaining feature has genuine
+class overlap (checked the same way).
 
 Data (CLAUDE.md section 10, the `_full` realisation):
     clean:  datasets/kitti/images/val/<id>.png   (is_glared=0 rows)
@@ -58,16 +65,29 @@ import torch.nn as nn
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
-FEATURE_NAMES = ["mean_luma", "std_luma", "max_luma", "min_luma", "sat_frac",
+FEATURE_NAMES = ["mean_luma", "std_luma", "max_luma", "sat_frac",
                  "p95_luma", "p99_luma", "upper_third_mean_luma", "rb_diff", "hsv_sat_mean"]
+
+# min_luma (frame-wide darkest pixel) was DROPPED after Ananya's review caught it as a
+# synthesis artifact, not real signal: glare_synth.py's black-lift (CLAUDE.md section 6
+# item 4) adds a constant per-frame floor, so every glared frame's min pixel sits at
+# 31-121 while every clean KITTI frame's sits at 0-2 -- zero overlap across 298 held-out
+# frames, confirmed directly against this repo's own data. min_pixel > 2 alone was a
+# 100%-accurate classifier on its own, and the MLP had clearly found exactly that
+# shortcut (this gate scored 100% with it in the feature set). It is real physics --
+# veiling glare does lift black level -- but the synthesis makes it deterministic and
+# exceptionless where real photos would overlap heavily, so it would collapse on real
+# glare data (CLAUDE.md section 13, the GLARE dataset) precisely where it matters most.
+# Every remaining feature was checked the same way and has genuine overlap between
+# classes (max_luma is [255,255] on both sides and contributes nothing either way).
 
 
 def extract_features(image: np.ndarray) -> np.ndarray:
-    """BGR uint8 (H, W, 3) -> 10 cheap glare-relevant scalars. No resize, no NN forward."""
+    """BGR uint8 (H, W, 3) -> 9 cheap glare-relevant scalars. No resize, no NN forward."""
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     mean, std = cv2.meanStdDev(gray)
     mean, std = float(mean[0, 0]), float(std[0, 0])
-    gmax, gmin = float(gray.max()), float(gray.min())
+    gmax = float(gray.max())
 
     hist = cv2.calcHist([gray], [0], None, [256], [0, 256]).ravel()
     cdf = np.cumsum(hist)
@@ -84,7 +104,7 @@ def extract_features(image: np.ndarray) -> np.ndarray:
 
     hsv_sat_mean = float(cv2.mean(cv2.cvtColor(image, cv2.COLOR_BGR2HSV)[:, :, 1])[0])
 
-    return np.array([mean, std, gmax, gmin, sat_frac, p95, p99,
+    return np.array([mean, std, gmax, sat_frac, p95, p99,
                      upper_mean, rb_diff, hsv_sat_mean], dtype=np.float32)
 
 

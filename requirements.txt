@@ -17,5 +17,9 @@ matplotlib>=3.8
 pyyaml>=6.0
 tqdm>=4.66
 
+# Flare7K++ Uformer restoration adapter (src/restore.py)
+timm>=1.0
+einops>=0.8
+
 # Notebooks (P0 step 1/2: visualise boxes and inspect glare realism)
 jupyter>=1.0

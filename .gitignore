@@ -12,9 +12,20 @@ data/restored/*
 data/clean_full/
 data/glared_full/
 
-# Model weights — ignore checkpoints, track final baseline
+# Model weights — keep large checkpoints outside Git
 runs/**/*.pt
 !models/yolo_baseline.pt
+models/restoration/*.pth
+
+# Restoration outputs and local model dependencies
+results/restoration_demo/
+external/Flare7K/
+
+# Review/report artifacts are local deliverables, not source code
+outputs/
+.report-build/
+.review2-build/
+.chart-data-*/
 
 # Results — keep the directory, ignore bulky per-run dumps
 results/**/predictions/

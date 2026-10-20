@@ -111,13 +111,21 @@ def load_frames(manifest: Path, params: Path, calibration: Path, v2_root: Path,
         sys.exit(f"error: {rel(manifest)} and {rel(params)} list different '{split}' "
                  f"frames ({len(glared_rows)} vs {len(param_rows)})")
 
+    # The calibration file may round the cutoff differently from the protocol (it stores
+    # 0.1752 against the registered 0.1753). That only matters if a frame's s falls
+    # between the two, so compare the excluded sets they produce, not the decimals.
     limit = None
     if calibration.is_file():
         cut = json.loads(calibration.read_text())["cutpoints"].get(EXCLUDE_TYPE, {})
         limit = cut.get("gate_exclude_below_s")
-        if limit is None or abs(float(limit) - EXCLUDE_BELOW_S) > 5e-5:
-            sys.exit(f"error: {rel(calibration)} has gate_exclude_below_s={limit} for "
-                     f"{EXCLUDE_TYPE}; the protocol pre-registered {EXCLUDE_BELOW_S}")
+        if limit is None:
+            sys.exit(f"error: {rel(calibration)} has no gate_exclude_below_s for {EXCLUDE_TYPE}")
+        lo, hi = sorted((float(limit), EXCLUDE_BELOW_S))
+        between = [i for i, p in param_rows.items()
+                   if p["glare_type"] == EXCLUDE_TYPE and lo <= float(p["severity"]) < hi]
+        if between:
+            sys.exit(f"error: {rel(calibration)} cutoff {limit} and the pre-registered "
+                     f"{EXCLUDE_BELOW_S} exclude different {split} frames, e.g. {between[0]}")
 
     frames, missing = [], []
     for image_id in sorted(param_rows):

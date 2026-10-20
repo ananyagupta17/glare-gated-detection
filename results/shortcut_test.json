@@ -1,0 +1,160 @@
+{
+  "thresholds": {
+    "registered": "2026-10-20, before any v2 frame was generated",
+    "auc_definition": "two-sided ROC AUC, max(AUC, 1 - AUC); val clean versions (1,496) vs val glared versions (1,496)",
+    "checks": {
+      "darkest_pixel": {
+        "features": [
+          "p1_luma",
+          "min_luma"
+        ],
+        "rule": "each AUC <= AUC(upper_third_mean_luma)",
+        "reason": "v1's constant floor made min pixel a perfect classifier. Veiling glare really does lift the blacks, so the darkest pixels may carry some signal, but no more than plain brightness does."
+      },
+      "single_feature": {
+        "max_auc": {
+          "jpeg_quality_est": 0.6,
+          "blockiness": 0.6,
+          "hf_mf_ratio": 0.6,
+          "pixel_count": 0.6,
+          "noise_level": 0.65
+        },
+        "noise_level_reason": "Shot-noise variance grows with signal (variance = a * signal + b). Glared frames carry more light, so they genuinely carry more noise, as a real sensor would. That allows a small excess over 0.60. Above 0.65 the separation comes from our noise model, not physics."
+      },
+      "mild_band_brightness": {
+        "max_auc": {
+          "mean_luma": 0.6,
+          "midtone_histogram": 0.6
+        },
+        "scope": "pass/fail on the mild band only: val glared frames in the mild band vs their paired clean versions. The all-frames AUC is reported with no pass/fail.",
+        "midtone_histogram_scoring": "logistic regression on the 16 bins, trained on the train split (all bands); AUC of its scores on val",
+        "reason": "Glare adds light and auto-exposure only partly compensates, and veiling glare pushes shadows into the midtones, so across all severities these two probes measure the glare itself. Mild glare should barely register; if these separate mild frames, something other than the glare is doing it.",
+        "changed": "2026-10-20, before generation: moved from single_feature (all frames, <= 0.60) to the mild band only",
+        "status": "not_evaluable",
+        "status_reason": "The mild severity band was dropped after calibration (results/severity_scale_decision.json, commit ddf2673), so there are no mild frames to evaluate. Marked 2026-10-20; the registered limit is kept for the record."
+      },
+      "brightness_removed_lr": {
+        "features": [
+          "jpeg_quality_est",
+          "blockiness",
+          "hf_mf_ratio",
+          "noise_level",
+          "pixel_count"
+        ],
+        "max_accuracy": 0.65,
+        "model": "logistic regression, standardised features, L2 1e-3",
+        "train": "train split",
+        "test": "val split",
+        "reason": "With every brightness feature removed, only artifacts are left. A classifier on artifacts alone must stay near chance."
+      },
+      "mild_vs_severe": {
+        "features": [
+          "mean_luma",
+          "std_luma",
+          "max_luma",
+          "sat_frac",
+          "p95_luma",
+          "p99_luma",
+          "upper_third_mean_luma",
+          "rb_diff",
+          "hsv_sat_mean"
+        ],
+        "model": "logistic regression on the gate classifier's 9 features (src/train_gate_classifier.py), trained on the train split",
+        "band_accuracy": "accuracy on val glared frames in the band plus their paired clean frames (balanced 50/50)",
+        "min_gap_points": 10,
+        "rule": "accuracy(severe) - accuracy(mild) >= 10 percentage points",
+        "reason": "Mild glare barely changes the frame. If mild frames are as easy to spot as severe ones, something other than the glare gives them away.",
+        "status": "not_evaluable",
+        "status_reason": "The mild severity band was dropped after calibration (results/severity_scale_decision.json, commit ddf2673), so there are no mild frames to evaluate. Marked 2026-10-20; the registered limit is kept for the record."
+      },
+      "determinism": {
+        "n_frames": 5,
+        "rule": "re-rendering val frames gives sha256-identical JPEGs to data/glare_v2_sha256.txt"
+      }
+    }
+  },
+  "n_val_pairs": 1496,
+  "n_train_pairs": 5985,
+  "checks": {
+    "darkest_pixel": {
+      "baseline_upper_third_auc": 0.6901,
+      "p1_luma": {
+        "value": 0.9981,
+        "limit": 0.6901,
+        "passed": false
+      },
+      "min_luma": {
+        "value": 0.9994,
+        "limit": 0.6901,
+        "passed": false
+      }
+    },
+    "single_feature": {
+      "jpeg_quality_est": {
+        "value": 0.5046,
+        "limit": 0.6,
+        "passed": true
+      },
+      "blockiness": {
+        "value": 0.5475,
+        "limit": 0.6,
+        "passed": true
+      },
+      "hf_mf_ratio": {
+        "value": 0.5358,
+        "limit": 0.6,
+        "passed": true
+      },
+      "pixel_count": {
+        "value": 0.5,
+        "limit": 0.6,
+        "passed": true
+      },
+      "noise_level": {
+        "value": 0.7237,
+        "limit": 0.65,
+        "passed": false
+      }
+    },
+    "mild_band_brightness": {
+      "status": "not_evaluable",
+      "mean_luma": {
+        "all_frames_auc": 0.8659
+      },
+      "midtone_histogram": {
+        "all_frames_auc": 0.9015
+      }
+    },
+    "brightness_removed_lr": {
+      "value": 0.8366,
+      "limit": 0.65,
+      "passed": false
+    },
+    "mild_vs_severe": {
+      "status": "not_evaluable"
+    },
+    "determinism": {
+      "frames": [
+        "000000",
+        "001920",
+        "003748",
+        "005555",
+        "007455"
+      ],
+      "mismatched": [],
+      "passed": true
+    }
+  },
+  "v1_reference": {
+    "p1_luma": 1.0,
+    "min_luma": 1.0,
+    "upper_third_mean_luma": 0.9146,
+    "mean_luma": 0.9861,
+    "note": "v1 is unpaired: 748 glared IDs vs 748 different clean IDs"
+  },
+  "not_evaluable": [
+    "mild_band_brightness",
+    "mild_vs_severe"
+  ],
+  "passed": false
+}

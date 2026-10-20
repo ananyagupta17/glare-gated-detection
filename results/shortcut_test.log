@@ -1,0 +1,35 @@
+wrote results/shortcut_test_thresholds.json
+extracting features: 5985 train + 1496 val pairs
+
+darkest-pixel probes vs brightness baseline
+  baseline AUC(upper_third_mean_luma) = 0.6901
+  [FAIL] AUC(p1_luma)                       0.9981   limit 0.6901
+  [FAIL] AUC(min_luma)                      0.9994   limit 0.6901
+
+single-feature probes
+  [PASS] AUC(jpeg_quality_est)              0.5046   limit 0.6000
+  [PASS] AUC(blockiness)                    0.5475   limit 0.6000
+  [PASS] AUC(hf_mf_ratio)                   0.5358   limit 0.6000
+  [PASS] AUC(pixel_count)                   0.5000   limit 0.6000
+  [FAIL] AUC(noise_level)                   0.7237   limit 0.6500
+
+brightness probes (all frames, report only; mild-band check not_evaluable)
+  [info] AUC(mean_luma) all frames 0.8659
+  [info] AUC(midtone_histogram) all frames 0.9015
+
+brightness-removed logistic regression (train -> val)
+  [FAIL] accuracy                           0.8366   limit 0.6500
+
+mild vs severe: not_evaluable (no mild band), skipped
+
+determinism
+  [PASS] determinism (5 val frames)
+
+v1 reference (report only)
+  v1 AUC(p1_luma) = 1.0
+  v1 AUC(min_luma) = 1.0
+  v1 AUC(upper_third_mean_luma) = 0.9146
+  v1 AUC(mean_luma) = 0.9861
+
+SHORTCUT TEST FAILED  -> results/shortcut_test.json
+exit 1

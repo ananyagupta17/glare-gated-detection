@@ -127,7 +127,7 @@ SEVERITY_SCALE = {
     "diffuse_haze": (0.05, 1.2),
     "direct_sun": (0.08, 1.5),
     "veiling_wash": (0.05, 1.2),
-    "horizon_streak": (0.04, 1.0),
+    "horizon_streak": (0.02, 1.0),        # revised 0.04 -> 0.02, results/severity_scale_revision.json
 }
 
 

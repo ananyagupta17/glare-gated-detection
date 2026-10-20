@@ -1,0 +1,4450 @@
+{
+ "detector": "models/yolo_baseline.pt (never saw a KITTI train frame)",
+ "device": "mps",
+ "frames": "the 480 KITTI train frames from calibration (120 per type), same seeds and renders",
+ "metric": "per-frame F1, IoU 0.5, conf 0.25, class-aware",
+ "bootstrap": "1,000 resamples, numpy default_rng(42)",
+ "control": "glare multiplier exactly 0; exposure jitter, highlight expansion, sensor noise (glared-version draw) and JPEG (glared-version quality) kept",
+ "images": "data/v2_control/train/",
+ "manifest": "data/v2_control_manifest.csv",
+ "per_type": {
+  "diffuse_haze": {
+   "n": 120,
+   "vs_original": {
+    "mean_drop": 0.0124,
+    "ci95": [
+     0.0027,
+     0.0237
+    ]
+   },
+   "vs_pipeline_clean": {
+    "mean_drop": 0.005,
+    "ci95": [
+     -0.0038,
+     0.0155
+    ]
+   },
+   "s0_minus_control": {
+    "mean": 0.0482,
+    "ci95": [
+     0.0227,
+     0.0771
+    ]
+   },
+   "control_smaller_than_s0": true
+  },
+  "direct_sun": {
+   "n": 120,
+   "vs_original": {
+    "mean_drop": 0.0046,
+    "ci95": [
+     -0.0068,
+     0.0155
+    ]
+   },
+   "vs_pipeline_clean": {
+    "mean_drop": 0.003,
+    "ci95": [
+     -0.0064,
+     0.0132
+    ]
+   },
+   "s0_minus_control": {
+    "mean": 0.0723,
+    "ci95": [
+     0.0337,
+     0.1143
+    ]
+   },
+   "control_smaller_than_s0": true
+  },
+  "veiling_wash": {
+   "n": 120,
+   "vs_original": {
+    "mean_drop": 0.0031,
+    "ci95": [
+     -0.0057,
+     0.0122
+    ]
+   },
+   "vs_pipeline_clean": {
+    "mean_drop": 0.0071,
+    "ci95": [
+     -0.0032,
+     0.0174
+    ]
+   },
+   "s0_minus_control": {
+    "mean": -0.0017,
+    "ci95": [
+     -0.0284,
+     0.0237
+    ]
+   },
+   "control_smaller_than_s0": false
+  },
+  "horizon_streak": {
+   "n": 120,
+   "vs_original": {
+    "mean_drop": 0.0052,
+    "ci95": [
+     -0.0119,
+     0.0272
+    ]
+   },
+   "vs_pipeline_clean": {
+    "mean_drop": 0.0015,
+    "ci95": [
+     -0.0044,
+     0.0077
+    ]
+   },
+   "s0_minus_control": {
+    "mean": 0.1257,
+    "ci95": [
+     0.0814,
+     0.173
+    ]
+   },
+   "control_smaller_than_s0": true
+  }
+ },
+ "vs_original": {
+  "n": 480,
+  "mean_drop": 0.0063,
+  "ci95": [
+   0.0002,
+   0.0133
+  ]
+ },
+ "vs_pipeline_clean": {
+  "n": 480,
+  "mean_drop": 0.0042,
+  "ci95": [
+   -0.0003,
+   0.009
+  ]
+ },
+ "per_frame": [
+  {
+   "image_id": "000008",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7058823529411765,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000022",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.5,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000039",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.6,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000047",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8235294117647058,
+   "f1_pipeline_clean": 0.8235294117647058,
+   "f1_s0": 0.875,
+   "f1_control": 0.8235294117647058,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000049",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6842105263157895,
+   "f1_s0": 0.6111111111111112,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000063",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000085",
+   "glare_type": "direct_sun",
+   "f1_original": 0.5714285714285714,
+   "f1_pipeline_clean": 0.5714285714285714,
+   "f1_s0": 0.5714285714285714,
+   "f1_control": 0.5714285714285714,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000108",
+   "glare_type": "direct_sun",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000110",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6,
+   "f1_control": 0.7,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000122",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.5714285714285714,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000175",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000182",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000188",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.75,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000197",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.7692307692307693,
+   "f1_s0": 0.8,
+   "f1_control": 0.7692307692307693,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000204",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.9090909090909091,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000210",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000212",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000229",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.5714285714285714,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.8,
+   "f1_control": 0.5714285714285714,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000238",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 1.0,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000243",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.9090909090909091,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000277",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8235294117647058,
+   "f1_s0": 0.8235294117647058,
+   "f1_control": 0.8235294117647058,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000302",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000315",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000344",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8888888888888888,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000362",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7777777777777778,
+   "f1_pipeline_clean": 0.7777777777777778,
+   "f1_s0": 0.7777777777777778,
+   "f1_control": 0.7777777777777778,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000373",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.9090909090909091,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000398",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000401",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7058823529411765,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.46153846153846156,
+   "f1_control": 0.7058823529411765,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000421",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.9230769230769231,
+   "f1_pipeline_clean": 0.9230769230769231,
+   "f1_s0": 0.9230769230769231,
+   "f1_control": 0.9230769230769231,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000427",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.7777777777777778,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000430",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.5714285714285714,
+   "f1_pipeline_clean": 0.5714285714285714,
+   "f1_s0": 0.6153846153846154,
+   "f1_control": 0.5714285714285714,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000431",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.5,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000434",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000464",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.7692307692307693,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.7692307692307693,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000478",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000516",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000538",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000571",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7407407407407407,
+   "f1_pipeline_clean": 0.7142857142857143,
+   "f1_s0": 0.7,
+   "f1_control": 0.6896551724137931,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000595",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.4,
+   "f1_pipeline_clean": 0.4,
+   "f1_s0": 0.5714285714285714,
+   "f1_control": 0.4,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000615",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000653",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 1.0,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000659",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.5714285714285714,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000663",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000734",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.875,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.6153846153846154,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000736",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.7777777777777778,
+   "f1_s0": 0.8421052631578947,
+   "f1_control": 0.7777777777777778,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000771",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000785",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.5625,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000787",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.9230769230769231,
+   "f1_pipeline_clean": 0.9230769230769231,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.9230769230769231,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000788",
+   "glare_type": "direct_sun",
+   "f1_original": 0.2857142857142857,
+   "f1_pipeline_clean": 0.25,
+   "f1_s0": 0.4,
+   "f1_control": 0.2857142857142857,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000807",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.4,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000810",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000835",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000841",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000852",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000855",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000896",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 1.0,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000928",
+   "glare_type": "direct_sun",
+   "f1_original": 0.5714285714285714,
+   "f1_pipeline_clean": 0.5909090909090909,
+   "f1_s0": 0.625,
+   "f1_control": 0.5909090909090909,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000938",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000954",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000955",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.9230769230769231,
+   "f1_pipeline_clean": 0.9230769230769231,
+   "f1_s0": 0.9230769230769231,
+   "f1_control": 0.9230769230769231,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000958",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8888888888888888,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000973",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "000979",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.4,
+   "f1_pipeline_clean": 0.2857142857142857,
+   "f1_s0": 0.4,
+   "f1_control": 0.3333333333333333,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001039",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001050",
+   "glare_type": "direct_sun",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.3076923076923077,
+   "f1_s0": 0.125,
+   "f1_control": 0.4166666666666667,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001075",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.9090909090909091,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001079",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001090",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001133",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001146",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8888888888888888,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001168",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001172",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.9090909090909091,
+   "f1_pipeline_clean": 0.8333333333333334,
+   "f1_s0": 0.8,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001184",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7368421052631579,
+   "f1_pipeline_clean": 0.7368421052631579,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.7368421052631579,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001203",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001216",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.9090909090909091,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001221",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7619047619047619,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001225",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7142857142857143,
+   "f1_pipeline_clean": 0.7142857142857143,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.7692307692307693,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001238",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6363636363636364,
+   "f1_pipeline_clean": 0.7,
+   "f1_s0": 0.7692307692307693,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001256",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001260",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001266",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001299",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.5714285714285714,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001330",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7142857142857143,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.36363636363636365,
+   "f1_control": 0.6153846153846154,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001331",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001345",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.75,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001363",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8888888888888888,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001368",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8235294117647058,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.6451612903225806,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001379",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001401",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 0.0,
+   "f1_s0": 1.0,
+   "f1_control": 0.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001403",
+   "glare_type": "direct_sun",
+   "f1_original": 0.9090909090909091,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.9090909090909091,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001405",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001407",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.2,
+   "f1_pipeline_clean": 0.2,
+   "f1_s0": 0.0,
+   "f1_control": 0.1111111111111111,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001437",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001447",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001469",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.875,
+   "f1_pipeline_clean": 0.875,
+   "f1_s0": 0.875,
+   "f1_control": 0.875,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001485",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.75,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001486",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001509",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001511",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001528",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001536",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.75,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001541",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7142857142857143,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001582",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001585",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7142857142857143,
+   "f1_pipeline_clean": 0.7692307692307693,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.7142857142857143,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001597",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001598",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001626",
+   "glare_type": "direct_sun",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.5,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001641",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001645",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001648",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.625,
+   "f1_pipeline_clean": 0.6451612903225806,
+   "f1_s0": 0.5517241379310345,
+   "f1_control": 0.625,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001659",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8421052631578947,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001684",
+   "glare_type": "direct_sun",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 1.0,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001696",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001699",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001721",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.782608695652174,
+   "f1_pipeline_clean": 0.782608695652174,
+   "f1_s0": 0.5882352941176471,
+   "f1_control": 0.782608695652174,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001738",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.7142857142857143,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.7692307692307693,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001745",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001765",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.9,
+   "f1_pipeline_clean": 0.9,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.9,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001771",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.9090909090909091,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.8,
+   "f1_control": 0.9090909090909091,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001807",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001828",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.5,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001834",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001859",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7619047619047619,
+   "f1_pipeline_clean": 0.7619047619047619,
+   "f1_s0": 0.8,
+   "f1_control": 0.7619047619047619,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001884",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.5,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001911",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001912",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6153846153846154,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.4,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001935",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "001950",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002009",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002042",
+   "glare_type": "direct_sun",
+   "f1_original": 0.5555555555555556,
+   "f1_pipeline_clean": 0.4444444444444444,
+   "f1_s0": 0.5,
+   "f1_control": 0.47058823529411764,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002053",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002063",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.35294117647058826,
+   "f1_pipeline_clean": 0.4444444444444444,
+   "f1_s0": 0.25,
+   "f1_control": 0.4444444444444444,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002073",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.5,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002077",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7272727272727273,
+   "f1_pipeline_clean": 0.7272727272727273,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002082",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6956521739130435,
+   "f1_pipeline_clean": 0.6956521739130435,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6956521739130435,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002094",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 1.0,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002104",
+   "glare_type": "direct_sun",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.5714285714285714,
+   "f1_s0": 0.4,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002122",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.5714285714285714,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.5714285714285714,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002154",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002166",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002174",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.0,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002182",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7619047619047619,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8421052631578947,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002196",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002198",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002221",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7272727272727273,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002248",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002264",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.0,
+   "f1_pipeline_clean": 0.0,
+   "f1_s0": 0.0,
+   "f1_control": 0.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002275",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.9,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.7368421052631579,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002277",
+   "glare_type": "direct_sun",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 1.0,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002287",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002327",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.6,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002356",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002365",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002371",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.7692307692307693,
+   "f1_s0": 0.7692307692307693,
+   "f1_control": 0.7692307692307693,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002375",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7741935483870968,
+   "f1_pipeline_clean": 0.7741935483870968,
+   "f1_s0": 0.7333333333333333,
+   "f1_control": 0.7741935483870968,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002383",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002389",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.9473684210526315,
+   "f1_pipeline_clean": 0.9473684210526315,
+   "f1_s0": 0.875,
+   "f1_control": 0.9473684210526315,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002393",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7777777777777778,
+   "f1_pipeline_clean": 0.7777777777777778,
+   "f1_s0": 0.7142857142857143,
+   "f1_control": 0.875,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002398",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.9411764705882353,
+   "f1_pipeline_clean": 0.9411764705882353,
+   "f1_s0": 0.75,
+   "f1_control": 0.9411764705882353,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002406",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.3333333333333333,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002445",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002478",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002487",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.631578947368421,
+   "f1_pipeline_clean": 0.6153846153846154,
+   "f1_s0": 0.631578947368421,
+   "f1_control": 0.5789473684210527,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002501",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.5714285714285714,
+   "f1_s0": 0.5454545454545454,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002525",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.4,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002534",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002547",
+   "glare_type": "direct_sun",
+   "f1_original": 0.46153846153846156,
+   "f1_pipeline_clean": 0.42857142857142855,
+   "f1_s0": 0.5714285714285714,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002558",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8148148148148148,
+   "f1_pipeline_clean": 0.7857142857142857,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.7857142857142857,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002559",
+   "glare_type": "direct_sun",
+   "f1_original": 0.875,
+   "f1_pipeline_clean": 0.875,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.9333333333333333,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002564",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002565",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.37037037037037035,
+   "f1_pipeline_clean": 0.4,
+   "f1_s0": 0.5454545454545454,
+   "f1_control": 0.37037037037037035,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002598",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.18181818181818182,
+   "f1_pipeline_clean": 0.2,
+   "f1_s0": 0.0,
+   "f1_control": 0.3076923076923077,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002621",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002636",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.5,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002639",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.6153846153846154,
+   "f1_s0": 0.7692307692307693,
+   "f1_control": 0.6153846153846154,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002652",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.7407407407407407,
+   "f1_s0": 0.5217391304347826,
+   "f1_control": 0.6896551724137931,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002665",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002678",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.7857142857142857,
+   "f1_s0": 0.64,
+   "f1_control": 0.8275862068965517,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002683",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8125,
+   "f1_pipeline_clean": 0.8125,
+   "f1_s0": 0.8125,
+   "f1_control": 0.7878787878787878,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002688",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7407407407407407,
+   "f1_pipeline_clean": 0.7407407407407407,
+   "f1_s0": 0.6363636363636364,
+   "f1_control": 0.7692307692307693,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002697",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.88,
+   "f1_pipeline_clean": 0.88,
+   "f1_s0": 0.9565217391304348,
+   "f1_control": 0.88,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002703",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002725",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7619047619047619,
+   "f1_pipeline_clean": 0.7619047619047619,
+   "f1_s0": 0.5555555555555556,
+   "f1_control": 0.7619047619047619,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002754",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.9090909090909091,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.8,
+   "f1_control": 0.9090909090909091,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002755",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8888888888888888,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002782",
+   "glare_type": "direct_sun",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002815",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.9375,
+   "f1_pipeline_clean": 0.9375,
+   "f1_s0": 0.8666666666666667,
+   "f1_control": 0.9375,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002826",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.9411764705882353,
+   "f1_pipeline_clean": 0.9411764705882353,
+   "f1_s0": 0.8,
+   "f1_control": 0.9411764705882353,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002831",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.7,
+   "f1_s0": 0.6363636363636364,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002841",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.7368421052631579,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002849",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002871",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002877",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002907",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002920",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.4444444444444444,
+   "f1_pipeline_clean": 0.47058823529411764,
+   "f1_s0": 0.47058823529411764,
+   "f1_control": 0.4444444444444444,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002927",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002931",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002936",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002937",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.5714285714285714,
+   "f1_pipeline_clean": 0.5714285714285714,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.5333333333333333,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002940",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.7142857142857143,
+   "f1_s0": 0.7692307692307693,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002941",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002948",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.9230769230769231,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 0.9230769230769231,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "002994",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003013",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.5714285714285714,
+   "f1_pipeline_clean": 0.46153846153846156,
+   "f1_s0": 0.36363636363636365,
+   "f1_control": 0.46153846153846156,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003031",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003041",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6470588235294118,
+   "f1_control": 0.7058823529411765,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003048",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8421052631578947,
+   "f1_s0": 0.7777777777777778,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003054",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.5,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003070",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003102",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.4,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003109",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003135",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.46153846153846156,
+   "f1_pipeline_clean": 0.46153846153846156,
+   "f1_s0": 0.46153846153846156,
+   "f1_control": 0.46153846153846156,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003158",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003187",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8235294117647058,
+   "f1_pipeline_clean": 0.7777777777777778,
+   "f1_s0": 0.5714285714285714,
+   "f1_control": 0.7777777777777778,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003188",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003201",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003211",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8421052631578947,
+   "f1_pipeline_clean": 0.7619047619047619,
+   "f1_s0": 0.7619047619047619,
+   "f1_control": 0.7619047619047619,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003227",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003234",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7777777777777778,
+   "f1_pipeline_clean": 0.875,
+   "f1_s0": 0.7777777777777778,
+   "f1_control": 0.8235294117647058,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003257",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.7692307692307693,
+   "f1_s0": 0.9090909090909091,
+   "f1_control": 0.7692307692307693,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003270",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.0,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003272",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003278",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003314",
+   "glare_type": "direct_sun",
+   "f1_original": 0.9090909090909091,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.8,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003321",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003356",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.7317073170731707,
+   "f1_control": 0.7804878048780488,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003360",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.75,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003403",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.75,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003412",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003433",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003446",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003458",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8888888888888888,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003479",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003486",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.7142857142857143,
+   "f1_s0": 0.7692307692307693,
+   "f1_control": 0.7692307692307693,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003504",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003568",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.9411764705882353,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8888888888888888,
+   "f1_control": 0.8421052631578947,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003577",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7272727272727273,
+   "f1_pipeline_clean": 0.7096774193548387,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.7741935483870968,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003637",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.5,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003714",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003717",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.875,
+   "f1_pipeline_clean": 0.875,
+   "f1_s0": 0.75,
+   "f1_control": 0.875,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003719",
+   "glare_type": "direct_sun",
+   "f1_original": 0.9411764705882353,
+   "f1_pipeline_clean": 0.9411764705882353,
+   "f1_s0": 0.9411764705882353,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003797",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.0,
+   "f1_pipeline_clean": 0.0,
+   "f1_s0": 0.0,
+   "f1_control": 0.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003799",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7272727272727273,
+   "f1_pipeline_clean": 0.7272727272727273,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003809",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003839",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7272727272727273,
+   "f1_pipeline_clean": 0.7272727272727273,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003840",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7058823529411765,
+   "f1_pipeline_clean": 0.625,
+   "f1_s0": 0.7142857142857143,
+   "f1_control": 0.7058823529411765,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003841",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.5,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003860",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7272727272727273,
+   "f1_pipeline_clean": 0.7272727272727273,
+   "f1_s0": 0.4444444444444444,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003870",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.782608695652174,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003882",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003889",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003905",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003906",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003914",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003917",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.7692307692307693,
+   "f1_s0": 0.7407407407407407,
+   "f1_control": 0.6923076923076923,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003921",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.8,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003930",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7368421052631579,
+   "f1_pipeline_clean": 0.7619047619047619,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.7368421052631579,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003938",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8235294117647058,
+   "f1_pipeline_clean": 0.875,
+   "f1_s0": 0.8235294117647058,
+   "f1_control": 0.875,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003971",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6956521739130435,
+   "f1_control": 0.7,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "003981",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004030",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.4,
+   "f1_pipeline_clean": 0.3333333333333333,
+   "f1_s0": 1.0,
+   "f1_control": 0.3333333333333333,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004049",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004055",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7272727272727273,
+   "f1_pipeline_clean": 0.7272727272727273,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004058",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.5714285714285714,
+   "f1_pipeline_clean": 0.5714285714285714,
+   "f1_s0": 0.5714285714285714,
+   "f1_control": 0.5714285714285714,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004075",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004087",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 1.0,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004091",
+   "glare_type": "direct_sun",
+   "f1_original": 0.5714285714285714,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004093",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004095",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7272727272727273,
+   "f1_pipeline_clean": 0.7619047619047619,
+   "f1_s0": 0.5,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004100",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.72,
+   "f1_s0": 0.8,
+   "f1_control": 0.72,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004104",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8888888888888888,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004110",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004111",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004113",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004129",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004135",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004172",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004175",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.7142857142857143,
+   "f1_s0": 0.0,
+   "f1_control": 0.7142857142857143,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004229",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.26666666666666666,
+   "f1_pipeline_clean": 0.375,
+   "f1_s0": 0.125,
+   "f1_control": 0.3076923076923077,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004242",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004266",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004310",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.9230769230769231,
+   "f1_pipeline_clean": 0.9230769230769231,
+   "f1_s0": 0.9230769230769231,
+   "f1_control": 0.9230769230769231,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004311",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.875,
+   "f1_pipeline_clean": 0.875,
+   "f1_s0": 0.9230769230769231,
+   "f1_control": 0.875,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004321",
+   "glare_type": "direct_sun",
+   "f1_original": 0.5882352941176471,
+   "f1_pipeline_clean": 0.625,
+   "f1_s0": 0.5882352941176471,
+   "f1_control": 0.5882352941176471,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004337",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.7692307692307693,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004352",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8421052631578947,
+   "f1_pipeline_clean": 0.8421052631578947,
+   "f1_s0": 0.7777777777777778,
+   "f1_control": 0.8421052631578947,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004434",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004447",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.7407407407407407,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.7142857142857143,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004456",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004520",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7777777777777778,
+   "f1_pipeline_clean": 0.8235294117647058,
+   "f1_s0": 0.7777777777777778,
+   "f1_control": 0.7777777777777778,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004531",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004560",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7407407407407407,
+   "f1_pipeline_clean": 0.7407407407407407,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.7407407407407407,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004561",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.5454545454545454,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004594",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004606",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004621",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7333333333333333,
+   "f1_pipeline_clean": 0.7096774193548387,
+   "f1_s0": 0.7586206896551724,
+   "f1_control": 0.7096774193548387,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004671",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.4,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004676",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004680",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004683",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.5,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004684",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8148148148148148,
+   "f1_pipeline_clean": 0.8148148148148148,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.7857142857142857,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004703",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004704",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6111111111111112,
+   "f1_pipeline_clean": 0.6285714285714286,
+   "f1_s0": 0.4827586206896552,
+   "f1_control": 0.5714285714285714,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004711",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004720",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.625,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.5333333333333333,
+   "f1_control": 0.5882352941176471,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004722",
+   "glare_type": "direct_sun",
+   "f1_original": 0.3333333333333333,
+   "f1_pipeline_clean": 0.42857142857142855,
+   "f1_s0": 0.4,
+   "f1_control": 0.36363636363636365,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004739",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8235294117647058,
+   "f1_s0": 0.9333333333333333,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004742",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.7058823529411765,
+   "f1_s0": 0.75,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004744",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.0,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004757",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.3333333333333333,
+   "f1_pipeline_clean": 0.3333333333333333,
+   "f1_s0": 0.3333333333333333,
+   "f1_control": 0.3333333333333333,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004768",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.4,
+   "f1_pipeline_clean": 0.4,
+   "f1_s0": 0.0,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004774",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.8333333333333334,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004783",
+   "glare_type": "direct_sun",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004785",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 1.0,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004806",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.3333333333333333,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004815",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004860",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.875,
+   "f1_pipeline_clean": 0.875,
+   "f1_s0": 0.8,
+   "f1_control": 0.875,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004871",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8695652173913043,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.8695652173913043,
+   "f1_control": 0.9090909090909091,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004895",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004925",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004930",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.9090909090909091,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.8333333333333334,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004962",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.875,
+   "f1_pipeline_clean": 0.875,
+   "f1_s0": 0.8235294117647058,
+   "f1_control": 0.8235294117647058,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004977",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.4,
+   "f1_control": 0.5714285714285714,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "004979",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.9090909090909091,
+   "f1_control": 0.7142857142857143,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005000",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7142857142857143,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.8333333333333334,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005001",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005017",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005018",
+   "glare_type": "direct_sun",
+   "f1_original": 0.9230769230769231,
+   "f1_pipeline_clean": 0.9230769230769231,
+   "f1_s0": 0.2857142857142857,
+   "f1_control": 0.9230769230769231,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005027",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7027027027027027,
+   "f1_pipeline_clean": 0.7777777777777778,
+   "f1_s0": 0.48,
+   "f1_control": 0.7777777777777778,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005047",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005051",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005070",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.0,
+   "f1_pipeline_clean": 0.0,
+   "f1_s0": 0.0,
+   "f1_control": 0.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005071",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.8333333333333334,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005074",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005087",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8421052631578947,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005089",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7142857142857143,
+   "f1_pipeline_clean": 0.7142857142857143,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.7142857142857143,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005151",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005159",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7272727272727273,
+   "f1_pipeline_clean": 0.6153846153846154,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6153846153846154,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005173",
+   "glare_type": "direct_sun",
+   "f1_original": 0.625,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.5714285714285714,
+   "f1_control": 0.5882352941176471,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005183",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005187",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005205",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005248",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.8333333333333334,
+   "f1_s0": 0.8333333333333334,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005284",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005301",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005305",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.5,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005323",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.0,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005343",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005344",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 1.0,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005366",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8148148148148148,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005370",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005373",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.5714285714285714,
+   "f1_pipeline_clean": 0.5714285714285714,
+   "f1_s0": 0.3333333333333333,
+   "f1_control": 0.5714285714285714,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005378",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.5,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005394",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005427",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7619047619047619,
+   "f1_pipeline_clean": 0.7619047619047619,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005432",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005445",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005447",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005456",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005458",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005476",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7142857142857143,
+   "f1_pipeline_clean": 0.7692307692307693,
+   "f1_s0": 0.5714285714285714,
+   "f1_control": 0.7142857142857143,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005496",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8181818181818182,
+   "f1_pipeline_clean": 0.8181818181818182,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.8181818181818182,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005535",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005549",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005574",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005580",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8181818181818182,
+   "f1_control": 0.9,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005583",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.8333333333333334,
+   "f1_control": 0.9090909090909091,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005600",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.75,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005601",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005640",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.75,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005693",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6153846153846154,
+   "f1_pipeline_clean": 0.5333333333333333,
+   "f1_s0": 0.5,
+   "f1_control": 0.46153846153846156,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005704",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8888888888888888,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005719",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.8333333333333334,
+   "f1_s0": 0.8333333333333334,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005721",
+   "glare_type": "direct_sun",
+   "f1_original": 0.9333333333333333,
+   "f1_pipeline_clean": 0.9333333333333333,
+   "f1_s0": 0.9333333333333333,
+   "f1_control": 0.9333333333333333,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005772",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.75,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005805",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005811",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.7142857142857143,
+   "f1_pipeline_clean": 0.7142857142857143,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.7142857142857143,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005819",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 0.9230769230769231,
+   "f1_s0": 0.9230769230769231,
+   "f1_control": 0.9230769230769231,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005832",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.8333333333333334,
+   "f1_s0": 0.5,
+   "f1_control": 0.7692307692307693,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005868",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.5555555555555556,
+   "f1_pipeline_clean": 0.5555555555555556,
+   "f1_s0": 0.7058823529411765,
+   "f1_control": 0.5555555555555556,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005874",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005892",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.9,
+   "f1_control": 0.8421052631578947,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005909",
+   "glare_type": "direct_sun",
+   "f1_original": 0.9230769230769231,
+   "f1_pipeline_clean": 0.9230769230769231,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.9230769230769231,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005923",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8888888888888888,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005938",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005944",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.4444444444444444,
+   "f1_pipeline_clean": 0.4444444444444444,
+   "f1_s0": 0.75,
+   "f1_control": 0.4444444444444444,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005945",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.0,
+   "f1_pipeline_clean": 0.0,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005953",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "005992",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.75,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006037",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7272727272727273,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.7272727272727273,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006057",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006090",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.42105263157894735,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006096",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006104",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006117",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.875,
+   "f1_pipeline_clean": 0.9333333333333333,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.875,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006123",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.8333333333333334,
+   "f1_s0": 0.8333333333333334,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006143",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6896551724137931,
+   "f1_pipeline_clean": 0.7272727272727273,
+   "f1_s0": 0.7333333333333333,
+   "f1_control": 0.7333333333333333,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006174",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.3333333333333333,
+   "f1_pipeline_clean": 0.4,
+   "f1_s0": 0.0,
+   "f1_control": 0.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006201",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006203",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.5,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006224",
+   "glare_type": "direct_sun",
+   "f1_original": 0.9285714285714286,
+   "f1_pipeline_clean": 0.896551724137931,
+   "f1_s0": 0.7407407407407407,
+   "f1_control": 0.896551724137931,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006229",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.4,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.3333333333333333,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006234",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006244",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006291",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6857142857142857,
+   "f1_s0": 0.7058823529411765,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006301",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8421052631578947,
+   "f1_pipeline_clean": 0.9,
+   "f1_s0": 0.75,
+   "f1_control": 0.9,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006315",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6,
+   "f1_pipeline_clean": 0.6,
+   "f1_s0": 0.5454545454545454,
+   "f1_control": 0.6,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006323",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 1.0,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006365",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6875,
+   "f1_pipeline_clean": 0.7741935483870968,
+   "f1_s0": 0.5217391304347826,
+   "f1_control": 0.7096774193548387,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006370",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.9230769230769231,
+   "f1_pipeline_clean": 0.9230769230769231,
+   "f1_s0": 0.9230769230769231,
+   "f1_control": 0.9230769230769231,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006397",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006414",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.5,
+   "f1_pipeline_clean": 0.5,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.5,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006444",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7,
+   "f1_pipeline_clean": 0.631578947368421,
+   "f1_s0": 0.5555555555555556,
+   "f1_control": 0.7,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006452",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006493",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.9090909090909091,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006497",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8695652173913043,
+   "f1_pipeline_clean": 0.8695652173913043,
+   "f1_s0": 0.9090909090909091,
+   "f1_control": 0.8695652173913043,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006525",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.9333333333333333,
+   "f1_pipeline_clean": 0.875,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.875,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006556",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 1.0,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006595",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.9,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.75,
+   "f1_control": 0.8421052631578947,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006634",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006642",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.7619047619047619,
+   "f1_control": 0.7,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006649",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.875,
+   "f1_pipeline_clean": 0.875,
+   "f1_s0": 0.7058823529411765,
+   "f1_control": 0.8235294117647058,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006656",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006666",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006680",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006682",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.625,
+   "f1_pipeline_clean": 0.5882352941176471,
+   "f1_s0": 0.5384615384615384,
+   "f1_control": 0.5625,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006704",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.6153846153846154,
+   "f1_pipeline_clean": 0.6153846153846154,
+   "f1_s0": 0.5454545454545454,
+   "f1_control": 0.6153846153846154,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006725",
+   "glare_type": "direct_sun",
+   "f1_original": 0.9333333333333333,
+   "f1_pipeline_clean": 0.9333333333333333,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.9333333333333333,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006726",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8421052631578947,
+   "f1_pipeline_clean": 0.875,
+   "f1_s0": 0.75,
+   "f1_control": 0.8235294117647058,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006742",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006755",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.8333333333333334,
+   "f1_s0": 0.5,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006756",
+   "glare_type": "direct_sun",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.7142857142857143,
+   "f1_s0": 0.36363636363636365,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006769",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.631578947368421,
+   "f1_pipeline_clean": 0.6,
+   "f1_s0": 0.5217391304347826,
+   "f1_control": 0.631578947368421,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006781",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7368421052631579,
+   "f1_pipeline_clean": 0.7,
+   "f1_s0": 0.7368421052631579,
+   "f1_control": 0.6,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006788",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.9333333333333333,
+   "f1_pipeline_clean": 0.9333333333333333,
+   "f1_s0": 0.6,
+   "f1_control": 0.9333333333333333,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006796",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006799",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006813",
+   "glare_type": "direct_sun",
+   "f1_original": 0.4444444444444444,
+   "f1_pipeline_clean": 0.4827586206896552,
+   "f1_s0": 0.5,
+   "f1_control": 0.5185185185185185,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006818",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006833",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8292682926829268,
+   "f1_pipeline_clean": 0.8780487804878049,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006853",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.631578947368421,
+   "f1_pipeline_clean": 0.631578947368421,
+   "f1_s0": 0.6,
+   "f1_control": 0.631578947368421,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006862",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7619047619047619,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006865",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006868",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.625,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006881",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.9090909090909091,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.8,
+   "f1_control": 0.9090909090909091,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006905",
+   "glare_type": "horizon_streak",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006906",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006917",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7142857142857143,
+   "f1_pipeline_clean": 0.7142857142857143,
+   "f1_s0": 0.6153846153846154,
+   "f1_control": 0.7142857142857143,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006949",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006952",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.8,
+   "f1_s0": 0.75,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006955",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006961",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.9090909090909091,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.9090909090909091,
+   "f1_control": 0.9090909090909091,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006989",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.9090909090909091,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.9090909090909091,
+   "f1_control": 0.9090909090909091,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "006992",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8275862068965517,
+   "f1_pipeline_clean": 0.8275862068965517,
+   "f1_s0": 0.7096774193548387,
+   "f1_control": 0.8275862068965517,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007012",
+   "glare_type": "direct_sun",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.8888888888888888,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007041",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007056",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7142857142857143,
+   "f1_pipeline_clean": 0.5714285714285714,
+   "f1_s0": 0.7142857142857143,
+   "f1_control": 0.7142857142857143,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007066",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.7692307692307693,
+   "f1_pipeline_clean": 0.7692307692307693,
+   "f1_s0": 0.7142857142857143,
+   "f1_control": 0.7692307692307693,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007091",
+   "glare_type": "direct_sun",
+   "f1_original": 0.7142857142857143,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6153846153846154,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007122",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.4,
+   "f1_pipeline_clean": 0.4,
+   "f1_s0": 0.0,
+   "f1_control": 0.4,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007142",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8571428571428571,
+   "f1_pipeline_clean": 0.8571428571428571,
+   "f1_s0": 0.7272727272727273,
+   "f1_control": 0.8571428571428571,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007164",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007169",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.9411764705882353,
+   "f1_pipeline_clean": 0.8888888888888888,
+   "f1_s0": 0.875,
+   "f1_control": 0.9411764705882353,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007191",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007216",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.625,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.7692307692307693,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007221",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8888888888888888,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8571428571428571,
+   "f1_control": 0.8888888888888888,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007250",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.8333333333333334,
+   "f1_s0": 0.9090909090909091,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007260",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.75,
+   "f1_pipeline_clean": 0.7777777777777778,
+   "f1_s0": 0.5333333333333333,
+   "f1_control": 0.75,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007274",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007283",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8,
+   "f1_pipeline_clean": 0.75,
+   "f1_s0": 0.8,
+   "f1_control": 0.8,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007290",
+   "glare_type": "diffuse_haze",
+   "f1_original": 0.7272727272727273,
+   "f1_pipeline_clean": 0.7272727272727273,
+   "f1_s0": 0.4444444444444444,
+   "f1_control": 0.6,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007312",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.8,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007348",
+   "glare_type": "direct_sun",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 0.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007376",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6666666666666666,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.6666666666666666,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007423",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.7692307692307693,
+   "f1_s0": 0.8333333333333334,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007428",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.9090909090909091,
+   "f1_s0": 0.3333333333333333,
+   "f1_control": 0.9090909090909091,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007440",
+   "glare_type": "horizon_streak",
+   "f1_original": 0.6153846153846154,
+   "f1_pipeline_clean": 0.6666666666666666,
+   "f1_s0": 0.7,
+   "f1_control": 0.6666666666666666,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007450",
+   "glare_type": "veiling_wash",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007454",
+   "glare_type": "veiling_wash",
+   "f1_original": 0.8333333333333334,
+   "f1_pipeline_clean": 0.8333333333333334,
+   "f1_s0": 0.8333333333333334,
+   "f1_control": 0.8333333333333334,
+   "control_ae_gain": 1.0
+  },
+  {
+   "image_id": "007477",
+   "glare_type": "diffuse_haze",
+   "f1_original": 1.0,
+   "f1_pipeline_clean": 1.0,
+   "f1_s0": 1.0,
+   "f1_control": 1.0,
+   "control_ae_gain": 1.0
+  }
+ ]
+}

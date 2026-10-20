@@ -1,0 +1,54 @@
+{
+ "detector": "models/yolo_baseline.pt (never saw a KITTI train frame)",
+ "device": "mps",
+ "frames": "the 480 KITTI train frames from calibration (120 per type), same seeds and renders",
+ "metric": "per-frame F1, IoU 0.5, conf 0.25, class-aware",
+ "bootstrap": "1,000 resamples, numpy default_rng(42)",
+ "definition": "drop = F1(pipeline clean) - F1(glared at the minimum multiplier, s = 0)",
+ "per_type": {
+  "diffuse_haze": {
+   "n": 120,
+   "mult_at_s0": 0.05,
+   "mean_drop": 0.0532,
+   "ci95": [
+    0.0276,
+    0.0817
+   ],
+   "ci_includes_0_05": true,
+   "calibration_curve_s0": 0.0532
+  },
+  "direct_sun": {
+   "n": 120,
+   "mult_at_s0": 0.08,
+   "mean_drop": 0.0753,
+   "ci95": [
+    0.0385,
+    0.1172
+   ],
+   "ci_includes_0_05": true,
+   "calibration_curve_s0": 0.0753
+  },
+  "veiling_wash": {
+   "n": 120,
+   "mult_at_s0": 0.05,
+   "mean_drop": 0.0055,
+   "ci95": [
+    -0.0191,
+    0.0273
+   ],
+   "ci_includes_0_05": false,
+   "calibration_curve_s0": 0.0055
+  },
+  "horizon_streak": {
+   "n": 120,
+   "mult_at_s0": 0.04,
+   "mean_drop": 0.1272,
+   "ci95": [
+    0.0826,
+    0.1792
+   ],
+   "ci_includes_0_05": false,
+   "calibration_curve_s0": 0.1272
+  }
+ }
+}

@@ -26,7 +26,7 @@ def scene(h: int = 96, w: int = 320) -> np.ndarray:
 
 
 def spec(rgb, gtype="direct_sun", s=0.5, image_id="000123", split="val", seed=42):
-    return gs.sample_frame(rgb, split, image_id, gtype, s, "moderate", seed)
+    return gs.sample_frame(rgb, split, image_id, gtype, s, "stratum 0", seed)
 
 
 class Determinism(unittest.TestCase):
@@ -129,23 +129,37 @@ class Physics(unittest.TestCase):
 
 
 class Assignment(unittest.TestCase):
-    def test_types_and_bands_balanced(self):
-        ids = [f"{i:06d}" for i in range(1200)]
+    def test_strata_cover_each_type_once(self):
+        ids = [f"{i:06d}" for i in range(1201)]
         types = gs.assign_types(ids, "train", 42)
-        bands = gs.assign_bands(types, "train", 42)
+        strata = gs.assign_strata(types, "train", 42)
         for gtype in gs.GLARE_TYPES:
             members = [i for i in ids if types[i] == gtype]
-            self.assertEqual(len(members), 300)
-            for band in gs.BANDS:
-                self.assertEqual(sum(bands[i] == band for i in members), 100)
+            ks = sorted(strata[i][0] for i in members)
+            self.assertEqual(ks, list(range(len(members))), "one frame per stratum")
+            for i in members:
+                k, n = strata[i]
+                s = gs.draw_severity("train", i, k, n, 42)
+                self.assertTrue(k / n <= s < (k + 1) / n, "s lies inside its stratum")
+        self.assertEqual(strata, gs.assign_strata(types, "train", 42), "seeded, repeatable")
 
-    def test_severity_inside_band(self):
-        cuts = (0.3, 0.7)
-        for band in gs.BANDS:
-            lo, hi = gs.band_range(band, cuts)
-            for k in range(50):
-                s = gs.draw_severity("val", f"{k:06d}", band, cuts, 42)
-                self.assertTrue(lo <= s <= hi)
+    def test_severe_fraction_matches_cutoff(self):
+        import math
+        ids = [f"{i:06d}" for i in range(1496)]
+        types = gs.assign_types(ids, "val", 42)
+        strata = gs.assign_strata(types, "val", 42)
+        cut = {"severe_min_s": 0.6042, "gate_exclude_below_s": 0.1753}
+        for gtype in gs.GLARE_TYPES:
+            members = [i for i in ids if types[i] == gtype]
+            n = len(members)
+            s = [gs.draw_severity("val", i, *strata[i], 42) for i in members]
+            severe = sum(gs.severe_flag(v, cut) for v in s)
+            excluded = sum(gs.gate_excluded(v, cut) for v in s)
+            c = cut["severe_min_s"]
+            self.assertIn(severe, (n - math.ceil(n * c), n - math.floor(n * c)))
+            self.assertIn(excluded, (math.floor(n * 0.1753), math.ceil(n * 0.1753)))
+        self.assertEqual(gs.gate_excluded(0.1, {"severe_min_s": 0.6}), 0,
+                         "no exclusion without gate_exclude_below_s")
 
     def test_manifest_columns(self):
         self.assertEqual(gs.MANIFEST_COLUMNS,

@@ -40,10 +40,12 @@ New in v2:
   * Continuous severity s in [0, 1]. Only the amplitudes and the floor scale with s, on
     a log scale between a mild and a severe multiplier per type. Shape parameters stay
     random and independent of s.
-  * Mild / moderate / severe bands are cut by measured detection damage, not guessed.
-    src/calibrate_severity.py fits per-type cutpoints on KITTI TRAIN frames only and
-    writes results/severity_calibration.json; this script reads it and draws s so each
-    type gets thirds of each band.
+  * s is drawn uniformly on [0, 1] per glare type, stratified: the type's n frames get
+    strata 0..n-1 in a seeded shuffle and s = (k + u) / n. Whether a frame is "severe"
+    is derived, not assigned: s >= the type's severe_min_s, measured on KITTI TRAIN frames
+    by src/calibrate_severity.py and written by src/write_severe_calibration.py. There is
+    no mild band (results/severity_scale_decision.json). veiling_wash frames below
+    gate_exclude_below_s are flagged gate_excluded (results/gate_protocol_v2.md).
 
 DETERMINISM
 
@@ -101,7 +103,6 @@ CALIBRATION = REPO_ROOT / "results" / "severity_calibration.json"
 SPLITS = ("train", "val")
 VERSIONS = ("clean", "glared")
 MANIFEST_COLUMNS = ["image_id", "split", "is_glared", "glare_type", "severity", "sat_frac"]
-BANDS = ("mild", "moderate", "severe")
 
 GAMMA = 2.2                       # sRGB <-> linear approximation, as in v1
 
@@ -153,7 +154,7 @@ class FrameSpec:
     image_id: str
     glare_type: str
     severity: float
-    band: str
+    label: str                         # metadata only ("stratum k"); never affects rendering
     mult: float                        # m(s)
     lobes: tuple[Lobe, ...]
     floor_f0: float                    # floor level at m = 1
@@ -322,7 +323,7 @@ def place_source(rng: random.Random, clean: np.ndarray, type_name: str) -> tuple
 
 
 def sample_frame(clean: np.ndarray, split: str, image_id: str, glare_type: str,
-                 severity: float, band: str, seed: int) -> FrameSpec:
+                 severity: float, label: str, seed: int) -> FrameSpec:
     """Draw every parameter for one frame. Each stream has its own RNG, so changing how
     one stream is used never shifts the draws of another."""
     pair = rng_for(seed, split, image_id, "pair")
@@ -346,7 +347,7 @@ def sample_frame(clean: np.ndarray, split: str, image_id: str, glare_type: str,
 
     return FrameSpec(
         split=split, image_id=image_id, glare_type=glare_type,
-        severity=float(severity), band=band, mult=severity_mult(glare_type, severity),
+        severity=float(severity), label=label, mult=severity_mult(glare_type, severity),
         lobes=lobes, floor_f0=floor_f0, floor_grid=grid,
         exposure=math.exp(pair.gauss(0.0, EXPOSURE_JITTER_SIGMA)),
         highlight_boost=pair.uniform(*HIGHLIGHT_BOOST),
@@ -501,32 +502,46 @@ def assign_types(ids: list[str], split: str, seed: int) -> dict[str, str]:
     return dict(zip(ids, types))
 
 
-def assign_bands(types_by_id: dict[str, str], split: str, seed: int) -> dict[str, str]:
-    """Within each type, a third of the frames go to each band."""
-    bands: dict[str, str] = {}
+def assign_strata(types_by_id: dict[str, str], split: str,
+                  seed: int) -> dict[str, tuple[int, int]]:
+    """Per type, a seeded shuffle of strata 0..n-1, one per frame: id -> (stratum, n)."""
+    strata: dict[str, tuple[int, int]] = {}
     for gtype in GLARE_TYPES:
         members = sorted(i for i, t in types_by_id.items() if t == gtype)
-        cycle = list(itertools.islice(itertools.cycle(BANDS), len(members)))
-        random.Random(f"{seed}:{split}:bands:{gtype}").shuffle(cycle)
-        bands.update(zip(members, cycle))
-    return bands
+        order = list(range(len(members)))
+        random.Random(f"{seed}:{split}:strata:{gtype}").shuffle(order)
+        strata.update((i, (k, len(members))) for i, k in zip(members, order))
+    return strata
 
 
-def load_cutpoints(path: Path) -> dict[str, tuple[float, float]]:
+def draw_severity(split: str, image_id: str, stratum: int, n: int, seed: int) -> float:
+    """s = (k + u) / n, so each type covers [0, 1] evenly with one frame per stratum."""
+    return (stratum + rng_for(seed, split, image_id, "severity").random()) / n
+
+
+def load_cutpoints(path: Path) -> dict[str, dict]:
+    """Severe-only calibration, as written by src/write_severe_calibration.py."""
     data = json.loads(path.read_text())
-    return {t: (float(c["mild_max_s"]), float(c["severe_min_s"]))
-            for t, c in data["cutpoints"].items()}
+    if data.get("status") != "ok-severe-only":
+        sys.exit(f"error: {rel(path)} has status {data.get('status')!r}, expected "
+                 f"'ok-severe-only'. Write it with src/write_severe_calibration.py.")
+    cuts = data["cutpoints"]
+    missing = [t for t in GLARE_TYPES if "severe_min_s" not in cuts.get(t, {})]
+    if missing:
+        sys.exit(f"error: {rel(path)} has no severe_min_s for {missing}")
+    return {t: {"severe_min_s": float(cuts[t]["severe_min_s"]),
+                "gate_exclude_below_s": (float(cuts[t]["gate_exclude_below_s"])
+                                         if "gate_exclude_below_s" in cuts[t] else None)}
+            for t in GLARE_TYPES}
 
 
-def band_range(band: str, cuts: tuple[float, float] | None) -> tuple[float, float]:
-    """The s interval a band occupies. Without calibration, thirds of [0, 1]."""
-    c1, c2 = cuts if cuts else (1 / 3, 2 / 3)
-    return {"mild": (0.0, c1), "moderate": (c1, c2), "severe": (c2, 1.0)}[band]
+def severe_flag(s: float, cut: dict) -> int:
+    return int(s >= cut["severe_min_s"])
 
 
-def draw_severity(split: str, image_id: str, band: str, cuts, seed: int) -> float:
-    lo, hi = band_range(band, cuts)
-    return rng_for(seed, split, image_id, "severity").uniform(lo, hi)
+def gate_excluded(s: float, cut: dict) -> int:
+    limit = cut.get("gate_exclude_below_s")
+    return int(limit is not None and s < limit)
 
 
 # --- I/O ------------------------------------------------------------------------------
@@ -584,11 +599,11 @@ def clear_stale(directory: Path, keep: set[str]) -> int:
     return len(stale)
 
 
-def params_row(spec: FrameSpec, info: dict) -> dict:
+def params_row(spec: FrameSpec, info: dict, flags: dict) -> dict:
     core = spec.lobes[0]
     return {
         "split": spec.split, "image_id": spec.image_id, "glare_type": spec.glare_type,
-        "severity": f"{spec.severity:.6f}", "band": spec.band, "mult": f"{spec.mult:.6f}",
+        "severity": f"{spec.severity:.6f}", **flags, "mult": f"{spec.mult:.6f}",
         "cx": f"{core.cx:.2f}", "cy": f"{core.cy:.2f}",
         "floor_f0": f"{spec.floor_f0:.6f}", "exposure": f"{spec.exposure:.6f}",
         "highlight_boost": f"{spec.highlight_boost:.6f}", "ae_k": f"{spec.ae_k:.6f}",
@@ -602,7 +617,8 @@ def params_row(spec: FrameSpec, info: dict) -> dict:
 
 
 PARAMS_COLUMNS = [
-    "split", "image_id", "glare_type", "severity", "band", "mult", "cx", "cy", "floor_f0",
+    "split", "image_id", "glare_type", "severity", "stratum", "severe", "gate_excluded",
+    "mult", "cx", "cy", "floor_f0",
     "exposure", "highlight_boost", "ae_k", "ae_gain", "noise_a_clean", "noise_b_clean",
     "noise_a_glared", "noise_b_glared", "jpeg_q_clean", "jpeg_q_glared", "lobes"]
 
@@ -614,7 +630,9 @@ class Task:
     src: Path
     glare_type: str
     severity: float
-    band: str
+    stratum: int
+    severe: int | None                 # None on an uncalibrated run
+    gate_excluded: int | None
     seed: int
     out_root: Path
 
@@ -623,7 +641,7 @@ def process(task: Task) -> dict:
     """Worker: render one pair, write both JPEGs, return manifest/params/checksum rows."""
     rgb = read_rgb(task.src)
     spec = sample_frame(rgb, task.split, task.image_id, task.glare_type,
-                        task.severity, task.band, task.seed)
+                        task.severity, f"stratum {task.stratum}", task.seed)
     clean_bytes, glared_bytes, info = render_pair(rgb, spec)
 
     out = {}
@@ -638,7 +656,10 @@ def process(task: Task) -> dict:
             [task.image_id, task.split, "1", task.glare_type, f"{task.severity:.6f}",
              f"{info['sat_frac_glared']:.6f}"],
         ],
-        "params": params_row(spec, info),
+        "params": params_row(spec, info, {
+            "stratum": task.stratum,
+            "severe": "" if task.severe is None else task.severe,
+            "gate_excluded": "" if task.gate_excluded is None else task.gate_excluded}),
         "checksums": [out["clean"], out["glared"]],
     }
 
@@ -683,8 +704,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--out-root", type=Path, default=OUT_ROOT)
     p.add_argument("--calibration", type=Path, default=CALIBRATION)
     p.add_argument("--uncalibrated", action="store_true",
-                   help="draw s from thirds of [0,1] instead of calibrated bands. For "
-                        "tuning only: the manifest it writes must not be committed")
+                   help="run without a calibration file: s is still stratified, but "
+                        "severe and gate_excluded are left empty. For tuning only: the "
+                        "files it writes must not be committed")
     p.add_argument("--no-examples", action="store_true")
     p.add_argument("--dry-run", action="store_true", help="report the plan, write nothing")
     args = p.parse_args(argv)
@@ -701,39 +723,48 @@ def main(argv: list[str] | None = None) -> int:
     cuts = None
     if args.calibration.is_file():
         cuts = load_cutpoints(args.calibration)
-        print(f"calibrated bands from {rel(args.calibration)}")
-        for gtype, (c1, c2) in cuts.items():
-            print(f"  {gtype:<15} mild s<{c1:.3f}  moderate <{c2:.3f}  severe <=1")
+        print(f"severe cutoffs from {rel(args.calibration)}")
+        for gtype, c in cuts.items():
+            extra = (f"  gate_exclude s<{c['gate_exclude_below_s']:.4f}"
+                     if c["gate_exclude_below_s"] is not None else "")
+            print(f"  {gtype:<15} severe s>={c['severe_min_s']:.4f}{extra}")
     elif args.uncalibrated or args.dry_run:
-        print(f"WARNING: no {rel(args.calibration)}; bands are thirds of s (uncalibrated)")
+        print(f"WARNING: no {rel(args.calibration)}; severe and gate_excluded left empty")
     else:
-        sys.exit(f"error: {rel(args.calibration)} not found. Run src/calibrate_severity.py "
-                 f"first, or pass --uncalibrated for a tuning run.")
+        sys.exit(f"error: {rel(args.calibration)} not found. Run "
+                 f"src/write_severe_calibration.py first, or pass --uncalibrated for a "
+                 f"tuning run.")
 
     tasks: list[Task] = []
     for split in args.splits:
         frames = list_split(split)
         types = assign_types([i for i, _ in frames], split, args.seed)
-        bands = assign_bands(types, split, args.seed)
+        strata = assign_strata(types, split, args.seed)
         for image_id, src in frames:
             gtype = types[image_id]
-            s = draw_severity(split, image_id, bands[image_id],
-                              cuts.get(gtype) if cuts else None, args.seed)
-            tasks.append(Task(split, image_id, src, gtype, s, bands[image_id],
+            k, n = strata[image_id]
+            s = draw_severity(split, image_id, k, n, args.seed)
+            cut = cuts[gtype] if cuts else None
+            tasks.append(Task(split, image_id, src, gtype, s, k,
+                              severe_flag(s, cut) if cut else None,
+                              gate_excluded(s, cut) if cut else None,
                               args.seed, args.out_root))
         print(f"{split}: {len(frames)} frames -> {len(frames)} clean + {len(frames)} glared")
         for gtype in GLARE_TYPES:
-            counts = [sum(1 for i in types if types[i] == gtype and bands[i] == b)
-                      for b in BANDS]
-            print(f"    {gtype:<15} " + "  ".join(f"{b} {n:>4}" for b, n in zip(BANDS, counts)))
+            mine = [t for t in tasks if t.split == split and t.glare_type == gtype]
+            line = f"    {gtype:<15} n {len(mine):>5}"
+            if cuts:
+                line += (f"  severe {sum(t.severe for t in mine):>5}"
+                         f"  gate_excluded {sum(t.gate_excluded for t in mine):>4}")
+            print(line)
 
     if args.dry_run:
         print("\n--dry-run, nothing written. One sample per type:")
         for gtype in GLARE_TYPES:
             t = next(t for t in tasks if t.glare_type == gtype)
             spec = sample_frame(read_rgb(t.src), t.split, t.image_id, gtype,
-                                t.severity, t.band, t.seed)
-            print(f"  {t.split}/{t.image_id} {gtype:<15} s={spec.severity:.3f} ({spec.band}) "
+                                t.severity, f"stratum {t.stratum}", t.seed)
+            print(f"  {t.split}/{t.image_id} {gtype:<15} s={spec.severity:.3f} ({spec.label}) "
                   f"m={spec.mult:.3f} e0={spec.exposure:.3f} ae_k={spec.ae_k:.2f} "
                   f"q={spec.jpeg_q_clean}/{spec.jpeg_q_glared}")
         return 0

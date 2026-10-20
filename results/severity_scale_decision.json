@@ -1,0 +1,49 @@
+{
+  "status": "post-hoc decision, made after calibration reruns (2026-10-20). Not pre-registered: it was made after seeing results/severity_calibration_failed_v1.json and results/severity_calibration_failed.json.",
+  "mild_band": {
+    "decision": "dropped for all four types",
+    "reasons": {
+      "diffuse_haze": "fails: s=0 drop 0.053 > 0.05; bootstrap 95% CI [0.028, 0.082] includes 0.05",
+      "direct_sun": "fails: s=0 drop 0.075 > 0.05; bootstrap 95% CI [0.039, 0.117] includes 0.05",
+      "horizon_streak": "passes by 0.0003 (s=0 drop 0.0497) after the 0.04 -> 0.02 revision, but the mild band is 0.0006 wide in s",
+      "veiling_wash": "s=0 drop 0.006 with 95% CI [-0.019, 0.027] including zero: its weakest glare is indistinguishable from no glare"
+    },
+    "sources": ["results/severity_s0_bootstrap.json", "results/severity_calibration_failed.json"]
+  },
+  "severe_band": {
+    "decision": "kept",
+    "threshold": "mean per-frame F1 drop >= 0.25, unchanged",
+    "severe_min_s_current_scale": {
+      "diffuse_haze": 0.6042,
+      "direct_sun": 0.5903,
+      "veiling_wash": 0.6911,
+      "horizon_streak": 0.4007
+    },
+    "current_scale_source": {"file": "results/severity_calibration_failed.json", "sha256": "312dd56b8994cbe241f1683a535cac2cb0381cfcdbc3bede6cf14a9efe2666e1", "note": "rerun with horizon_streak at 0.02; the other three types are identical to v1"},
+    "superseded": {"horizon_streak_severe_min_s_at_0.04": 0.2654, "file": "results/severity_calibration_failed_v1.json"}
+  },
+  "gate_positives": {
+    "rule": "all glared frames are gate positives, except veiling_wash frames with s < 0.175, which are excluded as effectively clean",
+    "veiling_wash_cutoff_source": "s where veiling_wash's monotone drop curve reaches 0.05 (0.1753, results/severity_calibration_failed.json)",
+    "note": "excluded frames stay is_glared = 1 in the glare manifest; the exclusion applies to gate training and gate scoring"
+  },
+  "scale_revision": {
+    "horizon_streak": {"min_multiplier": {"from": 0.04, "to": 0.02}, "pre_registered_in": "results/severity_scale_revision.json (commit 5090689)"},
+    "other_types": "unchanged"
+  },
+  "reporting": {
+    "severity": "continuous s and a severe flag (s >= severe_min_s for the frame's type) only",
+    "no_mild_band_accuracy": true
+  },
+  "proposed_next_step": {
+    "status": "PROPOSED, pending approval; no code written, nothing run",
+    "name": "severe-only calibration writer (src/write_severe_calibration.py)",
+    "rule": [
+      "Read results/severity_calibration_failed.json. Refuse unless its severity_scale equals glare_synth.SEVERITY_SCALE and its frames equal the v1 frames.",
+      "Per type, recompute severe_min_s from the stored monotone_drop curve with calibrate_severity.interpolate_crossing at 0.25. Do not copy numbers by hand. Refuse if any type never reaches 0.25.",
+      "Recompute the veiling_wash gate exclusion cutoff the same way at 0.05.",
+      "Write results/severity_calibration.json with status 'ok-severe-only', mild_max_s = null for every type, severe_min_s per type, gate_exclude_below_s for veiling_wash only, the source file's sha256, and a pointer to this decision file.",
+      "No detector run, no rendering, no change to any threshold or multiplier."
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+calibration: 480 KITTI train frames x 11 severities (+ clean) = 5760 renders
+  detector models/yolo_baseline.pt: trained on 1,198 KITTI val frames (train_baseline.py, val-split); never saw a KITTI train frame
+  thresholds: mild drop < 0.05, severe drop >= 0.25
+  40/480  (10s)
+  80/480  (19s)
+  120/480  (29s)
+  160/480  (39s)
+  200/480  (50s)
+  240/480  (61s)
+  280/480  (73s)
+  320/480  (94s)
+  360/480  (118s)
+  400/480  (139s)
+  440/480  (157s)
+  480/480  (173s)
+
+type             F1 clean   mild <  severe >=
+diffuse_haze        0.816    0.000      0.604
+direct_sun          0.812    0.000      0.590
+veiling_wash        0.805    0.175      0.691
+horizon_streak      0.784    0.000      0.265
+wrote results/severity_calibration.json
+
+FAILED -- moved to results/severity_calibration_failed.json:
+  diffuse_haze: drop at s=0 is 0.053, already past mild; lower SEVERITY_SCALE['diffuse_haze'][0]
+  direct_sun: drop at s=0 is 0.075, already past mild; lower SEVERITY_SCALE['direct_sun'][0]
+  horizon_streak: drop at s=0 is 0.127, already past mild; lower SEVERITY_SCALE['horizon_streak'][0]
+exit 1

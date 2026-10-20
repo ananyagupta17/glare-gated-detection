@@ -1,0 +1,19 @@
+{
+  "registered": "2026-10-20, before the calibration rerun",
+  "rule": {
+    "horizon_streak": {"min_multiplier": {"from": 0.04, "to": 0.02}, "max_multiplier": "unchanged (1.0)"},
+    "diffuse_haze": "unchanged (0.05, 1.2)",
+    "direct_sun": "unchanged (0.08, 1.5)",
+    "veiling_wash": "unchanged (0.05, 1.2)"
+  },
+  "reason": "horizon_streak's F1 drop at s = 0 is 0.127, 95% CI [0.083, 0.179], entirely above the 0.05 mild limit (results/severity_s0_bootstrap.json). A zero-glare pipeline control costs 0.0015 for this type (results/pipeline_control.json), so the drop is glare, not the camera pipeline.",
+  "borderline_unrevised": {
+    "diffuse_haze": {"s0_mean_drop": 0.0532, "ci95": [0.0276, 0.0817], "status": "borderline, unrevised: point estimate exceeds 0.05 but the CI includes it"},
+    "direct_sun": {"s0_mean_drop": 0.0753, "ci95": [0.0385, 0.1172], "status": "borderline, unrevised: point estimate exceeds 0.05 but the CI includes it"},
+    "expected_consequence": "calibration compares point estimates with 0.05 and is deterministic on these frames, so both types are expected to fail again; the rerun therefore tests the horizon_streak revision only"
+  },
+  "thresholds": {"mild_max_drop": 0.05, "severe_min_drop": 0.25, "changed": false},
+  "pass_rule": "unchanged: point-estimate comparison in src/calibrate_severity.py",
+  "frames": "the same 480 KITTI train frames as the first calibration (results/severity_calibration_failed_v1.json, frames.ids_by_type), same seed 42",
+  "previous_failed_run": {"file": "results/severity_calibration_failed_v1.json", "sha256": "c10b9a8a70436f3b39c5417ea7b71b81160b8b94395a739845341d5c1d0df4ff"}
+}

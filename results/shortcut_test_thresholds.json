@@ -28,7 +28,9 @@
       "scope": "pass/fail on the mild band only: val glared frames in the mild band vs their paired clean versions. The all-frames AUC is reported with no pass/fail.",
       "midtone_histogram_scoring": "logistic regression on the 16 bins, trained on the train split (all bands); AUC of its scores on val",
       "reason": "Glare adds light and auto-exposure only partly compensates, and veiling glare pushes shadows into the midtones, so across all severities these two probes measure the glare itself. Mild glare should barely register; if these separate mild frames, something other than the glare is doing it.",
-      "changed": "2026-10-20, before generation: moved from single_feature (all frames, <= 0.60) to the mild band only"
+      "changed": "2026-10-20, before generation: moved from single_feature (all frames, <= 0.60) to the mild band only",
+      "status": "not_evaluable",
+      "status_reason": "The mild severity band was dropped after calibration (results/severity_scale_decision.json, commit ddf2673), so there are no mild frames to evaluate. Marked 2026-10-20; the registered limit is kept for the record."
     },
     "brightness_removed_lr": {
       "features": [
@@ -60,7 +62,9 @@
       "band_accuracy": "accuracy on val glared frames in the band plus their paired clean frames (balanced 50/50)",
       "min_gap_points": 10,
       "rule": "accuracy(severe) - accuracy(mild) >= 10 percentage points",
-      "reason": "Mild glare barely changes the frame. If mild frames are as easy to spot as severe ones, something other than the glare gives them away."
+      "reason": "Mild glare barely changes the frame. If mild frames are as easy to spot as severe ones, something other than the glare gives them away.",
+      "status": "not_evaluable",
+      "status_reason": "The mild severity band was dropped after calibration (results/severity_scale_decision.json, commit ddf2673), so there are no mild frames to evaluate. Marked 2026-10-20; the registered limit is kept for the record."
     },
     "determinism": {
       "n_frames": 5,

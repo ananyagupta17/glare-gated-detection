@@ -103,6 +103,12 @@ THRESHOLDS = {
                       "other than the glare is doing it.",
             "changed": "2026-10-20, before generation: moved from single_feature "
                        "(all frames, <= 0.60) to the mild band only",
+
+            "status": "not_evaluable",
+            "status_reason": "The mild severity band was dropped after calibration "
+                             "(results/severity_scale_decision.json, commit ddf2673), so "
+                             "there are no mild frames to evaluate. Marked 2026-10-20; the "
+                             "registered limit is kept for the record.",
         },
         "brightness_removed_lr": {
             "features": NUISANCE,
@@ -122,6 +128,12 @@ THRESHOLDS = {
             "rule": "accuracy(severe) - accuracy(mild) >= 10 percentage points",
             "reason": "Mild glare barely changes the frame. If mild frames are as easy to "
                       "spot as severe ones, something other than the glare gives them away.",
+
+            "status": "not_evaluable",
+            "status_reason": "The mild severity band was dropped after calibration "
+                             "(results/severity_scale_decision.json, commit ddf2673), so "
+                             "there are no mild frames to evaluate. Marked 2026-10-20; the "
+                             "registered limit is kept for the record.",
         },
         "determinism": {
             "n_frames": 5,
@@ -366,11 +378,9 @@ def run(workers: int) -> int:
         a = probe(key)
         out["single_feature"][key] = check(f"AUC({key})", a, limit, a <= limit)
 
-    print("\nbrightness probes: pass/fail on the mild band, all frames reported only")
-    band_of = np.asarray([params[("val", i)]["band"] for i in pairs["val"]])
-    mild = band_of == "mild"
-    out["mild_band_brightness"] = {"n_mild_pairs": int(mild.sum())}
-    for key, limit in th["mild_band_brightness"]["max_auc"].items():
+    print("\nbrightness probes (all frames, report only; mild-band check not_evaluable)")
+    out["mild_band_brightness"] = {"status": th["mild_band_brightness"]["status"]}
+    for key in th["mild_band_brightness"]["max_auc"]:
         if key == "midtone_histogram":
             lr = LogReg().fit(np.vstack([matrix(tc, [key]), matrix(tg, [key])]),
                               np.r_[np.zeros(len(tc)), np.ones(len(tg))])
@@ -378,11 +388,8 @@ def run(workers: int) -> int:
         else:
             sg, sc = matrix(vg, [key]).ravel(), matrix(vc, [key]).ravel()
         a_all = two_sided(auc(sg, sc))
-        a_mild = two_sided(auc(sg[mild], sc[mild]))
-        print(f"  [info] AUC({key}) all frames {a_all:>17.4f}   (no pass/fail)")
-        out["mild_band_brightness"][key] = check(f"AUC({key}) mild band", a_mild, limit,
-                                                 a_mild <= limit,
-                                                 all_frames_auc=round(a_all, 4))
+        print(f"  [info] AUC({key}) all frames {a_all:.4f}")
+        out["mild_band_brightness"][key] = {"all_frames_auc": round(a_all, 4)}
 
     print("\nbrightness-removed logistic regression (train -> val)")
     keys = th["brightness_removed_lr"]["features"]
@@ -394,19 +401,8 @@ def run(workers: int) -> int:
     limit = th["brightness_removed_lr"]["max_accuracy"]
     out["brightness_removed_lr"] = check("accuracy", acc, limit, acc <= limit)
 
-    print("\nmild vs severe (gate features, train -> val)")
-    lr = LogReg().fit(np.vstack([matrix(tc, ["gate"]), matrix(tg, ["gate"])]),
-                      np.r_[np.zeros(len(tc)), np.ones(len(tg))])
-    sc, sg = lr.score(matrix(vc, ["gate"])) >= 0.5, lr.score(matrix(vg, ["gate"])) >= 0.5
-    band_acc = {}
-    for band in gs.BANDS:
-        m = band_of == band
-        band_acc[band] = float(np.r_[~sc[m], sg[m]].mean()) if m.any() else float("nan")
-        print(f"  {band:<9} n={int(m.sum()):>4}  accuracy {band_acc[band]:.4f}")
-    gap = 100.0 * (band_acc["severe"] - band_acc["mild"])
-    need = th["mild_vs_severe"]["min_gap_points"]
-    out["mild_vs_severe"] = check("severe - mild (points)", gap, need, gap >= need,
-                                  band_accuracy={b: round(v, 4) for b, v in band_acc.items()})
+    print("\nmild vs severe: not_evaluable (no mild band), skipped")
+    out["mild_vs_severe"] = {"status": th["mild_vs_severe"]["status"]}
 
     print("\ndeterminism")
     out["determinism"] = determinism(params, th["determinism"]["n_frames"])
@@ -423,10 +419,8 @@ def run(workers: int) -> int:
 
     flat = [out["darkest_pixel"][k]["passed"] for k in th["darkest_pixel"]["features"]]
     flat += [v["passed"] for v in out["single_feature"].values()]
-    flat += [out["mild_band_brightness"][k]["passed"]
-             for k in th["mild_band_brightness"]["max_auc"]]
-    flat += [out["brightness_removed_lr"]["passed"], out["mild_vs_severe"]["passed"],
-             out["determinism"]["passed"]]
+    flat += [out["brightness_removed_lr"]["passed"], out["determinism"]["passed"]]
+    results["not_evaluable"] = ["mild_band_brightness", "mild_vs_severe"]
     results["passed"] = all(flat)
     RESULTS_JSON.write_text(json.dumps(results, indent=2) + "\n")
     print(f"\n{'ALL CHECKS PASSED' if results['passed'] else 'SHORTCUT TEST FAILED'}"

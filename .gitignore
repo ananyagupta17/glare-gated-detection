@@ -11,6 +11,8 @@ data/restored/*
 # full-val scale-up (--full): 340 MB of glared PNGs, regenerable from seed 42
 data/clean_full/
 data/glared_full/
+# v2 paired synthesis (train + val, clean + glared JPEGs), regenerable from seed 42
+data/v2/
 
 # Model weights — ignore checkpoints, track final baseline
 runs/**/*.pt
@@ -29,5 +31,4 @@ __pycache__/
 # macOS
 .DS_Store
 
-# Local-only project context (untracked on purpose)
-CLAUDE.md
+

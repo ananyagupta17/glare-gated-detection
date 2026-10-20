@@ -166,6 +166,18 @@ rather than hiding inside it — measured on held-out data, `Person_sitting` AP5
 
 ## 6. Glare synthesis
 
+> **v2 rebuild (2026-10, code written, data NOT yet generated).** `src/glare_synth.py` is
+> now v2: every KITTI train + val frame comes out clean AND glared through one camera
+> pipeline (highlight expansion → shared exposure jitter → glare × m(s) + spatially
+> varying floor → auto-exposure drop → Poisson-Gaussian noise → JPEG q 75–95). Severity s
+> is continuous; mild/moderate/severe cutpoints come from `src/calibrate_severity.py`
+> (KITTI train frames only, `models/yolo_baseline.pt`). `src/shortcut_test.py` holds
+> pass thresholds registered before generation (`results/shortcut_test_thresholds.json`).
+> Outputs: `data/v2/{clean,glared}/images/{train,val}/`, manifest
+> `data/glare_manifest_v2.csv`. Run order: calibrate → generate → shortcut test.
+> The v1 description below (PNG output, constant floor, half glared) is reachable at
+> commit `a4d2b69`.
+
 **Physically-motivated camera glare model**, implemented in `src/glare_synth.py`. Four
 distinct glare types, 50 images each, so the gate cannot memorise one fixed artifact.
 Still strictly *daytime* glare — no ghosts or starbursts, so Flare7K++ and the nighttime
@@ -322,6 +334,14 @@ That alone is a genuine demonstrable result and motivates the whole project.
 ---
 
 ## 10. Teammate interfaces
+
+> **Changing with v2 (§6).** Once v2 is generated and the shortcut test passes, the
+> contract becomes `data/glare_manifest_v2.csv` (`image_id, split, is_glared, glare_type,
+> severity, sat_frac`; two rows per frame) plus `data/v2/`. Gate and restorer train on
+> the `train` split; all 1,496 `val` pairs are the test set for every arm. Cross-machine
+> check: regenerate, then `git diff data/glare_params_v2.csv data/glare_v2_sha256.txt` —
+> params differ = real divergence; only hashes differ = library build mismatch
+> (numpy/pillow are pinned in requirements.txt). Until then, the v1 contract below holds.
 
 **The dataset is the full 1,496-image KITTI val set**, not the earlier 400-image subset.
 748 are glared, 748 stay clean.

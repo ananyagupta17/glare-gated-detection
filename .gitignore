@@ -12,13 +12,15 @@ data/restored/*
 data/clean_full/
 data/glared_full/
 
-# Model weights — keep large checkpoints outside Git
-runs/**/*.pt
-!models/yolo_baseline.pt
-models/restoration/*.pth
+# Model weights and run artifacts — never in Git (shared separately or regenerable)
+models/
+runs/
+/*.pt
+archive/
 
 # Restoration outputs and local model dependencies
 results/restoration_demo/
+results/restoration_samples/**/*.png
 external/Flare7K/
 
 # Review/report artifacts are local deliverables, not source code

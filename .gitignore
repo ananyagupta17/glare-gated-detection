@@ -14,9 +14,16 @@ data/glared_full/
 # v2 paired synthesis (train + val, clean + glared JPEGs), regenerable from seed 42
 data/v2/
 
-# Model weights — ignore checkpoints, track final baseline
-runs/**/*.pt
-!models/yolo_baseline.pt
+# Model weights and run artifacts — never in Git (shared separately or regenerable)
+models/
+runs/
+/*.pt
+archive/
+
+# Restoration outputs and local model dependencies (same rules as restore-seamless)
+results/restoration_demo/
+results/restoration_samples/**/*.png
+external/Flare7K/
 
 # Results — keep the directory, ignore bulky per-run dumps
 results/**/predictions/
@@ -30,5 +37,3 @@ __pycache__/
 
 # macOS
 .DS_Store
-
-

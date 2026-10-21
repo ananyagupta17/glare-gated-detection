@@ -1,0 +1,10 @@
+{
+  "purpose": "Val frames inspected when choosing between restorer modes. src/eval_restorer_map.py excludes them from every mAP comparison.",
+  "val_ids_used": ["001071", "005796", "003507", "003781", "000129"],
+  "how_used": "Restored with Vihaan's tiling (overlap 128), then with overlap 384 and whole-frame. PSNR, SSIM and seam visibility on these five frames motivated src/restore_seamless.py and its two modes.",
+  "data_version": "v1 glared frames (data/glared_full) with KITTI val clean originals. v2 regenerates glare for the same KITTI val IDs, so the scene content was seen and the IDs are excluded.",
+  "parameters_chosen_on_them": {"overlap384": "overlap 384 px", "whole": "letterbox to 512 x 512, reflect padding"},
+  "detector_used": "none: no detection was run on these frames",
+  "sources": ["results/restoration_samples/samples.json", "results/restoration_samples/seamless/seamless_metrics.json"],
+  "recorded": "2026-10-20"
+}

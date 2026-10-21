@@ -1,0 +1,77 @@
+{
+  "subset": 200,
+  "subset_ids": "results/restored_analysis_subset200_ids.txt",
+  "subset_source": "first 200 eligible val IDs, identical to the --limit 200 trial",
+  "restorer": "whole",
+  "detector_weights": "models/yolo_c1_train.pt",
+  "device": "mps",
+  "clean_restore": {
+    "subset": 200,
+    "restore": {
+      "restored_now": 200,
+      "from_cache": 0,
+      "mean_restore_seconds": 1.74
+    },
+    "detection": {
+      "clean": {
+        "all": {
+          "mAP50": 0.8739,
+          "mAP50_95": 0.6144,
+          "count": 200
+        },
+        "severe": {
+          "mAP50": 0.8612,
+          "mAP50_95": 0.5801,
+          "count": 91
+        },
+        "non_severe": {
+          "mAP50": 0.8779,
+          "mAP50_95": 0.6321,
+          "count": 109
+        }
+      },
+      "clean_restored": {
+        "all": {
+          "mAP50": 0.8708,
+          "mAP50_95": 0.6103,
+          "count": 200
+        },
+        "severe": {
+          "mAP50": 0.8606,
+          "mAP50_95": 0.5771,
+          "count": 91
+        },
+        "non_severe": {
+          "mAP50": 0.8756,
+          "mAP50_95": 0.63,
+          "count": 109
+        }
+      }
+    },
+    "mAP50_change": {
+      "all": -0.0031,
+      "severe": -0.0006,
+      "non_severe": -0.0023
+    }
+  },
+  "separation": {
+    "subset": 200,
+    "classifier": "logistic regression on the gate classifier's 9 features, trained on v2 train clean vs glared (5,985 pairs); as in shortcut_test.py",
+    "auc": "two-sided, max(AUC, 1-AUC)",
+    "results": {
+      "clean_vs_glared": {
+        "accuracy": 0.895,
+        "auc": 0.9702
+      },
+      "clean_vs_glared_restored": {
+        "accuracy": 0.6125,
+        "auc": 0.7325
+      },
+      "clean_restored_vs_glared_restored": {
+        "accuracy": 0.62,
+        "auc": 0.785
+      }
+    },
+    "note": "report only; no shortcut_test.py threshold is applied"
+  }
+}

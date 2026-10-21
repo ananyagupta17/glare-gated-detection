@@ -1,0 +1,43 @@
+severe cutoffs from results/severity_calibration.json
+  diffuse_haze    severe s>=0.6042
+  direct_sun      severe s>=0.5904
+  veiling_wash    severe s>=0.6912  gate_exclude s<0.1752
+  horizon_streak  severe s>=0.4006
+train: 5985 frames -> 5985 clean + 5985 glared
+    diffuse_haze    n  1497  severe   593  gate_excluded    0
+    direct_sun      n  1496  severe   613  gate_excluded    0
+    veiling_wash    n  1496  severe   462  gate_excluded  262
+    horizon_streak  n  1496  severe   897  gate_excluded    0
+val: 1496 frames -> 1496 clean + 1496 glared
+    diffuse_haze    n   374  severe   148  gate_excluded    0
+    direct_sun      n   374  severe   153  gate_excluded    0
+    veiling_wash    n   374  severe   116  gate_excluded   65
+    horizon_streak  n   374  severe   224  gate_excluded    0
+
+rendering 7481 pairs with 7 worker(s)...
+  500/7481
+  1000/7481
+  1500/7481
+  2000/7481
+  2500/7481
+  3000/7481
+  3500/7481
+  4000/7481
+  4500/7481
+  5000/7481
+  5500/7481
+  6000/7481
+  6500/7481
+  7000/7481
+  7481/7481
+
+  wrote data/glare_manifest_v2.csv (14962 rows)  <-- commit
+  wrote data/glare_params_v2.csv (7481 rows)  <-- commit
+  wrote data/glare_v2_sha256.txt (14962 files)  <-- commit
+  wrote results/glare_v2_example_diffuse_haze.png
+  wrote results/glare_v2_example_direct_sun.png
+  wrote results/glare_v2_example_veiling_wash.png
+  wrote results/glare_v2_example_horizon_streak.png
+
+Next: python src/shortcut_test.py
+exit 0

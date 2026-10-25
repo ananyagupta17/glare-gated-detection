@@ -3,6 +3,8 @@
     python src/eval_restorer_map.py none          # detector on glared input only (C1)
     python src/eval_restorer_map.py tiling128     # Vihaan's handover tiling (src/restore.py)
     python src/eval_restorer_map.py overlap384    # src/restore_seamless.py, mode overlap
+    python src/eval_restorer_map.py daytime       # src/restore_daytime.py (classical, daytime)
+    python src/eval_restorer_map.py daynet        # src/restore_daytime_net.py (trained, daytime)
     python src/eval_restorer_map.py whole         # src/restore_seamless.py, mode whole
 
 For every run the detector scores three versions of the same val frames:
@@ -49,7 +51,7 @@ from types import SimpleNamespace
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-RESTORERS = ("none", "tiling128", "overlap384", "whole")
+RESTORERS = ("none", "tiling128", "overlap384", "whole", "daytime", "daynet")
 GROUPS = ("all", "severe", "non_severe")
 V2_ROOT = REPO_ROOT / "data" / "v2"
 PARAMS = REPO_ROOT / "data" / "glare_params_v2.csv"
@@ -146,6 +148,14 @@ def make_restorer(name: str, threads: int):
     import torch
     torch.set_num_threads(threads)
     os.environ.setdefault("FLARE7K_DEVICE", "cpu")
+    if name == "daytime":
+        from types import SimpleNamespace
+        import restore_daytime
+        return SimpleNamespace(restore=restore_daytime.restore)
+    if name == "daynet":
+        os.environ.setdefault("DAYTIME_NET_DEVICE", "cpu")  # CPU, comparable with the others
+        import restore_daytime_net
+        return restore_daytime_net.get_restorer()
     if name == "tiling128":
         import restore
         return restore.get_restorer()                       # handover default, overlap 128

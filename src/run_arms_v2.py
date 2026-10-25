@@ -53,6 +53,12 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 import eval_restorer_map as erm  # noqa: E402
 import shortcut_test as st  # noqa: E402
 
+RESTORER_DESCR = {
+    "whole": "Flare7K++ night model, whole-frame (src/restore_seamless.py)",
+    "daytime": "daytime classical veil subtraction (src/restore_daytime.py)",
+    "daynet": "daytime trained U-Net (src/restore_daytime_net.py)",
+}
+RESTORER = "whole"          # set by --restorer; "whole" keeps the original file names
 GLARED_CACHE = REPO_ROOT / "data" / "restored" / "v2_whole" / "val"
 CLEAN_CACHE = REPO_ROOT / "data" / "restored" / "v2_whole_clean" / "val"
 WORK = REPO_ROOT / "datasets" / "eval_arms_v2"
@@ -138,8 +144,23 @@ def time_ms(fn, inputs, warmup: int = 10) -> float:
     return statistics.mean(times)
 
 
+def configure(name: str) -> None:
+    """Point caches and outputs at one restorer. 'whole' keeps the original names."""
+    global RESTORER, GLARED_CACHE, CLEAN_CACHE, OUT_JSON, OUT_MD
+    RESTORER = name
+    GLARED_CACHE = REPO_ROOT / "data" / "restored" / f"v2_{name}" / "val"
+    CLEAN_CACHE = REPO_ROOT / "data" / "restored" / f"v2_{name}_clean" / "val"
+    suffix = "" if name == "whole" else f"_{name}"
+    OUT_JSON = REPO_ROOT / "results" / f"arms_v2{suffix}.json"
+    OUT_MD = REPO_ROOT / "results" / f"arms_v2{suffix}.md"
+
+
 def main() -> int:
-    whole = json.loads((REPO_ROOT / "results" / "restorer_map_whole.json").read_text())
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--restorer", choices=sorted(RESTORER_DESCR), default="whole")
+    configure(ap.parse_args().restorer)
+    whole = json.loads((REPO_ROOT / "results" / f"restorer_map_{RESTORER}.json").read_text())
     dirs = erm.v2_val_dirs(erm.V2_ROOT)
     ids, removed = erm.eligible(sorted(p.stem for p in dirs["glared"].glob("*.jpg")),
                                 erm.excluded_ids(erm.CALIBRATION, erm.TUNING))
@@ -151,7 +172,7 @@ def main() -> int:
     missing = [i for i in ids if not (GLARED_CACHE / f"{i}.png").is_file()]
     if missing:
         sys.exit(f"error: {len(missing)} restored glared frames missing; run eval_restorer_map.py whole")
-    clean_info = erm.restore_all("whole", ids, dirs["clean"], CLEAN_CACHE, threads=4)
+    clean_info = erm.restore_all(RESTORER, ids, dirs["clean"], CLEAN_CACHE, threads=4)
     print(f"clean restorations: {clean_info}")
     restored = {(i, "glared"): GLARED_CACHE / f"{i}.png" for i in ids}
     restored.update({(i, "clean"): CLEAN_CACHE / f"{i}.png" for i in ids})
@@ -228,9 +249,9 @@ def main() -> int:
                    "excluded_ids": removed},
         "detector": {"weights": "models/yolo_c1_train.pt", "mAP_device": device,
                      "latency_device": "cpu"},
-        "restorer": {"name": "whole (src/restore_seamless.py)", "device": "cpu",
+        "restorer": {"name": RESTORER, "description": RESTORER_DESCR[RESTORER], "device": "cpu",
                      "mean_ms_per_frame": round(restore_ms, 1),
-                     "source": "results/restorer_map_whole.json", "clean_restore": clean_info},
+                     "source": f"results/restorer_map_{RESTORER}.json", "clean_restore": clean_info},
         "gates": {**gate_info, "metrics_val": gates,
                   "protocol": "results/gate_protocol_v2.md (excluded glared frames not scored)"},
         "arms": results,
@@ -255,7 +276,7 @@ def write_markdown(p: dict) -> None:
         "Gate rows are the most affected.\n\n"
         f"Stream: {p['stream']['frames']} val frames, each clean and glared "
         f"({p['stream']['images']} images, 50/50). Detector `models/yolo_c1_train.pt`. "
-        f"Restorer: whole-frame Flare7K++, {p['restorer']['mean_ms_per_frame']:.0f} ms/frame on CPU.\n\n"
+        f"Restorer: {p['restorer']['description']}, {p['restorer']['mean_ms_per_frame']:.0f} ms/frame on CPU.\n\n"
         "| Arm | mAP50 stream | mAP50 clean | mAP50 glared | mAP50 glared severe | "
         "Trigger rate | Latency ms/frame (CPU) |\n|---|---|---|---|---|---|---|\n"
         + "\n".join(rows) + "\n\n"

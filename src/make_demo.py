@@ -210,10 +210,15 @@ def charts(arms: dict, whole: dict) -> list[Path]:
 # --- main ------------------------------------------------------------------------------
 
 def main() -> int:
-    arms_doc = json.loads((R / "arms_v2.json").read_text())
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--restorer", choices=sorted(ra.RESTORER_DESCR), default="whole")
+    name = ap.parse_args().restorer
+    ra.configure(name)
+    arms_doc = json.loads(ra.OUT_JSON.read_text())
     arms = arms_doc["arms"]
-    whole = json.loads((R / "restorer_map_whole.json").read_text())
-    analysis = json.loads((R / "restored_analysis.json").read_text())
+    whole = json.loads((R / f"restorer_map_{name}.json").read_text())
+    analysis = json.loads((R / "restored_analysis.json").read_text()) if name == "whole" else None
     shortcut = json.loads((R / "shortcut_test.json").read_text())
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -278,7 +283,7 @@ def main() -> int:
     panel_figure([(rows[0][0], f"1. Clean camera frame — {rows[0][1]}"),
                   (rows[1][0], f"2. Same frame with synthetic sun glare ({describe(i)}) — {rows[1][1]}\n"
                                f"    {gate_line(i, 'glared')}"),
-                  (rows[2][0], f"3. After whole-frame restoration — {rows[2][1]}")],
+                  (rows[2][0], f"3. After restoration ({ra.RESTORER_DESCR[name]}) — {rows[2][1]}")],
                  "How the pipeline handles one glared frame", OUT / f"01_pipeline_walkthrough_{i}.png",
                  note=f"Selection: the severe val frame with the median detection gain from restoration.")
 
@@ -333,8 +338,8 @@ def main() -> int:
                   (cr[0], f"Same clean frame after restoration — {cr[1]}")],
                  "What restoration does to a frame with no glare (the cost C2 pays on every clean frame)",
                  OUT / "05_restoring_a_clean_frame.png",
-                 note=f"Over the 200-frame subset, restoring clean frames changed mAP@50 by "
-                      f"{analysis['clean_restore']['mAP50_change']['all']:+.3f}.")
+                 note=f"Over all {len(ids):,} clean val frames, always restoring (C2 vs C1) changed "
+                      f"mAP@50 by {clean_change(arms):+.3f}.")
 
     # 06 failure case
     i = min(severe_ids, key=lambda k: (f1[(k, 'restored')], gain[k], k))
@@ -348,7 +353,7 @@ def main() -> int:
                       "Clipped (pure white) pixels hold no information to recover.")
 
     chart_paths = charts(arms, whole)
-    write_report(arms_doc, whole, analysis, shortcut, selected, reproduced, gain, f1, severe_ids)
+    write_report(arms_doc, whole, analysis, shortcut, selected, reproduced, gain, f1, severe_ids, name)
     (OUT / "selection.json").write_text(json.dumps(
         {"selected": selected, "gate_refit_reproduces_metrics": reproduced,
          "severe_frames_scored": len(severe_ids),
@@ -357,7 +362,33 @@ def main() -> int:
     return 0
 
 
-def write_report(doc, whole, analysis, shortcut, selected, reproduced, gain, f1, severe_ids) -> None:
+def clean_change(arms: dict) -> float:
+    """What always restoring costs on clean frames: C2 vs C1 mAP@50, all clean val frames."""
+    return arms["C2"]["clean"]["mAP50"] - arms["C1"]["clean"]["mAP50"]
+
+
+def comparison_rows() -> str:
+    """One row per restorer that has been evaluated, from its own result files."""
+    rows = []
+    for key in ("whole", "daytime", "daynet"):
+        suffix = "" if key == "whole" else f"_{key}"
+        arms_p, map_p = R / f"arms_v2{suffix}.json", R / f"restorer_map_{key}.json"
+        if not (arms_p.is_file() and map_p.is_file()):
+            continue
+        a = json.loads(arms_p.read_text())
+        m = json.loads(map_p.read_text())["results"]
+        rec = (m["output"]["all"]["mAP50"] - m["input"]["all"]["mAP50"]) / \
+              (m["clean"]["all"]["mAP50"] - m["input"]["all"]["mAP50"])
+        ar = a["arms"]
+        rows.append(f"| {ra.RESTORER_DESCR[key]} | {a['restorer']['mean_ms_per_frame']:,.0f} | "
+                    f"{m['output']['all']['mAP50']:.3f} | {rec:.0%} | {clean_change(ar):+.3f} | "
+                    f"{ar['C2']['stream']['mAP50']:.3f} | {ar['C3_features']['stream']['mAP50']:.3f} | "
+                    f"{ar['C3_features']['latency_ms']['total_mean']:,.0f} |")
+    return "\n".join(rows)
+
+
+def write_report(doc, whole, analysis, shortcut, selected, reproduced, gain, f1, severe_ids,
+                 restorer) -> None:
     a, g = doc["arms"], doc["gates"]["metrics_val"]
     res = whole["results"]
     lat = {k: v["latency_ms"] for k, v in a.items()}
@@ -378,7 +409,9 @@ def write_report(doc, whole, analysis, shortcut, selected, reproduced, gain, f1,
     gate_rows = "\n".join(f"| {name[k]} | {v['precision']:.3f} | {v['recall']:.3f} | "
                           f"{v['f1']:.3f} | {v['accuracy']:.3f} | {a[k]['trigger_rate']:.1%} |"
                           for k, v in g.items())
-    sep = analysis["separation"]["results"]
+    sep = analysis["separation"]["results"] if analysis else None
+    cc = clean_change(a)
+    descr = ra.RESTORER_DESCR[restorer]
     ch = shortcut["checks"]
     fails = [f"darkest-pixel p1 AUC {ch['darkest_pixel']['p1_luma']['value']:.3f}",
              f"min AUC {ch['darkest_pixel']['min_luma']['value']:.3f}",
@@ -398,8 +431,7 @@ def write_report(doc, whole, analysis, shortcut, selected, reproduced, gain, f1,
   ({doc['stream']['images']:,} images, exactly 50/50). Glare: v2 camera-model synthesis,
   four types, continuous severity. 5 frames used to tune the restorer are excluded.
 - **Detector:** YOLOv8n trained on clean KITTI train only (`models/yolo_c1_train.pt`, 50 epochs).
-- **Restorer:** pretrained Flare7K++ Uformer, whole-frame mode (`src/restore_seamless.py`,
-  built on Vihaan's handover). **{doc['restorer']['mean_ms_per_frame']:,.0f} ms/frame on CPU.**
+- **Restorer:** {descr}. **{doc['restorer']['mean_ms_per_frame']:,.0f} ms/frame on CPU.**
 - **Gates (C3),** fit on v2 *train* only: an upper-third brightness threshold, and a
   logistic regression on Harshitha's 9 gate features (standing in for her v2 gate).
 
@@ -423,10 +455,14 @@ def write_report(doc, whole, analysis, shortcut, selected, reproduced, gain, f1,
 |---|---|---|---|---|---|
 {sev}
 
-Restoring a frame **without** glare is nearly free in accuracy: on a 200-frame subset,
-clean-frame mAP@50 went {analysis['clean_restore']['detection']['clean']['all']['mAP50']:.3f} →
-{analysis['clean_restore']['detection']['clean_restored']['all']['mAP50']:.3f}
-({analysis['clean_restore']['mAP50_change']['all']:+.3f}). So gating saves **time**, not accuracy.
+**Restoring frames without glare:** over all {doc['stream']['frames']:,} clean val frames, always
+restoring changed mAP@50 from {a['C1']['clean']['mAP50']:.3f} to {a['C2']['clean']['mAP50']:.3f}
+({cc:+.3f}). {"That cost is real, so the gate protects accuracy on clean frames as well as saving time." if cc < -0.005 else "That is close to free, so here the gate mainly saves time."}
+
+## Restorers compared (same frames, same detector, same gates)
+| Restorer | ms/frame (CPU) | Glared mAP@50 restored | Share of loss recovered | Clean-frame change (C2−C1) | C2 stream mAP@50 | C3 features stream mAP@50 | C3 features ms/frame |
+|---|---|---|---|---|---|---|---|
+{comparison_rows()}
 
 ![recovery by severity](09_chart_recovery_by_severity.png)
 
@@ -443,9 +479,7 @@ which is what makes skipping it worthwhile.
 |---|---|---|---|---|---|
 {gate_rows}
 
-The features gate is likely inflated by the synthesis artifacts. After restoration the same
-features separate clean from glared far less well: accuracy {sep['clean_vs_glared']['accuracy']:.1%}
-on originals vs {sep['clean_vs_glared_restored']['accuracy']:.1%} clean-vs-restored (200-frame subset).
+The features gate is likely inflated by the synthesis artifacts.{(" After Flare7K++ restoration the same features separate clean from glared far less well: accuracy " + format(sep['clean_vs_glared']['accuracy'], '.1%') + " on originals vs " + format(sep['clean_vs_glared_restored']['accuracy'], '.1%') + " clean-vs-restored (200-frame subset).") if sep else ""}
 
 ## Figures in this folder
 | File | Shows |
@@ -469,7 +503,7 @@ Box colours: green = correct detection, red = false detection, yellow = missed o
 1. **Synthetic glare that failed its shortcut test.** Restoration may suit this additive,
    smooth glare better than real glare; confirm on real glare (e.g. BDD100K) before quoting.
 2. **The C3 gates are stand-ins,** fit here on v2 train; Harshitha's v2 gate is not trained yet.
-3. **Flare7K++ is a nighttime lens-flare model** applied to daytime sun glare.
+3. {"**Flare7K++ is a nighttime lens-flare model** applied to daytime sun glare." if restorer == "whole" else "**The daytime restorer was tuned or trained on our synthetic glare only** (train split); real-glare performance is untested."}
 4. KITTI's train/val split shares drives, so absolute mAP is slightly optimistic; the
    comparisons between arms use identical frames and are unaffected.
 """)

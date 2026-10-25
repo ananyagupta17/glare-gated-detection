@@ -1,0 +1,127 @@
+{
+ "device": "cpu",
+ "torch_threads": 4,
+ "metric_code": "psnr/ssim from Vihaan's src/demo_restoration.py",
+ "severity_note": "v1 has no severity value; frames chosen by mean brightness the glare added",
+ "timing_note": "image loaded before the timer; the first frame's time includes the lazy model load (about 2-3 s); 4 torch threads on CPU while detector training ran concurrently",
+ "frames": [
+  {
+   "id": "001071",
+   "glare_type": "direct_sun",
+   "severity": null,
+   "selection": "median added brightness of its type",
+   "mean_added_brightness": 31.3,
+   "added_sat_frac": 0.0109,
+   "input_psnr_db": 15.24,
+   "restored_psnr_db": 24.67,
+   "input_ssim": 0.7617,
+   "restored_ssim": 0.9439,
+   "restore_seconds": 23.51,
+   "sun_xy": [
+    999,
+    80
+   ]
+  },
+  {
+   "id": "005796",
+   "glare_type": "horizon_streak",
+   "severity": null,
+   "selection": "median added brightness of its type",
+   "mean_added_brightness": 89.1,
+   "added_sat_frac": 0.1121,
+   "input_psnr_db": 6.48,
+   "restored_psnr_db": 8.56,
+   "input_ssim": 0.5778,
+   "restored_ssim": 0.673,
+   "restore_seconds": 18.14,
+   "sun_xy": [
+    1043,
+    76
+   ]
+  },
+  {
+   "id": "003507",
+   "glare_type": "diffuse_haze",
+   "severity": null,
+   "selection": "median added brightness of its type",
+   "mean_added_brightness": 70.8,
+   "added_sat_frac": 0.0786,
+   "input_psnr_db": 9.74,
+   "restored_psnr_db": 15.59,
+   "input_ssim": 0.6014,
+   "restored_ssim": 0.7991,
+   "restore_seconds": 18.48,
+   "sun_xy": [
+    600,
+    147
+   ]
+  },
+  {
+   "id": "003781",
+   "glare_type": "veiling_wash",
+   "severity": null,
+   "selection": "median added brightness of its type",
+   "mean_added_brightness": 58.9,
+   "added_sat_frac": 0.021,
+   "input_psnr_db": 11.31,
+   "restored_psnr_db": 13.85,
+   "input_ssim": 0.605,
+   "restored_ssim": 0.694,
+   "restore_seconds": 17.73,
+   "sun_xy": [
+    255,
+    269
+   ]
+  },
+  {
+   "id": "000129",
+   "glare_type": "horizon_streak",
+   "severity": null,
+   "selection": "largest added brightness of all 748 glared frames",
+   "mean_added_brightness": 155.0,
+   "added_sat_frac": 0.3873,
+   "input_psnr_db": 3.41,
+   "restored_psnr_db": 4.27,
+   "input_ssim": 0.3172,
+   "restored_ssim": 0.383,
+   "restore_seconds": 17.87,
+   "sun_xy": [
+    1096,
+    141
+   ]
+  }
+ ],
+ "zoom": {
+  "frame": "003507",
+  "sun_crop": {
+   "x": [
+    400,
+    800
+   ],
+   "y": [
+    67,
+    287
+   ],
+   "files": [
+    "003507_zoom_input.png",
+    "003507_zoom_restored.png"
+   ]
+  },
+  "seam_crop": {
+   "x": [
+    700,
+    1100
+   ],
+   "y": [
+    155,
+    375
+   ],
+   "files": [
+    "003507_zoom_seam_input.png",
+    "003507_zoom_seam_restored.png",
+    "003507_zoom_seam_clean.png"
+   ]
+  },
+  "scale": "3x nearest-neighbour"
+ }
+}

@@ -1,0 +1,9 @@
+loading gate, restorer and detector...
+/Users/ananyagupta/Desktop/glare-gated-detection/src/demo_app.py:273: DeprecationWarning: The 'theme' parameter in the Blocks constructor will be removed in Gradio 6.0. You will need to pass 'theme' to Blocks.launch() instead.
+  with gr.Blocks(title="Glare-Gated Object Detection", theme=theme, css=CSS) as ui:
+/Users/ananyagupta/Desktop/glare-gated-detection/src/demo_app.py:273: DeprecationWarning: The 'css' parameter in the Blocks constructor will be removed in Gradio 6.0. You will need to pass 'css' to Blocks.launch() instead.
+  with gr.Blocks(title="Glare-Gated Object Detection", theme=theme, css=CSS) as ui:
+/Users/ananyagupta/Desktop/glare-gated-detection/src/demo_app.py:299: DeprecationWarning: The 'show_api' parameter in event listeners will be removed in Gradio 6.0. You will need to use the 'api_visibility' parameter instead. To replicate show_api=False, in Gradio 6.0, use api_visibility='undocumented'.
+  stop.click(None, None, None, cancels=[event])
+* Running on local URL:  http://127.0.0.1:7860
+* To create a public link, set `share=True` in `launch()`.

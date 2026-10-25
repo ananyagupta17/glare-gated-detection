@@ -1,0 +1,9 @@
+detecting KITTI versions...
+KITTI point estimates: {'stream_mAP50_C1': 0.6421, 'stream_mAP50_C2': 0.7782, 'stream_mAP50_C3_cnn': 0.7667, 'stream_mAP50_C3_features': 0.7739, 'stream_mAP50_C3_brightness': 0.7555, 'clean': 0.8551, 'glared': 0.4351, 'restored': 0.7093, 'glare_drop': 0.42, 'recovery': 0.6527, 'gain_kept_C3_cnn': 0.915, 'gate_C3_cnn_precision': 1.0, 'gate_C3_cnn_recall': 0.817, 'gate_C3_cnn_f1': 0.8993, 'gate_C3_cnn_accuracy': 0.9105, 'gain_kept_C3_features': 0.9682, 'gate_C3_features_precision': 0.9156, 'gate_C3_features_recall': 0.8822, 'gate_C3_features_f1': 0.8986, 'gate_C3_features_accuracy': 0.9026, 'gain_kept_C3_brightness': 0.8331, 'gate_C3_brightness_precision': 0.6163, 'gate_C3_brightness_recall': 0.7174, 'gate_C3_brightness_f1': 0.663, 'gate_C3_brightness_accuracy': 0.6435}
+  KITTI bootstrap 200/1000
+  KITTI bootstrap 400/1000
+  KITTI bootstrap 600/1000
+  KITTI bootstrap 800/1000
+  KITTI bootstrap 1000/1000
+wrote results/bootstrap_ci.json
+exit 0

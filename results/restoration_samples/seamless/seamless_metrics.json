@@ -1,0 +1,205 @@
+{
+ "crop_box": {
+  "x": [
+   700,
+   1100
+  ],
+  "y": [
+   155,
+   375
+  ]
+ },
+ "seam_columns": [
+  843,
+  867,
+  937
+ ],
+ "seam_step_definition": "|mean of (restored-clean) luma residual over x..x+2 minus over x-3..x-1|, rows 155-375; typical_step = median of that over every column in the crop",
+ "overlap_mode_overlap_px": 384,
+ "tiling_128": "original handover tiling, from samples.json (not rerun)",
+ "metric_code": "psnr/ssim from Vihaan's src/demo_restoration.py",
+ "device": "cpu",
+ "torch_threads": 4,
+ "frames": {
+  "001071": {
+   "glare_type": "direct_sun",
+   "tiling_128": {
+    "psnr_db": 24.67,
+    "ssim": 0.9439,
+    "seconds": 23.51,
+    "seam_steps": {
+     "843": 0.52,
+     "867": 0.02,
+     "937": 0.53
+    },
+    "typical_step": 0.19
+   },
+   "overlap": {
+    "psnr_db": 24.65,
+    "ssim": 0.9435,
+    "seconds": 39.25,
+    "seam_steps": {
+     "843": 0.14,
+     "867": 0.01,
+     "937": 0.34
+    },
+    "typical_step": 0.19
+   },
+   "whole": {
+    "psnr_db": 23.09,
+    "ssim": 0.9338,
+    "seconds": 8.08,
+    "seam_steps": {
+     "843": 0.0,
+     "867": 0.01,
+     "937": 0.14
+    },
+    "typical_step": 0.23
+   }
+  },
+  "005796": {
+   "glare_type": "horizon_streak",
+   "tiling_128": {
+    "psnr_db": 8.56,
+    "ssim": 0.673,
+    "seconds": 18.14,
+    "seam_steps": {
+     "843": 0.71,
+     "867": 0.62,
+     "937": 0.76
+    },
+    "typical_step": 0.36
+   },
+   "overlap": {
+    "psnr_db": 8.56,
+    "ssim": 0.6734,
+    "seconds": 39.69,
+    "seam_steps": {
+     "843": 0.41,
+     "867": 0.64,
+     "937": 0.55
+    },
+    "typical_step": 0.32
+   },
+   "whole": {
+    "psnr_db": 10.17,
+    "ssim": 0.7011,
+    "seconds": 6.64,
+    "seam_steps": {
+     "843": 0.62,
+     "867": 0.06,
+     "937": 0.54
+    },
+    "typical_step": 0.25
+   }
+  },
+  "003507": {
+   "glare_type": "diffuse_haze",
+   "tiling_128": {
+    "psnr_db": 15.59,
+    "ssim": 0.7991,
+    "seconds": 18.48,
+    "seam_steps": {
+     "843": 5.87,
+     "867": 5.86,
+     "937": 3.27
+    },
+    "typical_step": 0.56
+   },
+   "overlap": {
+    "psnr_db": 15.79,
+    "ssim": 0.8032,
+    "seconds": 44.46,
+    "seam_steps": {
+     "843": 3.1,
+     "867": 1.88,
+     "937": 1.71
+    },
+    "typical_step": 0.53
+   },
+   "whole": {
+    "psnr_db": 20.65,
+    "ssim": 0.8874,
+    "seconds": 6.27,
+    "seam_steps": {
+     "843": 0.54,
+     "867": 0.49,
+     "937": 0.3
+    },
+    "typical_step": 0.42
+   }
+  },
+  "003781": {
+   "glare_type": "veiling_wash",
+   "tiling_128": {
+    "psnr_db": 13.85,
+    "ssim": 0.694,
+    "seconds": 17.73,
+    "seam_steps": {
+     "843": 0.1,
+     "867": 1.18,
+     "937": 0.45
+    },
+    "typical_step": 0.33
+   },
+   "overlap": {
+    "psnr_db": 13.75,
+    "ssim": 0.6912,
+    "seconds": 44.74,
+    "seam_steps": {
+     "843": 0.2,
+     "867": 0.4,
+     "937": 0.38
+    },
+    "typical_step": 0.29
+   },
+   "whole": {
+    "psnr_db": 21.22,
+    "ssim": 0.8154,
+    "seconds": 5.4,
+    "seam_steps": {
+     "843": 0.6,
+     "867": 0.74,
+     "937": 0.09
+    },
+    "typical_step": 0.29
+   }
+  },
+  "000129": {
+   "glare_type": "horizon_streak",
+   "tiling_128": {
+    "psnr_db": 4.27,
+    "ssim": 0.383,
+    "seconds": 17.87,
+    "seam_steps": {
+     "843": 0.27,
+     "867": 8.35,
+     "937": 1.35
+    },
+    "typical_step": 1.45
+   },
+   "overlap": {
+    "psnr_db": 4.28,
+    "ssim": 0.3839,
+    "seconds": 52.94,
+    "seam_steps": {
+     "843": 1.49,
+     "867": 5.87,
+     "937": 1.13
+    },
+    "typical_step": 1.43
+   },
+   "whole": {
+    "psnr_db": 4.99,
+    "ssim": 0.3909,
+    "seconds": 5.83,
+    "seam_steps": {
+     "843": 1.35,
+     "867": 4.84,
+     "937": 1.41
+    },
+    "typical_step": 1.52
+   }
+  }
+ }
+}

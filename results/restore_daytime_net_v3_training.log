@@ -1,0 +1,19 @@
+pairs: 5985 KITTI + 3000 BDD
+train 8536 pairs, holdout 449 (train split only), device mps
+epoch  1  train L1 0.1078  holdout L1 0.0932 (no restoration 0.1168)  324s
+epoch  2  train L1 0.0895  holdout L1 0.0834 (no restoration 0.1168)  637s
+epoch  3  train L1 0.0769  holdout L1 0.0692 (no restoration 0.1168)  1121s
+epoch  4  train L1 0.0702  holdout L1 0.0646 (no restoration 0.1168)  1400s
+epoch  5  train L1 0.0657  holdout L1 0.0611 (no restoration 0.1168)  1719s
+epoch  6  train L1 0.0619  holdout L1 0.0593 (no restoration 0.1168)  2012s
+epoch  7  train L1 0.0591  holdout L1 0.0547 (no restoration 0.1168)  2316s
+epoch  8  train L1 0.0570  holdout L1 0.0521 (no restoration 0.1168)  2600s
+epoch  9  train L1 0.0545  holdout L1 0.0531 (no restoration 0.1168)  2892s
+epoch 10  train L1 0.0526  holdout L1 0.0504 (no restoration 0.1168)  3186s
+epoch 11  train L1 0.0507  holdout L1 0.0473 (no restoration 0.1168)  3480s
+epoch 12  train L1 0.0488  holdout L1 0.0470 (no restoration 0.1168)  3779s
+epoch 13  train L1 0.0474  holdout L1 0.0464 (no restoration 0.1168)  4109s
+epoch 14  train L1 0.0463  holdout L1 0.0454 (no restoration 0.1168)  4409s
+epoch 15  train L1 0.0458  holdout L1 0.0452 (no restoration 0.1168)  4718s
+best epoch 15 (holdout L1 0.0452); wrote models/restore_daytime_net_v3.pt
+exit 0

@@ -1,0 +1,18 @@
+train 5686 pairs, holdout 299 (train split only), device mps
+epoch  1  train L1 0.0786  holdout L1 0.0528 (no restoration 0.0898)  239s
+epoch  2  train L1 0.0460  holdout L1 0.0423 (no restoration 0.0898)  472s
+epoch  3  train L1 0.0376  holdout L1 0.0335 (no restoration 0.0898)  714s
+epoch  4  train L1 0.0338  holdout L1 0.0329 (no restoration 0.0898)  959s
+epoch  5  train L1 0.0298  holdout L1 0.0274 (no restoration 0.0898)  1171s
+epoch  6  train L1 0.0281  holdout L1 0.0271 (no restoration 0.0898)  1377s
+epoch  7  train L1 0.0269  holdout L1 0.0314 (no restoration 0.0898)  1594s
+epoch  8  train L1 0.0255  holdout L1 0.0233 (no restoration 0.0898)  1847s
+epoch  9  train L1 0.0241  holdout L1 0.0240 (no restoration 0.0898)  2091s
+epoch 10  train L1 0.0232  holdout L1 0.0230 (no restoration 0.0898)  2342s
+epoch 11  train L1 0.0223  holdout L1 0.0220 (no restoration 0.0898)  2608s
+epoch 12  train L1 0.0215  holdout L1 0.0210 (no restoration 0.0898)  2868s
+epoch 13  train L1 0.0209  holdout L1 0.0206 (no restoration 0.0898)  3137s
+epoch 14  train L1 0.0204  holdout L1 0.0201 (no restoration 0.0898)  3400s
+epoch 15  train L1 0.0202  holdout L1 0.0200 (no restoration 0.0898)  3606s
+best epoch 15 (holdout L1 0.0200); wrote models/restore_daytime_net.pt
+exit 0

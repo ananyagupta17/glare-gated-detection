@@ -1,0 +1,249 @@
+{
+  "protocol": "Resampling unit = the frame: on KITTI a clean/glared pair is drawn together (it is\none scene); on BDD100K each test frame is drawn independently, glare and clean sets\nseparately. 1,000 resamples, seed 42, percentile intervals (2.5th, 97.5th).\n\nmAP here is computed by this script (VOC all-point interpolated AP at IoU 0.5, class-aware\ngreedy matching within an image, detections at conf >= 0.001, up to 300 per image),\naveraged over the classes that have ground truth. Ultralytics interpolates differently, so\npoint estimates differ slightly from the tables; each interval is reported with its own\npoint estimate. Matching is done once per image, so resampling only re-weights images.",
+  "B": 1000,
+  "seed": 42,
+  "kitti": {
+    "n_pairs": 1491,
+    "metrics": {
+      "stream_mAP50_C1": {
+        "point": 0.6421,
+        "ci95": [
+          0.6204,
+          0.6692
+        ]
+      },
+      "stream_mAP50_C2": {
+        "point": 0.7782,
+        "ci95": [
+          0.7534,
+          0.8045
+        ]
+      },
+      "stream_mAP50_C3_cnn": {
+        "point": 0.7667,
+        "ci95": [
+          0.7423,
+          0.7912
+        ]
+      },
+      "stream_mAP50_C3_features": {
+        "point": 0.7739,
+        "ci95": [
+          0.749,
+          0.8001
+        ]
+      },
+      "stream_mAP50_C3_brightness": {
+        "point": 0.7555,
+        "ci95": [
+          0.7304,
+          0.7826
+        ]
+      },
+      "clean": {
+        "point": 0.8551,
+        "ci95": [
+          0.831,
+          0.8787
+        ]
+      },
+      "glared": {
+        "point": 0.4351,
+        "ci95": [
+          0.4046,
+          0.4742
+        ]
+      },
+      "restored": {
+        "point": 0.7093,
+        "ci95": [
+          0.681,
+          0.7416
+        ]
+      },
+      "glare_drop": {
+        "point": 0.42,
+        "ci95": [
+          0.3829,
+          0.4561
+        ]
+      },
+      "recovery": {
+        "point": 0.6527,
+        "ci95": [
+          0.6022,
+          0.7051
+        ]
+      },
+      "gain_kept_C3_cnn": {
+        "point": 0.915,
+        "ci95": [
+          0.8347,
+          0.9705
+        ]
+      },
+      "gate_C3_cnn_precision": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "gate_C3_cnn_recall": {
+        "point": 0.817,
+        "ci95": [
+          0.7971,
+          0.8369
+        ]
+      },
+      "gate_C3_cnn_f1": {
+        "point": 0.8993,
+        "ci95": [
+          0.8871,
+          0.9112
+        ]
+      },
+      "gate_C3_cnn_accuracy": {
+        "point": 0.9105,
+        "ci95": [
+          0.9006,
+          0.9205
+        ]
+      },
+      "gain_kept_C3_features": {
+        "point": 0.9682,
+        "ci95": [
+          0.9416,
+          0.9895
+        ]
+      },
+      "gate_C3_features_precision": {
+        "point": 0.9156,
+        "ci95": [
+          0.9025,
+          0.9286
+        ]
+      },
+      "gate_C3_features_recall": {
+        "point": 0.8822,
+        "ci95": [
+          0.8652,
+          0.8983
+        ]
+      },
+      "gate_C3_features_f1": {
+        "point": 0.8986,
+        "ci95": [
+          0.8872,
+          0.9094
+        ]
+      },
+      "gate_C3_features_accuracy": {
+        "point": 0.9026,
+        "ci95": [
+          0.892,
+          0.9126
+        ]
+      },
+      "gain_kept_C3_brightness": {
+        "point": 0.8331,
+        "ci95": [
+          0.79,
+          0.8686
+        ]
+      },
+      "gate_C3_brightness_precision": {
+        "point": 0.6163,
+        "ci95": [
+          0.6008,
+          0.6322
+        ]
+      },
+      "gate_C3_brightness_recall": {
+        "point": 0.7174,
+        "ci95": [
+          0.6922,
+          0.7398
+        ]
+      },
+      "gate_C3_brightness_f1": {
+        "point": 0.663,
+        "ci95": [
+          0.646,
+          0.679
+        ]
+      },
+      "gate_C3_brightness_accuracy": {
+        "point": 0.6435,
+        "ci95": [
+          0.6268,
+          0.6603
+        ]
+      }
+    }
+  },
+  "bdd100k": {
+    "n_glare": 72,
+    "n_clean": 72,
+    "metrics": {
+      "car_AP_clean_C1": {
+        "point": 0.3653,
+        "ci95": [
+          0.3204,
+          0.4144
+        ]
+      },
+      "car_AP_glare_C1": {
+        "point": 0.112,
+        "ci95": [
+          0.082,
+          0.1478
+        ]
+      },
+      "car_AP_glare_C2": {
+        "point": 0.1309,
+        "ci95": [
+          0.1007,
+          0.1662
+        ]
+      },
+      "car_recovery_C2": {
+        "point": 0.0748,
+        "ci95": [
+          0.0221,
+          0.1342
+        ]
+      },
+      "car_AP_glare_C3": {
+        "point": 0.132,
+        "ci95": [
+          0.1017,
+          0.1682
+        ]
+      },
+      "car_recovery_C3": {
+        "point": 0.0792,
+        "ci95": [
+          0.0258,
+          0.1387
+        ]
+      },
+      "car_glare_drop": {
+        "point": 0.2533,
+        "ci95": [
+          0.1946,
+          0.3134
+        ]
+      }
+    },
+    "gate_precision_hard_frames": {
+      "point": 0.3333,
+      "ci95_wilson": [
+        0.2723,
+        0.4006
+      ],
+      "k": 68,
+      "n": 204
+    }
+  }
+}

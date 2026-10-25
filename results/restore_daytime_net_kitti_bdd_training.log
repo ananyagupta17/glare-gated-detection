@@ -1,0 +1,28 @@
+pairs: 5985 KITTI + 3000 BDD
+train 8536 pairs, holdout 449 (train split only), device mps
+epoch  1  train L1 0.0733  holdout L1 0.0521 (no restoration 0.0859)  297s
+epoch  2  train L1 0.0470  holdout L1 0.0395 (no restoration 0.0859)  599s
+epoch  3  train L1 0.0394  holdout L1 0.0365 (no restoration 0.0859)  902s
+epoch  4  train L1 0.0356  holdout L1 0.0357 (no restoration 0.0859)  1207s
+epoch  5  train L1 0.0328  holdout L1 0.0291 (no restoration 0.0859)  1515s
+epoch  6  train L1 0.0322  holdout L1 0.0312 (no restoration 0.0859)  2723s
+epoch  7  train L1 0.0298  holdout L1 0.0272 (no restoration 0.0859)  3074s
+epoch  8  train L1 0.0301  holdout L1 0.0279 (no restoration 0.0859)  3439s
+epoch  9  train L1 0.0277  holdout L1 0.0277 (no restoration 0.0859)  3807s
+epoch 10  train L1 0.0264  holdout L1 0.0250 (no restoration 0.0859)  4170s
+epoch 11  train L1 0.0253  holdout L1 0.0245 (no restoration 0.0859)  6291s
+epoch 12  train L1 0.0242  holdout L1 0.0237 (no restoration 0.0859)  6608s
+epoch 13  train L1 0.0233  holdout L1 0.0229 (no restoration 0.0859)  6942s
+epoch 14  train L1 0.0227  holdout L1 0.0226 (no restoration 0.0859)  7284s
+epoch 15  train L1 0.0224  holdout L1 0.0225 (no restoration 0.0859)  7635s
+Traceback (most recent call last):
+  File "/Users/ananyagupta/Desktop/glare-gated-detection/src/train_restore_daytime_net.py", line 150, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/ananyagupta/Desktop/glare-gated-detection/src/train_restore_daytime_net.py", line 143, in main
+    "weights": str(args.out.relative_to(REPO_ROOT)), "train_seconds": round(time.time() - t0, 1),
+                   ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 490, in relative_to
+    raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+ValueError: 'models/restore_daytime_net_kitti_bdd.pt' is not in the subpath of '/Users/ananyagupta/Desktop/glare-gated-detection'
+exit 1

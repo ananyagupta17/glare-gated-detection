@@ -1,0 +1,19 @@
+7663 BDD train frames not in BDD val
+5776 pass the daytime brightness filter
+5508 have gate p(glare) < 0.3
+/Users/ananyagupta/Desktop/glare-gated-detection/src/glare_synth_v3.py:110: RuntimeWarning: overflow encountered in exp
+  disc = 1.0 / (1.0 + np.exp((rr - rad) / max(rad * 0.15, 1.0)))
+/Users/ananyagupta/Desktop/glare-gated-detection/src/glare_synth_v3.py:110: RuntimeWarning: overflow encountered in exp
+  disc = 1.0 / (1.0 + np.exp((rr - rad) / max(rad * 0.15, 1.0)))
+/Users/ananyagupta/Desktop/glare-gated-detection/src/glare_synth_v3.py:110: RuntimeWarning: overflow encountered in exp
+  disc = 1.0 / (1.0 + np.exp((rr - rad) / max(rad * 0.15, 1.0)))
+/Users/ananyagupta/Desktop/glare-gated-detection/src/glare_synth_v3.py:110: RuntimeWarning: overflow encountered in exp
+  disc = 1.0 / (1.0 + np.exp((rr - rad) / max(rad * 0.15, 1.0)))
+/Users/ananyagupta/Desktop/glare-gated-detection/src/glare_synth_v3.py:110: RuntimeWarning: overflow encountered in exp
+  disc = 1.0 / (1.0 + np.exp((rr - rad) / max(rad * 0.15, 1.0)))
+/Users/ananyagupta/Desktop/glare-gated-detection/src/glare_synth_v3.py:110: RuntimeWarning: overflow encountered in exp
+  disc = 1.0 / (1.0 + np.exp((rr - rad) / max(rad * 0.15, 1.0)))
+/Users/ananyagupta/Desktop/glare-gated-detection/src/glare_synth_v3.py:110: RuntimeWarning: overflow encountered in exp
+  disc = 1.0 / (1.0 + np.exp((rr - rad) / max(rad * 0.15, 1.0)))
+wrote 3000 pairs to data/bdd_pairs_v3/
+bdd exit 0

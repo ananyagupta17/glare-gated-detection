@@ -1,0 +1,18 @@
+{
+  "placeholder": true,
+  "note": "Values shown on the metric tiles of src/demo_mock.py. Prefilled with target values from the 30 fps target table. Replace with measured values and set placeholder to false.",
+  "speed_fps_mean": 40,
+  "speed_fps_p95": 30,
+  "latency_ms_mean": 25,
+  "latency_ms_p95": 33,
+  "gate_ms": 1,
+  "restoration_ms_per_restored_frame": 13,
+  "restoration_rate_pct": 40,
+  "gate_accuracy_pct": 92,
+  "gate_precision_pct": 92,
+  "gate_recall_pct": 92,
+  "f1_glare_without": 0.50,
+  "f1_glare_with": 0.70,
+  "f1_clean_without": 0.90,
+  "f1_clean_with": 0.90
+}

@@ -316,15 +316,15 @@ def main() -> int:
                                               and params[("val", k[0])]["gate_excluded"] != "1"],
         }
         rows = []
-        for name, keys in outcomes.items():
+        for outcome, keys in outcomes.items():
             k = median_by(keys, lambda kk: score[kk])
             if k is None:
                 continue
             img = cv2.imread(str(path[k[1]](k[0])))[:, :, ::-1]
             extra = describe(k[0]) if k[1] == "glared" else f"{k[0]} · clean"
-            rows.append((img, f"{name} — {extra} · features score {score[k]:.2f} "
+            rows.append((img, f"{outcome} — {extra} · features score {score[k]:.2f} "
                               f"(n = {len(keys)} in this outcome)"))
-            selected[f"gate_{name}"] = f"{k[0]}_{k[1]}"
+            selected[f"gate_{outcome}"] = f"{k[0]}_{k[1]}"
         panel_figure(rows, "C3 gate decisions (features gate), one typical frame per outcome",
                      OUT / "04_gate_decisions.png",
                      note="Selection: within each outcome, the frame with the median gate score.")

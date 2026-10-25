@@ -1,17 +1,17 @@
 {
   "selected": {
-    "pipeline": "004980",
+    "pipeline": "007004",
     "type_diffuse_haze": "005482",
-    "type_direct_sun": "005847",
-    "type_veiling_wash": "007437",
+    "type_direct_sun": "006110",
+    "type_veiling_wash": "000843",
     "type_horizon_streak": "003641",
     "gate_fired on glare (correct)": "004131_glared",
     "gate_skipped a clean frame (correct)": "004939_clean",
     "gate_false alarm: restored a clean frame": "004198_clean",
     "gate_missed glare: did not restore": "000721_glared",
-    "failure": "000568"
+    "failure": "000090"
   },
   "gate_refit_reproduces_metrics": true,
   "severe_frames_scored": 640,
-  "median_f1_gain_severe": 0.2737
+  "median_f1_gain_severe": 0.2143
 }

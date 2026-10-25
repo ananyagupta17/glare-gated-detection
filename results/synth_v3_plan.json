@@ -1,0 +1,17 @@
+{
+  "registered": "2026-10-25, before any v3 data is generated or any v3 restorer is trained",
+  "why": "On real BDD100K glare the trained daytime restorer recovers only 7-10% of the glare loss (results/real_bdd_results.md), versus 67% on synthetic KITTI glare. Retraining with BDD frames + v2 synthetic glare did not help (results/real_bdd_results_restore_daytime_net_kitti_bdd.md). Measured difference (results/real_glare_tuning_set.json): real glare is a bright, local sun region on a frame that stays dark and contrasty (p1 luma ~12, mean ~87, std ~68); v2 synthetic glare lifts and flattens the whole frame (p1 ~50, mean ~133, std ~54).",
+  "tuning_set": "results/real_glare_tuning_set.json: 40 real-glare frames from BDD100K TRAIN, disjoint from the BDD val test set",
+  "changes_v3": [
+    "frame-wide floor (black lift) reduced and made local (falls off with distance from the sun)",
+    "widest veil lobe reduced",
+    "auto-exposure exposes for the bright region (stronger compensation), so the scene darkens as in backlit real glare",
+    "sun starburst rays and lens-flare ghosts added (seen in most real glare frames)",
+    "v2 code path and v2 data unchanged; v3 is opt-in and writes to its own folders"
+  ],
+  "fitting_rule": "a small grid over the v3 global scale factors is chosen to minimise the summed normalised distance between the medians of {p1, p5, mean, std, sat, spread} on synthetic v3 glare (BDD train frames not in the tuning set, s ~ U(0.3, 1)) and the tuning-set medians; normalisation = tuning-set IQR per statistic",
+  "shortcut_test": "run src/shortcut_test.py checks on v3 KITTI val with the registered thresholds unchanged (results/shortcut_test_thresholds.json); reported, not used to pick the restorer",
+  "restorer": "same architecture and training settings as models/restore_daytime_net.pt; trained on v3 KITTI train pairs + v3 BDD train pairs; saved as models/restore_daytime_net_v3.pt (current restorer kept)",
+  "adoption_rule": "adopt v3 restorer as final only if, on the BDD real-glare test set (72 glare + 72 clean, current detector models/yolo_c1_train.pt, read-only), C2 car AP@50 on glare frames >= 0.141 (current 0.131 + 0.01) AND C2 mAP@50 on glare frames >= 0.044 (current) AND C2 mAP@50 on clean frames >= 0.124 (C1, no harm); otherwise keep models/restore_daytime_net.pt",
+  "detector": "not trained or modified; Harshitha is fine-tuning it separately. Joint evaluation with her detector later."
+}

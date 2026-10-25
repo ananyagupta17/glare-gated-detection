@@ -840,5 +840,14 @@ def merge_existing(splits, manifest, params, checksums):
     return manifest, params, checksums
 
 
+SYNTH_VERSION = "v2"
+if os.environ.get("GLARE_SYNTH_VERSION") == "v3":
+    # Opt-in v3 renderer and output paths (src/glare_synth_v3.py). Set as an environment
+    # variable so worker processes, which re-import this module, pick it up too.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import glare_synth_v3 as _v3
+    _v3.install(sys.modules[__name__])
+
+
 if __name__ == "__main__":
     sys.exit(main())

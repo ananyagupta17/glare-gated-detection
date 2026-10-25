@@ -44,7 +44,7 @@ import glare_synth as gs  # noqa: E402
 MIRROR = Path.home() / ".cache/kagglehub/datasets/solesensei/solesensei_bdd100k/versions/2/bdd100k/bdd100k/images"
 SOURCES = [MIRROR / "100k" / "train", MIRROR / "10k" / "train"]
 VAL = REPO_ROOT / "datasets" / "bdd100k" / "images" / "100k" / "val"
-OUT = REPO_ROOT / "data" / "bdd_pairs"
+OUT = REPO_ROOT / "data" / ("bdd_pairs_v3" if gs.SYNTH_VERSION == "v3" else "bdd_pairs")
 N_PAIRS, SEED, SPLIT_TAG = 3000, 42, "bdd-train"
 LUMA_MIN, UPPER_MIN, GATE_MAX = 70.0, 90.0, 0.3
 KITTI_H = 375                      # frames are resized to this height before adding glare

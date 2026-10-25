@@ -1,0 +1,95 @@
+{
+  "data": "v2 train pairs only; holdout = 5% of train IDs (seeded)",
+  "n_train": 5686,
+  "n_holdout": 299,
+  "params": 482067,
+  "input": "624x192 RGB [0,1]; predicts a correction added to the input",
+  "loss": "L1",
+  "optimizer": "AdamW lr 0.002 OneCycle, wd 1e-4",
+  "epochs": 15,
+  "batch": 8,
+  "seed": 42,
+  "device": "mps",
+  "best_epoch": 15,
+  "best_holdout_l1": 0.02003,
+  "holdout_l1_no_restoration": 0.0898,
+  "history": [
+    {
+      "epoch": 1,
+      "train_l1": 0.07861,
+      "holdout_l1": 0.05285
+    },
+    {
+      "epoch": 2,
+      "train_l1": 0.046,
+      "holdout_l1": 0.04228
+    },
+    {
+      "epoch": 3,
+      "train_l1": 0.03759,
+      "holdout_l1": 0.03352
+    },
+    {
+      "epoch": 4,
+      "train_l1": 0.03376,
+      "holdout_l1": 0.03291
+    },
+    {
+      "epoch": 5,
+      "train_l1": 0.02979,
+      "holdout_l1": 0.02736
+    },
+    {
+      "epoch": 6,
+      "train_l1": 0.02807,
+      "holdout_l1": 0.02714
+    },
+    {
+      "epoch": 7,
+      "train_l1": 0.02688,
+      "holdout_l1": 0.03137
+    },
+    {
+      "epoch": 8,
+      "train_l1": 0.02554,
+      "holdout_l1": 0.02327
+    },
+    {
+      "epoch": 9,
+      "train_l1": 0.02407,
+      "holdout_l1": 0.02402
+    },
+    {
+      "epoch": 10,
+      "train_l1": 0.02323,
+      "holdout_l1": 0.02296
+    },
+    {
+      "epoch": 11,
+      "train_l1": 0.0223,
+      "holdout_l1": 0.02204
+    },
+    {
+      "epoch": 12,
+      "train_l1": 0.02149,
+      "holdout_l1": 0.02097
+    },
+    {
+      "epoch": 13,
+      "train_l1": 0.02088,
+      "holdout_l1": 0.02059
+    },
+    {
+      "epoch": 14,
+      "train_l1": 0.02038,
+      "holdout_l1": 0.02008
+    },
+    {
+      "epoch": 15,
+      "train_l1": 0.02015,
+      "holdout_l1": 0.02003
+    }
+  ],
+  "weights": "models/restore_daytime_net.pt",
+  "train_seconds": 3605.7
+}

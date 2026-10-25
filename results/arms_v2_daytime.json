@@ -1,0 +1,208 @@
+{
+  "status": "DEMO -- v2 failed its shortcut test (results/shortcut_test.json); not final",
+  "stream": {
+    "frames": 1491,
+    "images": 2982,
+    "clean_fraction": 0.5,
+    "excluded_ids": [
+      "000129",
+      "001071",
+      "003507",
+      "003781",
+      "005796"
+    ]
+  },
+  "detector": {
+    "weights": "models/yolo_c1_train.pt",
+    "mAP_device": "mps",
+    "latency_device": "cpu"
+  },
+  "restorer": {
+    "name": "daytime",
+    "description": "daytime classical veil subtraction (src/restore_daytime.py)",
+    "device": "cpu",
+    "mean_ms_per_frame": 20.0,
+    "source": "results/restorer_map_daytime.json",
+    "clean_restore": {
+      "restored_now": 0,
+      "from_cache": 1491,
+      "mean_restore_seconds": null
+    }
+  },
+  "gates": {
+    "train_negatives": 5985,
+    "train_positives": 5723,
+    "train_excluded_positives": 262,
+    "brightness_threshold_luma": 118.962,
+    "brightness_train_accuracy": 0.6534,
+    "metrics_val": {
+      "C3_brightness": {
+        "precision": 0.6163,
+        "recall": 0.7174,
+        "f1": 0.663,
+        "accuracy": 0.6435,
+        "tp": 1023,
+        "fp": 637,
+        "tn": 854,
+        "fn": 403
+      },
+      "C3_features": {
+        "precision": 0.9156,
+        "recall": 0.8822,
+        "f1": 0.8986,
+        "accuracy": 0.9026,
+        "tp": 1258,
+        "fp": 116,
+        "tn": 1375,
+        "fn": 168
+      }
+    },
+    "protocol": "results/gate_protocol_v2.md (excluded glared frames not scored)"
+  },
+  "arms": {
+    "C1": {
+      "trigger_rate": 0.0,
+      "trigger_rate_clean": 0.0,
+      "trigger_rate_glared": 0.0,
+      "stream": {
+        "mAP50": 0.6376,
+        "mAP50_95": 0.4304,
+        "n": 2982
+      },
+      "clean": {
+        "mAP50": 0.8496,
+        "mAP50_95": 0.5964,
+        "n": 1491
+      },
+      "glared": {
+        "mAP50": 0.4343,
+        "mAP50_95": 0.2686,
+        "n": 1491
+      },
+      "glared_severe": {
+        "mAP50": 0.2478,
+        "mAP50_95": 0.1435,
+        "n": 640
+      },
+      "glared_non_severe": {
+        "mAP50": 0.581,
+        "mAP50_95": 0.3671,
+        "n": 851
+      },
+      "latency_ms": {
+        "gate": 0.0,
+        "detect": 15.91,
+        "restore_expected": 0.0,
+        "total_mean": 15.9
+      }
+    },
+    "C2": {
+      "trigger_rate": 1.0,
+      "trigger_rate_clean": 1.0,
+      "trigger_rate_glared": 1.0,
+      "stream": {
+        "mAP50": 0.6622,
+        "mAP50_95": 0.4253,
+        "n": 2982
+      },
+      "clean": {
+        "mAP50": 0.7239,
+        "mAP50_95": 0.4707,
+        "n": 1491
+      },
+      "glared": {
+        "mAP50": 0.6024,
+        "mAP50_95": 0.3813,
+        "n": 1491
+      },
+      "glared_severe": {
+        "mAP50": 0.5127,
+        "mAP50_95": 0.3232,
+        "n": 640
+      },
+      "glared_non_severe": {
+        "mAP50": 0.6672,
+        "mAP50_95": 0.4258,
+        "n": 851
+      },
+      "latency_ms": {
+        "gate": 0.0,
+        "detect": 15.91,
+        "restore_expected": 20.0,
+        "total_mean": 35.9
+      }
+    },
+    "C3_brightness": {
+      "trigger_rate": 0.5671,
+      "trigger_rate_clean": 0.4272,
+      "trigger_rate_glared": 0.7069,
+      "stream": {
+        "mAP50": 0.6884,
+        "mAP50_95": 0.4493,
+        "n": 2982
+      },
+      "clean": {
+        "mAP50": 0.792,
+        "mAP50_95": 0.5288,
+        "n": 1491
+      },
+      "glared": {
+        "mAP50": 0.5858,
+        "mAP50_95": 0.3706,
+        "n": 1491
+      },
+      "glared_severe": {
+        "mAP50": 0.4939,
+        "mAP50_95": 0.3103,
+        "n": 640
+      },
+      "glared_non_severe": {
+        "mAP50": 0.6522,
+        "mAP50_95": 0.4168,
+        "n": 851
+      },
+      "latency_ms": {
+        "gate": 0.118,
+        "detect": 15.91,
+        "restore_expected": 11.3,
+        "total_mean": 27.4
+      }
+    },
+    "C3_features": {
+      "trigger_rate": 0.4735,
+      "trigger_rate_clean": 0.0778,
+      "trigger_rate_glared": 0.8692,
+      "stream": {
+        "mAP50": 0.7221,
+        "mAP50_95": 0.4847,
+        "n": 2982
+      },
+      "clean": {
+        "mAP50": 0.8396,
+        "mAP50_95": 0.5864,
+        "n": 1491
+      },
+      "glared": {
+        "mAP50": 0.6019,
+        "mAP50_95": 0.3816,
+        "n": 1491
+      },
+      "glared_severe": {
+        "mAP50": 0.5104,
+        "mAP50_95": 0.3204,
+        "n": 640
+      },
+      "glared_non_severe": {
+        "mAP50": 0.6687,
+        "mAP50_95": 0.4285,
+        "n": 851
+      },
+      "latency_ms": {
+        "gate": 1.109,
+        "detect": 15.91,
+        "restore_expected": 9.5,
+        "total_mean": 26.5
+      }
+    }
+  }
+}

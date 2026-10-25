@@ -1,0 +1,18 @@
+{
+  "real_glare": {
+    "frame": "bf8feaf5-cf2b6195.jpg",
+    "f1_change": 0.0,
+    "selection": "median per-frame F1 change over 72 real-glare frames",
+    "median_f1_change": 0.0,
+    "frames_improved": 13,
+    "frames_worse": 4,
+    "frames_unchanged": 55
+  },
+  "dark_pixel_leak": {
+    "n_pairs": 1496,
+    "median_p1": {
+      "clean": 7.0,
+      "glared": 36.0
+    }
+  }
+}

@@ -1,0 +1,357 @@
+{
+  "stream": "v2 KITTI val, 50/50 clean/glared; tuning IDs excluded",
+  "restorer": "models/restore_daytime_net.pt",
+  "detector": "models/yolo_c1_train.pt",
+  "cnn_gate": "models/gate_cnn_mixed.pt (p > 0.5)",
+  "cnn_gate_train_overlap": {
+    "ids_in_stream": 521,
+    "note": "v1-glared KITTI val IDs the CNN gate trained on (her split: test_frac 0.3, seed 42)"
+  },
+  "map_device": "mps",
+  "accuracy": {
+    "full": {
+      "n_frames": 1491,
+      "C1": {
+        "trigger_rate": 0.0,
+        "stream": {
+          "mAP50": 0.6376,
+          "mAP50_95": 0.4304,
+          "n": 2982
+        },
+        "clean": {
+          "mAP50": 0.8496,
+          "mAP50_95": 0.5964,
+          "n": 1491
+        },
+        "glared": {
+          "mAP50": 0.4343,
+          "mAP50_95": 0.2686,
+          "n": 1491
+        },
+        "glared_severe": {
+          "mAP50": 0.2478,
+          "mAP50_95": 0.1435,
+          "n": 640
+        },
+        "gain_kept": 0.0
+      },
+      "C2": {
+        "trigger_rate": 1.0,
+        "stream": {
+          "mAP50": 0.778,
+          "mAP50_95": 0.5341,
+          "n": 2982
+        },
+        "clean": {
+          "mAP50": 0.849,
+          "mAP50_95": 0.5954,
+          "n": 1491
+        },
+        "glared": {
+          "mAP50": 0.7144,
+          "mAP50_95": 0.4773,
+          "n": 1491
+        },
+        "glared_severe": {
+          "mAP50": 0.6353,
+          "mAP50_95": 0.41,
+          "n": 640
+        },
+        "gain_kept": 1.0
+      },
+      "C3_cnn": {
+        "trigger_rate": 0.3934,
+        "stream": {
+          "mAP50": 0.7653,
+          "mAP50_95": 0.5244,
+          "n": 2982
+        },
+        "clean": {
+          "mAP50": 0.8496,
+          "mAP50_95": 0.5964,
+          "n": 1491
+        },
+        "glared": {
+          "mAP50": 0.6905,
+          "mAP50_95": 0.4565,
+          "n": 1491
+        },
+        "glared_severe": {
+          "mAP50": 0.611,
+          "mAP50_95": 0.3985,
+          "n": 640
+        },
+        "gate": {
+          "precision": 1.0,
+          "recall": 0.817,
+          "f1": 0.8993,
+          "accuracy": 0.9105,
+          "tp": 1165,
+          "fp": 0,
+          "tn": 1491,
+          "fn": 261
+        },
+        "gain_kept": 0.9095
+      },
+      "C3_features": {
+        "trigger_rate": 0.4735,
+        "stream": {
+          "mAP50": 0.7716,
+          "mAP50_95": 0.5278,
+          "n": 2982
+        },
+        "clean": {
+          "mAP50": 0.8488,
+          "mAP50_95": 0.5953,
+          "n": 1491
+        },
+        "glared": {
+          "mAP50": 0.7034,
+          "mAP50_95": 0.4646,
+          "n": 1491
+        },
+        "glared_severe": {
+          "mAP50": 0.6317,
+          "mAP50_95": 0.4046,
+          "n": 640
+        },
+        "gate": {
+          "precision": 0.9156,
+          "recall": 0.8822,
+          "f1": 0.8986,
+          "accuracy": 0.9026,
+          "tp": 1258,
+          "fp": 116,
+          "tn": 1375,
+          "fn": 168
+        },
+        "gain_kept": 0.9544
+      },
+      "C3_brightness": {
+        "trigger_rate": 0.5671,
+        "stream": {
+          "mAP50": 0.754,
+          "mAP50_95": 0.5165,
+          "n": 2982
+        },
+        "clean": {
+          "mAP50": 0.8496,
+          "mAP50_95": 0.5952,
+          "n": 1491
+        },
+        "glared": {
+          "mAP50": 0.666,
+          "mAP50_95": 0.4424,
+          "n": 1491
+        },
+        "glared_severe": {
+          "mAP50": 0.6054,
+          "mAP50_95": 0.389,
+          "n": 640
+        },
+        "gate": {
+          "precision": 0.6163,
+          "recall": 0.7174,
+          "f1": 0.663,
+          "accuracy": 0.6435,
+          "tp": 1023,
+          "fp": 637,
+          "tn": 854,
+          "fn": 403
+        },
+        "gain_kept": 0.8291
+      }
+    },
+    "no_cnn_train_ids": {
+      "n_frames": 970,
+      "C1": {
+        "trigger_rate": 0.0,
+        "stream": {
+          "mAP50": 0.6497,
+          "mAP50_95": 0.4359,
+          "n": 1940
+        },
+        "clean": {
+          "mAP50": 0.8463,
+          "mAP50_95": 0.5934,
+          "n": 970
+        },
+        "glared": {
+          "mAP50": 0.4621,
+          "mAP50_95": 0.2826,
+          "n": 970
+        },
+        "glared_severe": {
+          "mAP50": 0.2607,
+          "mAP50_95": 0.1509,
+          "n": 420
+        },
+        "gain_kept": 0.0
+      },
+      "C2": {
+        "trigger_rate": 1.0,
+        "stream": {
+          "mAP50": 0.7822,
+          "mAP50_95": 0.5392,
+          "n": 1940
+        },
+        "clean": {
+          "mAP50": 0.8446,
+          "mAP50_95": 0.593,
+          "n": 970
+        },
+        "glared": {
+          "mAP50": 0.7291,
+          "mAP50_95": 0.4911,
+          "n": 970
+        },
+        "glared_severe": {
+          "mAP50": 0.6419,
+          "mAP50_95": 0.4237,
+          "n": 420
+        },
+        "gain_kept": 1.0
+      },
+      "C3_cnn": {
+        "trigger_rate": 0.3918,
+        "stream": {
+          "mAP50": 0.7696,
+          "mAP50_95": 0.5272,
+          "n": 1940
+        },
+        "clean": {
+          "mAP50": 0.8463,
+          "mAP50_95": 0.5934,
+          "n": 970
+        },
+        "glared": {
+          "mAP50": 0.7024,
+          "mAP50_95": 0.4668,
+          "n": 970
+        },
+        "glared_severe": {
+          "mAP50": 0.5828,
+          "mAP50_95": 0.3965,
+          "n": 420
+        },
+        "gate": {
+          "precision": 1.0,
+          "recall": 0.8116,
+          "f1": 0.896,
+          "accuracy": 0.9078,
+          "tp": 754,
+          "fp": 0,
+          "tn": 970,
+          "fn": 175
+        },
+        "gain_kept": 0.9049
+      },
+      "C3_features": {
+        "trigger_rate": 0.4711,
+        "stream": {
+          "mAP50": 0.7782,
+          "mAP50_95": 0.5336,
+          "n": 1940
+        },
+        "clean": {
+          "mAP50": 0.8458,
+          "mAP50_95": 0.5917,
+          "n": 970
+        },
+        "glared": {
+          "mAP50": 0.7213,
+          "mAP50_95": 0.4808,
+          "n": 970
+        },
+        "glared_severe": {
+          "mAP50": 0.6402,
+          "mAP50_95": 0.42,
+          "n": 420
+        },
+        "gate": {
+          "precision": 0.9179,
+          "recall": 0.8784,
+          "f1": 0.8977,
+          "accuracy": 0.9021,
+          "tp": 816,
+          "fp": 73,
+          "tn": 897,
+          "fn": 113
+        },
+        "gain_kept": 0.9698
+      },
+      "C3_brightness": {
+        "trigger_rate": 0.5515,
+        "stream": {
+          "mAP50": 0.7585,
+          "mAP50_95": 0.5212,
+          "n": 1940
+        },
+        "clean": {
+          "mAP50": 0.8461,
+          "mAP50_95": 0.593,
+          "n": 970
+        },
+        "glared": {
+          "mAP50": 0.6796,
+          "mAP50_95": 0.4548,
+          "n": 970
+        },
+        "glared_severe": {
+          "mAP50": 0.6108,
+          "mAP50_95": 0.401,
+          "n": 420
+        },
+        "gate": {
+          "precision": 0.6226,
+          "recall": 0.7051,
+          "f1": 0.6613,
+          "accuracy": 0.6467,
+          "tp": 655,
+          "fp": 397,
+          "tn": 573,
+          "fn": 274
+        },
+        "gain_kept": 0.8211
+      }
+    }
+  },
+  "latency": {
+    "device": "CPU (Apple M3), torch threads 4",
+    "timed_frames": 300,
+    "warmup_frames": 20,
+    "definition": "end to end per frame, image pre-decoded",
+    "per_arm": {
+      "C1": {
+        "mean_ms": 16.3,
+        "p95_ms": 17.8,
+        "fps_mean": 61.2,
+        "restored_in_sample": 0.0
+      },
+      "C2": {
+        "mean_ms": 88.3,
+        "p95_ms": 94.0,
+        "fps_mean": 11.3,
+        "restored_in_sample": 1.0
+      },
+      "C3_cnn": {
+        "mean_ms": 98.6,
+        "p95_ms": 147.6,
+        "fps_mean": 10.1,
+        "restored_in_sample": 0.383
+      },
+      "C3_features": {
+        "mean_ms": 54.9,
+        "p95_ms": 91.8,
+        "fps_mean": 18.2,
+        "restored_in_sample": 0.5
+      },
+      "C3_brightness": {
+        "mean_ms": 59.9,
+        "p95_ms": 97.6,
+        "fps_mean": 16.7,
+        "restored_in_sample": 0.567
+      }
+    }
+  }
+}

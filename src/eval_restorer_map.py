@@ -51,7 +51,7 @@ from types import SimpleNamespace
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-RESTORERS = ("none", "tiling128", "overlap384", "whole", "daytime", "daynet")
+RESTORERS = ("none", "tiling128", "overlap384", "whole", "daytime", "daynet", "daynet_bdd")
 GROUPS = ("all", "severe", "non_severe")
 V2_ROOT = REPO_ROOT / "data" / "v2"
 PARAMS = REPO_ROOT / "data" / "glare_params_v2.csv"
@@ -152,6 +152,11 @@ def make_restorer(name: str, threads: int):
         from types import SimpleNamespace
         import restore_daytime
         return SimpleNamespace(restore=restore_daytime.restore)
+    if name == "daynet_bdd":
+        os.environ.setdefault("DAYTIME_NET_DEVICE", "cpu")
+        import restore_daytime_net
+        return restore_daytime_net.DaytimeNetRestorer(
+            REPO_ROOT / "models" / "restore_daytime_net_kitti_bdd.pt", device="cpu")
     if name == "daynet":
         os.environ.setdefault("DAYTIME_NET_DEVICE", "cpu")  # CPU, comparable with the others
         import restore_daytime_net

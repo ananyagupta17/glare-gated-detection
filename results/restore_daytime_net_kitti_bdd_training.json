@@ -1,0 +1,93 @@
+{
+  "data": "v2 KITTI train pairs + BDD train pairs (data/bdd_pairs); holdout = 5% of pair IDs (seeded); no val frame of either dataset",
+  "n_kitti_pairs": 5985,
+  "n_bdd_pairs": 3000,
+  "n_train": 8536,
+  "n_holdout": 449,
+  "epochs": 15,
+  "batch": 8,
+  "seed": 42,
+  "device": "mps",
+  "best_epoch": 15,
+  "best_holdout_l1": 0.0225,
+  "holdout_l1_no_restoration": 0.0859,
+  "history": [
+    {
+      "epoch": 1,
+      "train_l1": 0.0733,
+      "holdout_l1": 0.0521
+    },
+    {
+      "epoch": 2,
+      "train_l1": 0.047,
+      "holdout_l1": 0.0395
+    },
+    {
+      "epoch": 3,
+      "train_l1": 0.0394,
+      "holdout_l1": 0.0365
+    },
+    {
+      "epoch": 4,
+      "train_l1": 0.0356,
+      "holdout_l1": 0.0357
+    },
+    {
+      "epoch": 5,
+      "train_l1": 0.0328,
+      "holdout_l1": 0.0291
+    },
+    {
+      "epoch": 6,
+      "train_l1": 0.0322,
+      "holdout_l1": 0.0312
+    },
+    {
+      "epoch": 7,
+      "train_l1": 0.0298,
+      "holdout_l1": 0.0272
+    },
+    {
+      "epoch": 8,
+      "train_l1": 0.0301,
+      "holdout_l1": 0.0279
+    },
+    {
+      "epoch": 9,
+      "train_l1": 0.0277,
+      "holdout_l1": 0.0277
+    },
+    {
+      "epoch": 10,
+      "train_l1": 0.0264,
+      "holdout_l1": 0.025
+    },
+    {
+      "epoch": 11,
+      "train_l1": 0.0253,
+      "holdout_l1": 0.0245
+    },
+    {
+      "epoch": 12,
+      "train_l1": 0.0242,
+      "holdout_l1": 0.0237
+    },
+    {
+      "epoch": 13,
+      "train_l1": 0.0233,
+      "holdout_l1": 0.0229
+    },
+    {
+      "epoch": 14,
+      "train_l1": 0.0227,
+      "holdout_l1": 0.0226
+    },
+    {
+      "epoch": 15,
+      "train_l1": 0.0224,
+      "holdout_l1": 0.0225
+    }
+  ],
+  "weights": "models/restore_daytime_net_kitti_bdd.pt",
+  "note": "written from the training log: the run finished and saved the weights, then crashed writing this summary (relative --out path); fixed in the script"
+}

@@ -57,6 +57,7 @@ RESTORER_DESCR = {
     "whole": "Flare7K++ night model, whole-frame (src/restore_seamless.py)",
     "daytime": "daytime classical veil subtraction (src/restore_daytime.py)",
     "daynet": "daytime trained U-Net (src/restore_daytime_net.py)",
+    "daynet_bdd": "daytime U-Net trained on KITTI + BDD pairs (models/restore_daytime_net_kitti_bdd.pt)",
 }
 RESTORER = "whole"          # set by --restorer; "whole" keeps the original file names
 GLARED_CACHE = REPO_ROOT / "data" / "restored" / "v2_whole" / "val"

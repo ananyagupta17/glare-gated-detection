@@ -30,6 +30,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 from restore_daytime_net import NET_H, NET_W, WEIGHTS, DayGlareUNet  # noqa: E402
 
 V2 = REPO_ROOT / "data" / "v2"
+BDD_PAIRS = REPO_ROOT / "data" / "bdd_pairs"
 
 
 class Pairs(Dataset):
@@ -40,7 +41,11 @@ class Pairs(Dataset):
         return len(self.ids)
 
     def load(self, version, image_id):
-        img = cv2.imread(str(V2 / version / "images" / "train" / f"{image_id}.jpg"))
+        # ids are "kitti:<id>" or "bdd:<name>" (bare ids are KITTI, for compatibility)
+        src, _, name = image_id.rpartition(":")
+        path = (BDD_PAIRS / version / f"{name}.jpg") if src == "bdd" else \
+            (V2 / version / "images" / "train" / f"{name}.jpg")
+        img = cv2.imread(str(path))
         img = cv2.resize(img, (NET_W, NET_H), interpolation=cv2.INTER_AREA)
         return cv2.cvtColor(img, cv2.COLOR_BGR2RGB).astype(np.float32) / 255.0
 
@@ -61,11 +66,19 @@ def main(argv=None) -> int:
     p.add_argument("--base", type=int, default=16)
     p.add_argument("--workers", type=int, default=4)
     p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--with-bdd", action="store_true",
+                   help="add the BDD train pairs (data/bdd_pairs, src/make_bdd_pairs.py)")
+    p.add_argument("--out", type=Path, default=WEIGHTS)
     args = p.parse_args(argv)
+    args.out = args.out.resolve()
 
     random.seed(args.seed); np.random.seed(args.seed); torch.manual_seed(args.seed)
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-    ids = sorted(q.stem for q in (V2 / "glared" / "images" / "train").glob("*.jpg"))
+    ids = sorted(f"kitti:{q.stem}" for q in (V2 / "glared" / "images" / "train").glob("*.jpg"))
+    n_kitti = len(ids)
+    if args.with_bdd:
+        ids += sorted(f"bdd:{q.stem}" for q in (BDD_PAIRS / "glared").glob("*.jpg"))
+    print(f"pairs: {n_kitti} KITTI + {len(ids) - n_kitti} BDD")
     random.Random(f"{args.seed}:daynet-holdout").shuffle(ids)
     n_hold = len(ids) // 20
     hold, train = sorted(ids[:n_hold]), sorted(ids[n_hold:])
@@ -113,21 +126,24 @@ def main(argv=None) -> int:
               f"(no restoration {base:.4f})  {time.time() - t0:.0f}s", flush=True)
         if best is None or h < best[1]:
             best = (epoch, h)
-            WEIGHTS.parent.mkdir(parents=True, exist_ok=True)
-            torch.save({"model": model.state_dict(), "base": args.base, "epoch": epoch}, WEIGHTS)
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            torch.save({"model": model.state_dict(), "base": args.base, "epoch": epoch}, args.out)
 
-    out = REPO_ROOT / "results" / "restore_daytime_net_training.json"
+    out = REPO_ROOT / "results" / (f"{args.out.stem}_training.json" if args.out != WEIGHTS
+                                   else "restore_daytime_net_training.json")
     out.write_text(json.dumps({
-        "data": "v2 train pairs only; holdout = 5% of train IDs (seeded)",
+        "data": ("v2 KITTI train pairs" + (" + BDD train pairs (data/bdd_pairs)" if args.with_bdd else "")
+                 + "; holdout = 5% of pair IDs (seeded); no val frame of either dataset"),
+        "n_kitti_pairs": n_kitti, "n_bdd_pairs": len(ids) - n_kitti,
         "n_train": len(train), "n_holdout": len(hold), "params": n_params,
         "input": f"{NET_W}x{NET_H} RGB [0,1]; predicts a correction added to the input",
         "loss": "L1", "optimizer": f"AdamW lr {args.lr} OneCycle, wd 1e-4",
         "epochs": args.epochs, "batch": args.batch, "seed": args.seed, "device": str(device),
         "best_epoch": best[0], "best_holdout_l1": round(best[1], 5),
         "holdout_l1_no_restoration": round(base, 5), "history": history,
-        "weights": "models/restore_daytime_net.pt", "train_seconds": round(time.time() - t0, 1),
+        "weights": str(args.out.relative_to(REPO_ROOT)), "train_seconds": round(time.time() - t0, 1),
     }, indent=2) + "\n")
-    print(f"best epoch {best[0]} (holdout L1 {best[1]:.4f}); wrote {WEIGHTS.relative_to(REPO_ROOT)}")
+    print(f"best epoch {best[0]} (holdout L1 {best[1]:.4f}); wrote {args.out.relative_to(REPO_ROOT)}")
     return 0
 
 

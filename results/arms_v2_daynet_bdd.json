@@ -1,0 +1,208 @@
+{
+  "status": "DEMO -- v2 failed its shortcut test (results/shortcut_test.json); not final",
+  "stream": {
+    "frames": 1491,
+    "images": 2982,
+    "clean_fraction": 0.5,
+    "excluded_ids": [
+      "000129",
+      "001071",
+      "003507",
+      "003781",
+      "005796"
+    ]
+  },
+  "detector": {
+    "weights": "models/yolo_c1_train.pt",
+    "mAP_device": "mps",
+    "latency_device": "cpu"
+  },
+  "restorer": {
+    "name": "daynet_bdd",
+    "description": "daytime U-Net trained on KITTI + BDD pairs (models/restore_daytime_net_kitti_bdd.pt)",
+    "device": "cpu",
+    "mean_ms_per_frame": 70.0,
+    "source": "results/restorer_map_daynet_bdd.json",
+    "clean_restore": {
+      "restored_now": 1491,
+      "from_cache": 0,
+      "mean_restore_seconds": 0.07
+    }
+  },
+  "gates": {
+    "train_negatives": 5985,
+    "train_positives": 5723,
+    "train_excluded_positives": 262,
+    "brightness_threshold_luma": 118.962,
+    "brightness_train_accuracy": 0.6534,
+    "metrics_val": {
+      "C3_brightness": {
+        "precision": 0.6163,
+        "recall": 0.7174,
+        "f1": 0.663,
+        "accuracy": 0.6435,
+        "tp": 1023,
+        "fp": 637,
+        "tn": 854,
+        "fn": 403
+      },
+      "C3_features": {
+        "precision": 0.9156,
+        "recall": 0.8822,
+        "f1": 0.8986,
+        "accuracy": 0.9026,
+        "tp": 1258,
+        "fp": 116,
+        "tn": 1375,
+        "fn": 168
+      }
+    },
+    "protocol": "results/gate_protocol_v2.md (excluded glared frames not scored)"
+  },
+  "arms": {
+    "C1": {
+      "trigger_rate": 0.0,
+      "trigger_rate_clean": 0.0,
+      "trigger_rate_glared": 0.0,
+      "stream": {
+        "mAP50": 0.6376,
+        "mAP50_95": 0.4304,
+        "n": 2982
+      },
+      "clean": {
+        "mAP50": 0.8496,
+        "mAP50_95": 0.5964,
+        "n": 1491
+      },
+      "glared": {
+        "mAP50": 0.4343,
+        "mAP50_95": 0.2686,
+        "n": 1491
+      },
+      "glared_severe": {
+        "mAP50": 0.2478,
+        "mAP50_95": 0.1435,
+        "n": 640
+      },
+      "glared_non_severe": {
+        "mAP50": 0.581,
+        "mAP50_95": 0.3671,
+        "n": 851
+      },
+      "latency_ms": {
+        "gate": 0.0,
+        "detect": 14.59,
+        "restore_expected": 0.0,
+        "total_mean": 14.6
+      }
+    },
+    "C2": {
+      "trigger_rate": 1.0,
+      "trigger_rate_clean": 1.0,
+      "trigger_rate_glared": 1.0,
+      "stream": {
+        "mAP50": 0.7815,
+        "mAP50_95": 0.5359,
+        "n": 2982
+      },
+      "clean": {
+        "mAP50": 0.8461,
+        "mAP50_95": 0.594,
+        "n": 1491
+      },
+      "glared": {
+        "mAP50": 0.7245,
+        "mAP50_95": 0.482,
+        "n": 1491
+      },
+      "glared_severe": {
+        "mAP50": 0.6628,
+        "mAP50_95": 0.4326,
+        "n": 640
+      },
+      "glared_non_severe": {
+        "mAP50": 0.7769,
+        "mAP50_95": 0.5246,
+        "n": 851
+      },
+      "latency_ms": {
+        "gate": 0.0,
+        "detect": 14.59,
+        "restore_expected": 70.0,
+        "total_mean": 84.6
+      }
+    },
+    "C3_brightness": {
+      "trigger_rate": 0.5671,
+      "trigger_rate_clean": 0.4272,
+      "trigger_rate_glared": 0.7069,
+      "stream": {
+        "mAP50": 0.7576,
+        "mAP50_95": 0.5175,
+        "n": 2982
+      },
+      "clean": {
+        "mAP50": 0.8471,
+        "mAP50_95": 0.594,
+        "n": 1491
+      },
+      "glared": {
+        "mAP50": 0.6753,
+        "mAP50_95": 0.4449,
+        "n": 1491
+      },
+      "glared_severe": {
+        "mAP50": 0.6323,
+        "mAP50_95": 0.4105,
+        "n": 640
+      },
+      "glared_non_severe": {
+        "mAP50": 0.7137,
+        "mAP50_95": 0.4769,
+        "n": 851
+      },
+      "latency_ms": {
+        "gate": 0.116,
+        "detect": 14.59,
+        "restore_expected": 39.7,
+        "total_mean": 54.4
+      }
+    },
+    "C3_features": {
+      "trigger_rate": 0.4735,
+      "trigger_rate_clean": 0.0778,
+      "trigger_rate_glared": 0.8692,
+      "stream": {
+        "mAP50": 0.777,
+        "mAP50_95": 0.5294,
+        "n": 2982
+      },
+      "clean": {
+        "mAP50": 0.8486,
+        "mAP50_95": 0.5944,
+        "n": 1491
+      },
+      "glared": {
+        "mAP50": 0.713,
+        "mAP50_95": 0.4684,
+        "n": 1491
+      },
+      "glared_severe": {
+        "mAP50": 0.6595,
+        "mAP50_95": 0.427,
+        "n": 640
+      },
+      "glared_non_severe": {
+        "mAP50": 0.7583,
+        "mAP50_95": 0.5051,
+        "n": 851
+      },
+      "latency_ms": {
+        "gate": 1.108,
+        "detect": 14.59,
+        "restore_expected": 33.1,
+        "total_mean": 48.8
+      }
+    }
+  }
+}

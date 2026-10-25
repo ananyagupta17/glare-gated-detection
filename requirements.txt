@@ -21,3 +21,6 @@ tqdm>=4.66
 
 # Notebooks (P0 step 1/2: visualise boxes and inspect glare realism)
 jupyter>=1.0
+
+# Live demo dashboard (src/demo_app.py)
+gradio>=5.40,<6

@@ -1,0 +1,85 @@
+{
+  "fit_on": "v2 train only, as src/run_arms_v2.py",
+  "train_negatives": 5985,
+  "train_positives": 5723,
+  "train_excluded_positives": 262,
+  "brightness_threshold_luma": 118.962,
+  "brightness_train_accuracy": 0.6534,
+  "brightness": {
+    "feature": "upper_third_mean_luma (Rec.601 luma, 0-255)",
+    "threshold": 118.96163382930759,
+    "rule": "glare if value > threshold"
+  },
+  "features": {
+    "feature_names": [
+      "mean_luma",
+      "std_luma",
+      "max_luma",
+      "sat_frac",
+      "p95_luma",
+      "p99_luma",
+      "upper_third_mean_luma",
+      "rb_diff",
+      "hsv_sat_mean"
+    ],
+    "mu": [
+      108.9188060330416,
+      74.06056859674901,
+      254.9327810044414,
+      0.11519811155040964,
+      250.7555517594807,
+      254.4368807652887,
+      128.41481456424256,
+      4.431344570525878,
+      49.74888941726059
+    ],
+    "sd": [
+      20.013293838816843,
+      11.214322021955706,
+      1.0017109829075403,
+      0.06649904887522984,
+      10.880482447312172,
+      2.978288862956259,
+      36.91818469113876,
+      11.123315064544386,
+      15.32549997603455
+    ],
+    "w": [
+      0.6069279190206747,
+      0.997967563890885,
+      -2.2167149811918203,
+      -0.06167903650485926,
+      0.1455483818622363,
+      -0.839413695124189,
+      0.24705580924421702,
+      0.2914471961075471,
+      2.2981073958271443,
+      -1.4456304587065867
+    ],
+    "rule": "glare if sigmoid(w0 + w . (x - mu)/sd) >= 0.5",
+    "features_from": "src/train_gate_classifier.py extract_features (BGR uint8)"
+  },
+  "val_metrics": {
+    "C3_features": {
+      "precision": 0.9156,
+      "recall": 0.8822,
+      "f1": 0.8986,
+      "accuracy": 0.9026,
+      "tp": 1258,
+      "fp": 116,
+      "tn": 1375,
+      "fn": 168
+    },
+    "C3_brightness": {
+      "precision": 0.6163,
+      "recall": 0.7174,
+      "f1": 0.663,
+      "accuracy": 0.6435,
+      "tp": 1023,
+      "fp": 637,
+      "tn": 854,
+      "fn": 403
+    }
+  },
+  "status": "DEMO: v2 failed its shortcut test; the features gate is likely inflated"
+}

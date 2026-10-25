@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-25",
+  "rule": "results/synth_v3_plan.json adoption_rule",
+  "checks": {
+    "car_AP50_glare_C2": {
+      "value": 0.1102,
+      "need": ">= 0.141",
+      "pass": false
+    },
+    "mAP50_glare_C2": {
+      "value": 0.0474,
+      "need": ">= 0.044",
+      "pass": true
+    },
+    "mAP50_clean_C2": {
+      "value": 0.1315,
+      "need": ">= 0.124",
+      "pass": true
+    }
+  },
+  "adopted": false,
+  "decision": "not adopted: models/restore_daytime_net.pt (v2, KITTI only) stays the final restorer",
+  "observations": [
+    "on real glare the v3 restorer does not improve car AP (0.110 vs C1 0.112) or per-frame F1 (0.089 vs 0.091); the small mAP gain on glare frames comes from rare classes with few boxes",
+    "on KITTI v2 synthetic val it recovers 44% of the loss vs 67% for the v2 restorer (expected: different glare)",
+    "v3 synthesis matches real-glare brightness and locality much better (results/synth_v3_fit.json) but still fails the shortcut test (results/shortcut_test_v3.json)"
+  ],
+  "sources": [
+    "results/real_bdd_results_restore_daytime_net_v3.json",
+    "results/restorer_map_daynet_v3.json",
+    "results/arms_v2_daynet_v3.json",
+    "results/restore_daytime_net_v3_training.json"
+  ]
+}

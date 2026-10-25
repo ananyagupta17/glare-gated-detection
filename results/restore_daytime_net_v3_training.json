@@ -1,0 +1,98 @@
+{
+  "synth": "v3",
+  "data": "v3 KITTI train pairs + BDD train pairs (data/bdd_pairs_v3); holdout = 5% of pair IDs (seeded); no val frame of either dataset",
+  "n_kitti_pairs": 5985,
+  "n_bdd_pairs": 3000,
+  "n_train": 8536,
+  "n_holdout": 449,
+  "params": 482067,
+  "input": "624x192 RGB [0,1]; predicts a correction added to the input",
+  "loss": "L1",
+  "optimizer": "AdamW lr 0.002 OneCycle, wd 1e-4",
+  "epochs": 15,
+  "batch": 8,
+  "seed": 42,
+  "device": "mps",
+  "best_epoch": 15,
+  "best_holdout_l1": 0.04523,
+  "holdout_l1_no_restoration": 0.1168,
+  "history": [
+    {
+      "epoch": 1,
+      "train_l1": 0.10777,
+      "holdout_l1": 0.09322
+    },
+    {
+      "epoch": 2,
+      "train_l1": 0.08953,
+      "holdout_l1": 0.0834
+    },
+    {
+      "epoch": 3,
+      "train_l1": 0.07685,
+      "holdout_l1": 0.06922
+    },
+    {
+      "epoch": 4,
+      "train_l1": 0.07021,
+      "holdout_l1": 0.06461
+    },
+    {
+      "epoch": 5,
+      "train_l1": 0.0657,
+      "holdout_l1": 0.06105
+    },
+    {
+      "epoch": 6,
+      "train_l1": 0.0619,
+      "holdout_l1": 0.05932
+    },
+    {
+      "epoch": 7,
+      "train_l1": 0.05912,
+      "holdout_l1": 0.05474
+    },
+    {
+      "epoch": 8,
+      "train_l1": 0.05702,
+      "holdout_l1": 0.0521
+    },
+    {
+      "epoch": 9,
+      "train_l1": 0.0545,
+      "holdout_l1": 0.05308
+    },
+    {
+      "epoch": 10,
+      "train_l1": 0.05263,
+      "holdout_l1": 0.05037
+    },
+    {
+      "epoch": 11,
+      "train_l1": 0.05068,
+      "holdout_l1": 0.04727
+    },
+    {
+      "epoch": 12,
+      "train_l1": 0.04884,
+      "holdout_l1": 0.04702
+    },
+    {
+      "epoch": 13,
+      "train_l1": 0.04742,
+      "holdout_l1": 0.04642
+    },
+    {
+      "epoch": 14,
+      "train_l1": 0.04634,
+      "holdout_l1": 0.04543
+    },
+    {
+      "epoch": 15,
+      "train_l1": 0.04579,
+      "holdout_l1": 0.04523
+    }
+  ],
+  "weights": "models/restore_daytime_net_v3.pt",
+  "train_seconds": 4717.8
+}

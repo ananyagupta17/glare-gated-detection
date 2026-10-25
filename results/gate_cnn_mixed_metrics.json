@@ -1,0 +1,78 @@
+{
+  "data": "mixed",
+  "model": "MobileNetV3-Small, ImageNet init, fine-tuned",
+  "input": "224x224",
+  "threshold": 0.5,
+  "epochs": 8,
+  "seed": 42,
+  "n_train": 1938,
+  "test_real_photos": 60,
+  "test_all": {
+    "precision": 95.71,
+    "recall": 94.85,
+    "f1": 95.28,
+    "per_source": {
+      "kitti_clean": {
+        "n": 224,
+        "fired": 0,
+        "fire_rate": 0.0
+      },
+      "kitti_synthetic": {
+        "n": 224,
+        "fired": 224,
+        "fire_rate": 100.0
+      },
+      "real_crop_neg": {
+        "n": 165,
+        "fired": 19,
+        "fire_rate": 11.52
+      },
+      "real_crop_pos": {
+        "n": 163,
+        "fired": 142,
+        "fire_rate": 87.12
+      },
+      "real_full": {
+        "n": 60,
+        "fired": 58,
+        "fire_rate": 96.67
+      }
+    }
+  },
+  "test_real_crops": {
+    "precision": 88.2,
+    "recall": 87.12,
+    "f1": 87.65,
+    "per_source": {
+      "real_crop_neg": {
+        "n": 165,
+        "fired": 19,
+        "fire_rate": 11.52
+      },
+      "real_crop_pos": {
+        "n": 163,
+        "fired": 142,
+        "fire_rate": 87.12
+      }
+    }
+  },
+  "test_kitti": {
+    "precision": 100.0,
+    "recall": 100.0,
+    "f1": 100.0,
+    "per_source": {
+      "kitti_clean": {
+        "n": 224,
+        "fired": 0,
+        "fire_rate": 0.0
+      },
+      "kitti_synthetic": {
+        "n": 224,
+        "fired": 224,
+        "fire_rate": 100.0
+      }
+    }
+  },
+  "latency_ms_per_frame": 11.74,
+  "device": "cpu"
+}

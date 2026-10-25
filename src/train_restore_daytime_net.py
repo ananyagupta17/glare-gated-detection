@@ -34,8 +34,11 @@ BDD_PAIRS = REPO_ROOT / "data" / "bdd_pairs"
 
 
 class Pairs(Dataset):
-    def __init__(self, ids, flip: bool):
+    def __init__(self, ids, flip: bool, v2_root: Path = None, bdd_root: Path = None):
+        # Roots are stored on the dataset: DataLoader workers re-import this module, so a
+        # module-level path changed in main() would not reach them.
         self.ids, self.flip = ids, flip
+        self.v2_root, self.bdd_root = v2_root or V2, bdd_root or BDD_PAIRS
 
     def __len__(self):
         return len(self.ids)
@@ -43,8 +46,8 @@ class Pairs(Dataset):
     def load(self, version, image_id):
         # ids are "kitti:<id>" or "bdd:<name>" (bare ids are KITTI, for compatibility)
         src, _, name = image_id.rpartition(":")
-        path = (BDD_PAIRS / version / f"{name}.jpg") if src == "bdd" else \
-            (V2 / version / "images" / "train" / f"{name}.jpg")
+        path = (self.bdd_root / version / f"{name}.jpg") if src == "bdd" else \
+            (self.v2_root / version / "images" / "train" / f"{name}.jpg")
         img = cv2.imread(str(path))
         img = cv2.resize(img, (NET_W, NET_H), interpolation=cv2.INTER_AREA)
         return cv2.cvtColor(img, cv2.COLOR_BGR2RGB).astype(np.float32) / 255.0
@@ -69,8 +72,13 @@ def main(argv=None) -> int:
     p.add_argument("--with-bdd", action="store_true",
                    help="add the BDD train pairs (data/bdd_pairs, src/make_bdd_pairs.py)")
     p.add_argument("--out", type=Path, default=WEIGHTS)
+    p.add_argument("--synth", choices=["v2", "v3"], default="v2",
+                   help="which synthetic glare to train on (data/v2 + data/bdd_pairs, or the v3 folders)")
     args = p.parse_args(argv)
     args.out = args.out.resolve()
+    global V2, BDD_PAIRS
+    if args.synth == "v3":
+        V2, BDD_PAIRS = REPO_ROOT / "data" / "v3", REPO_ROOT / "data" / "bdd_pairs_v3"
 
     random.seed(args.seed); np.random.seed(args.seed); torch.manual_seed(args.seed)
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
@@ -85,9 +93,9 @@ def main(argv=None) -> int:
     print(f"train {len(train)} pairs, holdout {len(hold)} (train split only), device {device}")
 
     g = torch.Generator().manual_seed(args.seed)
-    tl = DataLoader(Pairs(train, True), batch_size=args.batch, shuffle=True, generator=g,
+    tl = DataLoader(Pairs(train, True, V2, BDD_PAIRS), batch_size=args.batch, shuffle=True, generator=g,
                     num_workers=args.workers, persistent_workers=True, drop_last=True)
-    hl = DataLoader(Pairs(hold, False), batch_size=16, num_workers=args.workers)
+    hl = DataLoader(Pairs(hold, False, V2, BDD_PAIRS), batch_size=16, num_workers=args.workers)
 
     model = DayGlareUNet(args.base).to(device)
     n_params = sum(q.numel() for q in model.parameters())
@@ -132,7 +140,8 @@ def main(argv=None) -> int:
     out = REPO_ROOT / "results" / (f"{args.out.stem}_training.json" if args.out != WEIGHTS
                                    else "restore_daytime_net_training.json")
     out.write_text(json.dumps({
-        "data": ("v2 KITTI train pairs" + (" + BDD train pairs (data/bdd_pairs)" if args.with_bdd else "")
+        "synth": args.synth,
+        "data": (f"{args.synth} KITTI train pairs" + (f" + BDD train pairs ({BDD_PAIRS.relative_to(REPO_ROOT)})" if args.with_bdd else "")
                  + "; holdout = 5% of pair IDs (seeded); no val frame of either dataset"),
         "n_kitti_pairs": n_kitti, "n_bdd_pairs": len(ids) - n_kitti,
         "n_train": len(train), "n_holdout": len(hold), "params": n_params,

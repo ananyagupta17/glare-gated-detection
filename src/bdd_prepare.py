@@ -26,7 +26,7 @@ STEP 2 -- build. After review:
       -> data/bdd_real_manifest.csv
 
 The clean set is the same size as the confirmed glare set, drawn (seeded) from daytime
-frames with low glare scores, matched on BDD's weather x scene attributes so the two
+frames with low glare scores, matched on BDD's weather x scene x time-of-day attributes so the two
 sets differ as little as possible apart from the glare. They are still different
 scenes; report that confound.
 
@@ -54,16 +54,25 @@ import numpy as np
 REPO_ROOT = Path(__file__).resolve().parent.parent
 BDD = REPO_ROOT / "datasets" / "bdd100k"
 IMAGES = BDD / "images" / "100k" / "val"
-LABELS_JSON = BDD / "labels" / "det_20" / "det_val.json"
+# Detection 2020 labels if present, else the 2018 release (the Kaggle mirror
+# solesensei/solesensei_bdd100k ships the 2018 file; same frames and boxes, older names).
+LABELS_JSON = next((p for p in (BDD / "labels" / "det_20" / "det_val.json",
+                                BDD / "labels" / "bdd100k_labels_images_val.json") if p.exists()),
+                   BDD / "labels" / "det_20" / "det_val.json")
 REVIEW = REPO_ROOT / "data" / "bdd_review"
 OUT = REPO_ROOT / "datasets" / "bdd_real"
 MANIFEST = REPO_ROOT / "data" / "bdd_real_manifest.csv"
 CLASS_MAP_JSON = REPO_ROOT / "results" / "bdd_class_map.json"
 SEED = 42
 
-CLASS_MAP = {"car": 0, "truck": 2, "pedestrian": 3, "rider": 5, "train": 6}
-DROPPED = ["bus", "bicycle", "motorcycle", "traffic light", "traffic sign",
+CLASS_MAP = {"car": 0, "truck": 2, "pedestrian": 3, "person": 3, "rider": 5, "train": 6}
+# "person" is the 2018 release's name for "pedestrian"; "bike" and "motor" are its names
+# for bicycle and motorcycle, dropped as before.
+DROPPED = ["bus", "bicycle", "motorcycle", "bike", "motor", "traffic light", "traffic sign",
            "other person", "other vehicle", "trailer"]
+# Sun glare needs the sun: search daytime and dawn/dusk frames (low sun is when glare is
+# most common); night frames are excluded.
+TIMES = ("daytime", "dawn/dusk")
 EVAL_MERGE = {1: 0}            # detector 'van' predictions count as 'car' on BDD
 
 
@@ -134,24 +143,26 @@ def contact_sheets(rows: list[dict], per_sheet: int = 12) -> int:
 
 
 def cmd_candidates(top: int, workers: int) -> int:
-    frames = [f for f in load_labels() if (f.get("attributes") or {}).get("timeofday") == "daytime"]
-    print(f"{len(frames)} daytime val frames; scoring...")
+    frames = [f for f in load_labels() if (f.get("attributes") or {}).get("timeofday") in TIMES]
+    print(f"{len(frames)} daytime + dawn/dusk val frames; scoring...")
     with ProcessPoolExecutor(max_workers=workers) as pool:
         scores = list(pool.map(glare_score, [str(IMAGES / f["name"]) for f in frames], chunksize=32))
     ranked = sorted(zip(scores, frames), key=lambda t: (-t[0], t[1]["name"]))
     REVIEW.mkdir(parents=True, exist_ok=True)
     rows = [{"rank": k + 1, "name": f["name"], "score": f"{sc:.4f}",
              "weather": f["attributes"].get("weather", ""), "scene": f["attributes"].get("scene", ""),
-             "verdict": ""} for k, (sc, f) in enumerate(ranked[:top])]
+             "timeofday": f["attributes"].get("timeofday", ""), "verdict": ""}
+            for k, (sc, f) in enumerate(ranked[:top])]
     with (REVIEW / "candidates.csv").open("w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0]))
         w.writeheader()
         w.writerows(rows)
     with (REVIEW / "all_daytime_scores.csv").open("w", newline="") as fh:
         w = csv.writer(fh)
-        w.writerow(["name", "score", "weather", "scene"])
+        w.writerow(["name", "score", "weather", "scene", "timeofday"])
         w.writerows([[f["name"], f"{sc:.4f}", f["attributes"].get("weather", ""),
-                      f["attributes"].get("scene", "")] for sc, f in ranked])
+                      f["attributes"].get("scene", ""), f["attributes"].get("timeofday", "")]
+                     for sc, f in ranked])
     n = contact_sheets(rows)
     print(f"wrote {REVIEW / 'candidates.csv'} ({len(rows)} candidates) and {n} contact sheets")
     print("next: fill the verdict column with 'glare' or 'no', then run: bdd_prepare.py build")
@@ -179,9 +190,9 @@ def cmd_build() -> int:
     pool = pool[len(pool) // 2:]                                  # lower half of the ranking
     by_stratum = defaultdict(list)
     for r in pool:
-        by_stratum[(r["weather"], r["scene"])].append(r["name"])
+        by_stratum[(r["weather"], r["scene"], r["timeofday"])].append(r["name"])
     rng = random.Random(f"{SEED}:bdd-clean")
-    need = Counter((r["weather"], r["scene"]) for r in glare)
+    need = Counter((r["weather"], r["scene"], r["timeofday"]) for r in glare)
     clean, short = [], 0
     for stratum, k in sorted(need.items()):
         names = sorted(by_stratum.get(stratum, []))

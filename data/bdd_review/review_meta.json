@@ -1,0 +1,45 @@
+{
+ "pool": {
+  "heuristic_top": 100,
+  "blob_top": 60,
+  "gate_top": 200
+ },
+ "n_candidates": 338,
+ "already_reviewed": 24,
+ "uncertain": [
+  "b305fc0b-ec8916d5.jpg",
+  "b501bb52-7282ae0d.jpg",
+  "b5859b97-9d5532a9.jpg",
+  "b6decb24-3f0404d4.jpg",
+  "b9fc97df-397f8a5d.jpg",
+  "ba4adf3d-27e3cae5.jpg",
+  "bc97328c-1869fa3c.jpg",
+  "bd989210-ecdee00d.jpg",
+  "beb712cc-ee31a67b.jpg",
+  "c202c860-fbf85ab9.jpg",
+  "c2341eec-16d212b8.jpg",
+  "c43052f6-d337ba62.jpg",
+  "c57cda5b-7ca48687.jpg",
+  "c83c10de-0d2047c8.jpg"
+ ],
+ "reviewer": "Claude (first pass); team to confirm",
+ "blind": "sheets shuffled with seed 42:bdd-blind-review; source and gate score not shown on tiles",
+ "criteria": "glare = sun or its bloom in frame, or strong sun glare (direct or reflected off road/windscreen) washing out part of the scene; not glare = bright sky without sun, white buildings, ordinary overexposure, haze or fog, night lights",
+ "counts": {
+  "candidates": 338,
+  "glare": 72,
+  "uncertain_glare": 14,
+  "glare_by_source": {
+   "heuristic": 8,
+   "blob": 6,
+   "gate": 68
+  },
+  "glare_found_without_gate": 4
+ },
+ "label_decision": {
+  "date": "2026-10-25",
+  "by": "Ananya (project lead)",
+  "decision": "Claude's first-pass glare/no verdicts accepted as the labels; no separate team re-check",
+  "note": "14 glare frames are marked uncertain; a strict variant excluding them can be reported"
+ }
+}

@@ -1,0 +1,351 @@
+{
+  "data": {
+    "source": "BDD100K val (100k images), via Kaggle mirror solesensei/solesensei_bdd100k",
+    "frames_glare": 72,
+    "frames_clean": 72,
+    "manifest": "data/bdd_real_manifest.csv",
+    "review": {
+      "pool": {
+        "heuristic_top": 100,
+        "blob_top": 60,
+        "gate_top": 200
+      },
+      "n_candidates": 338,
+      "already_reviewed": 24,
+      "uncertain": [
+        "b305fc0b-ec8916d5.jpg",
+        "b501bb52-7282ae0d.jpg",
+        "b5859b97-9d5532a9.jpg",
+        "b6decb24-3f0404d4.jpg",
+        "b9fc97df-397f8a5d.jpg",
+        "ba4adf3d-27e3cae5.jpg",
+        "bc97328c-1869fa3c.jpg",
+        "bd989210-ecdee00d.jpg",
+        "beb712cc-ee31a67b.jpg",
+        "c202c860-fbf85ab9.jpg",
+        "c2341eec-16d212b8.jpg",
+        "c43052f6-d337ba62.jpg",
+        "c57cda5b-7ca48687.jpg",
+        "c83c10de-0d2047c8.jpg"
+      ],
+      "reviewer": "Claude (first pass); team to confirm",
+      "blind": "sheets shuffled with seed 42:bdd-blind-review; source and gate score not shown on tiles",
+      "criteria": "glare = sun or its bloom in frame, or strong sun glare (direct or reflected off road/windscreen) washing out part of the scene; not glare = bright sky without sun, white buildings, ordinary overexposure, haze or fog, night lights",
+      "counts": {
+        "candidates": 338,
+        "glare": 72,
+        "uncertain_glare": 14,
+        "glare_by_source": {
+          "heuristic": 8,
+          "blob": 6,
+          "gate": 68
+        },
+        "glare_found_without_gate": 4
+      }
+    }
+  },
+  "pipeline": {
+    "gate": "models/gate_cnn_mixed.pt (CNN, p > 0.5)",
+    "restorer": "models/restore_daytime_net.pt",
+    "detector": "models/yolo_c1_train.pt"
+  },
+  "device": "mps",
+  "scoring": "own mAP@50 (VOC all-point), van->car merge; F1 at conf 0.25",
+  "latency_ms_mean": {
+    "gate": 11.66,
+    "restore": 30.68,
+    "detect": 14.57
+  },
+  "latency_ms_p95": {
+    "gate": 13.16,
+    "restore": 38.27,
+    "detect": 20.33
+  },
+  "realtime_targets_ms": {
+    "30 fps": 33.333333333333336,
+    "10 Hz (KITTI camera rate)": 100.0
+  },
+  "glare_drop_note": "clean-set minus glare-set mAP@50 under C1; real frames are not paired",
+  "gate": {
+    "precision": 1.0,
+    "recall": 0.9444,
+    "f1": 0.9714,
+    "accuracy": 0.9722,
+    "tp": 68,
+    "fn": 4,
+    "fp": 0,
+    "tn": 72
+  },
+  "arms": {
+    "C1": {
+      "stream": {
+        "mAP50": 0.0759,
+        "per_class": {
+          "car": {
+            "AP50": 0.2245,
+            "n_gt": 1592
+          },
+          "truck": {
+            "AP50": 0.018,
+            "n_gt": 52
+          },
+          "pedestrian": {
+            "AP50": 0.0594,
+            "n_gt": 156
+          },
+          "cyclist": {
+            "AP50": 0.0017,
+            "n_gt": 10
+          }
+        }
+      },
+      "glare": {
+        "mAP50": 0.0354,
+        "per_class": {
+          "car": {
+            "AP50": 0.112,
+            "n_gt": 855
+          },
+          "truck": {
+            "AP50": 0.0029,
+            "n_gt": 20
+          },
+          "pedestrian": {
+            "AP50": 0.0268,
+            "n_gt": 55
+          },
+          "cyclist": {
+            "AP50": 0.0,
+            "n_gt": 4
+          }
+        }
+      },
+      "clean": {
+        "mAP50": 0.1237,
+        "per_class": {
+          "car": {
+            "AP50": 0.3653,
+            "n_gt": 737
+          },
+          "truck": {
+            "AP50": 0.049,
+            "n_gt": 32
+          },
+          "pedestrian": {
+            "AP50": 0.0772,
+            "n_gt": 101
+          },
+          "cyclist": {
+            "AP50": 0.0035,
+            "n_gt": 6
+          }
+        }
+      },
+      "f1_mean": {
+        "glare": 0.0907,
+        "clean": 0.3946
+      },
+      "trigger_rate": 0.0,
+      "latency_ms": 14.6,
+      "latency_p95_ms": 20.3,
+      "latency_split_ms": {
+        "gate": 0.0,
+        "restoration": 0.0,
+        "detection": 14.57
+      },
+      "realtime": {
+        "30 fps": {
+          "mean_ok": true,
+          "p95_ok": true
+        },
+        "10 Hz (KITTI camera rate)": {
+          "mean_ok": true,
+          "p95_ok": true
+        }
+      },
+      "glare_drop": null,
+      "glare_drop_C1": 0.0883,
+      "recovery_share": 0.0
+    },
+    "C2": {
+      "stream": {
+        "mAP50": 0.082,
+        "per_class": {
+          "car": {
+            "AP50": 0.2367,
+            "n_gt": 1592
+          },
+          "truck": {
+            "AP50": 0.0208,
+            "n_gt": 52
+          },
+          "pedestrian": {
+            "AP50": 0.0688,
+            "n_gt": 156
+          },
+          "cyclist": {
+            "AP50": 0.0016,
+            "n_gt": 10
+          }
+        }
+      },
+      "glare": {
+        "mAP50": 0.0445,
+        "per_class": {
+          "car": {
+            "AP50": 0.1309,
+            "n_gt": 855
+          },
+          "truck": {
+            "AP50": 0.0028,
+            "n_gt": 20
+          },
+          "pedestrian": {
+            "AP50": 0.0442,
+            "n_gt": 55
+          },
+          "cyclist": {
+            "AP50": 0.0,
+            "n_gt": 4
+          }
+        }
+      },
+      "clean": {
+        "mAP50": 0.129,
+        "per_class": {
+          "car": {
+            "AP50": 0.3682,
+            "n_gt": 737
+          },
+          "truck": {
+            "AP50": 0.0636,
+            "n_gt": 32
+          },
+          "pedestrian": {
+            "AP50": 0.0809,
+            "n_gt": 101
+          },
+          "cyclist": {
+            "AP50": 0.0032,
+            "n_gt": 6
+          }
+        }
+      },
+      "f1_mean": {
+        "glare": 0.1139,
+        "clean": 0.4019
+      },
+      "trigger_rate": 1.0,
+      "latency_ms": 45.2,
+      "latency_p95_ms": 58.0,
+      "latency_split_ms": {
+        "gate": 0.0,
+        "restoration": 30.68,
+        "detection": 14.57
+      },
+      "realtime": {
+        "30 fps": {
+          "mean_ok": false,
+          "p95_ok": false
+        },
+        "10 Hz (KITTI camera rate)": {
+          "mean_ok": true,
+          "p95_ok": true
+        }
+      },
+      "glare_drop": null,
+      "glare_drop_C1": 0.0883,
+      "recovery_share": 0.1031
+    },
+    "C3": {
+      "stream": {
+        "mAP50": 0.0788,
+        "per_class": {
+          "car": {
+            "AP50": 0.2361,
+            "n_gt": 1592
+          },
+          "truck": {
+            "AP50": 0.0164,
+            "n_gt": 52
+          },
+          "pedestrian": {
+            "AP50": 0.061,
+            "n_gt": 156
+          },
+          "cyclist": {
+            "AP50": 0.0017,
+            "n_gt": 10
+          }
+        }
+      },
+      "glare": {
+        "mAP50": 0.0412,
+        "per_class": {
+          "car": {
+            "AP50": 0.132,
+            "n_gt": 855
+          },
+          "truck": {
+            "AP50": 0.0026,
+            "n_gt": 20
+          },
+          "pedestrian": {
+            "AP50": 0.0303,
+            "n_gt": 55
+          },
+          "cyclist": {
+            "AP50": 0.0,
+            "n_gt": 4
+          }
+        }
+      },
+      "clean": {
+        "mAP50": 0.1237,
+        "per_class": {
+          "car": {
+            "AP50": 0.3653,
+            "n_gt": 737
+          },
+          "truck": {
+            "AP50": 0.049,
+            "n_gt": 32
+          },
+          "pedestrian": {
+            "AP50": 0.0772,
+            "n_gt": 101
+          },
+          "cyclist": {
+            "AP50": 0.0035,
+            "n_gt": 6
+          }
+        }
+      },
+      "f1_mean": {
+        "glare": 0.1128,
+        "clean": 0.3946
+      },
+      "trigger_rate": 0.4722,
+      "latency_ms": 40.7,
+      "latency_p95_ms": 65.9,
+      "latency_split_ms": {
+        "gate": 11.66,
+        "restoration": 14.49,
+        "detection": 14.57
+      },
+      "realtime": {
+        "30 fps": {
+          "mean_ok": false,
+          "p95_ok": false
+        },
+        "10 Hz (KITTI camera rate)": {
+          "mean_ok": true,
+          "p95_ok": true
+        }
+      },
+      "glare_drop": null,
+      "glare_drop_C1": 0.0883,
+      "recovery_share": 0.0657
+    }
+  }
+}

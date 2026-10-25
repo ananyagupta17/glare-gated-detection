@@ -1,0 +1,339 @@
+rank,name,score,weather,scene,timeofday,source,gate_p,verdict
+1,b4ecb933-08326feb.jpg,0.2595,clear,city street,daytime,heuristic+gate,0.9987,glare
+2,c5b166fd-3156e611.jpg,0.3050,rainy,residential,daytime,heuristic,0.0015,no
+3,bd70577b-b4dd3097.jpg,-0.1908,clear,highway,dawn/dusk,gate,0.7562,no
+4,bcd53258-8754ded0.jpg,0.4780,rainy,residential,daytime,heuristic,0.0001,no
+5,b477c2e7-6590a089.jpg,-0.1241,clear,city street,daytime,gate,0.9935,no
+6,b37693d0-cd9bdf88.jpg,-0.2356,partly cloudy,residential,daytime,blob,0.0004,no
+7,b81b8523-57ccb331.jpg,0.3119,overcast,city street,daytime,heuristic,0.0001,no
+8,bc8c555a-5f402650.jpg,-0.1017,undefined,city street,daytime,gate,0.9966,glare
+9,bb9d32ae-a1246a1e.jpg,0.5251,overcast,highway,daytime,heuristic,0.0301,no
+10,b7a16331-728c61ea.jpg,-0.0713,clear,highway,daytime,gate,0.8044,no
+11,be614466-2e58f448.jpg,0.3293,undefined,highway,daytime,heuristic+blob,0.0501,no
+12,b4253085-22b9e610.jpg,-0.0547,clear,highway,dawn/dusk,blob,0.0000,no
+13,c9403737-3743ae01.jpg,-0.1580,partly cloudy,city street,dawn/dusk,gate,0.8571,glare
+14,c61e7344-d27499c3.jpg,0.2281,undefined,city street,dawn/dusk,heuristic,0.0008,no
+15,bd31fb8b-28ae6a12.jpg,-0.0846,undefined,city street,daytime,gate,0.9997,glare
+16,bd92c756-0eee51cd.jpg,-0.0360,rainy,city street,dawn/dusk,gate,0.8308,no
+17,b7a16331-0c817de1.jpg,-0.1173,clear,highway,daytime,gate,0.8159,no
+18,be94df25-464ac4f8.jpg,-0.0952,clear,highway,daytime,gate,0.9153,no
+19,bdf58c55-dee0b9f7.jpg,0.3446,rainy,city street,daytime,heuristic,0.0002,no
+20,c8257ea8-ea7235f8.jpg,-0.1148,partly cloudy,city street,daytime,gate,0.7648,no
+21,b4688d0b-3e2bda23.jpg,0.2379,undefined,residential,daytime,heuristic,0.0038,no
+22,bbe207fc-fdb1b49f.jpg,0.3330,snowy,highway,dawn/dusk,heuristic+blob,0.0162,no
+23,c8e8cd4a-2f894188.jpg,0.2931,undefined,city street,daytime,heuristic,0.0000,no
+24,c72b8356-0bac66a5.jpg,0.0136,clear,city street,daytime,gate,0.9141,glare
+25,bb92ddee-aea40f05.jpg,0.2908,undefined,city street,dawn/dusk,heuristic,0.0019,no
+26,c174a2be-b32a8285.jpg,0.4307,overcast,city street,daytime,heuristic,0.0003,no
+27,c4fb6443-4d900d7f.jpg,-0.1035,partly cloudy,highway,dawn/dusk,gate,0.9728,no
+28,c680eea3-5a7f9086.jpg,-0.2257,clear,highway,dawn/dusk,blob+gate,0.9999,glare
+29,c7fd8df0-429644e7.jpg,0.0150,snowy,highway,daytime,gate,0.9877,no
+30,c6a4abc9-e999da65.jpg,0.2756,snowy,residential,daytime,heuristic,0.1837,no
+31,bc24f222-dad76e37.jpg,-0.1086,clear,highway,dawn/dusk,gate,0.9251,glare
+32,b4b07c88-e71768f1.jpg,-0.0953,clear,city street,daytime,gate,0.7786,glare
+33,b4253085-9f907156.jpg,0.3305,overcast,city street,daytime,heuristic,0.0000,no
+34,c4e92086-e1b8324f.jpg,0.2154,overcast,city street,daytime,heuristic,0.0026,no
+35,b9782b2a-681c4b4d.jpg,-0.1659,clear,residential,dawn/dusk,gate,0.9999,glare
+36,bb8dba97-9f4540b7.jpg,0.0022,overcast,highway,daytime,blob,0.0358,no
+37,bfea6630-a872fd0d.jpg,-0.2069,snowy,city street,dawn/dusk,gate,0.9876,no
+38,b940ba87-435d34a8.jpg,-0.1198,clear,highway,dawn/dusk,gate,0.9891,no
+39,c179d309-0e034578.jpg,0.0826,rainy,highway,daytime,blob,0.0002,no
+40,c346c42b-748697b5.jpg,-0.1054,rainy,highway,dawn/dusk,gate,0.8284,no
+41,be554fed-b1ed30d1.jpg,0.2170,overcast,city street,dawn/dusk,heuristic,0.0826,no
+42,b4c89ab1-5c72cd7d.jpg,-0.1558,partly cloudy,city street,daytime,blob+gate,1.0000,glare
+43,b61f19ba-48885e8c.jpg,-0.1426,snowy,city street,dawn/dusk,blob,0.4105,no
+44,c73ca2e7-37f54fa3.jpg,-0.0825,clear,highway,dawn/dusk,gate,0.9772,no
+45,b49a272b-c52895c3.jpg,1.4243,undefined,residential,daytime,heuristic,0.0886,no
+46,c4816131-7251b67e.jpg,-0.1121,clear,residential,daytime,gate,0.8378,no
+47,c895041f-b2d189ed.jpg,0.2746,overcast,highway,daytime,heuristic+gate,0.8471,no
+48,c1bb60fd-24b6cf0b.jpg,-0.1250,clear,city street,dawn/dusk,gate,0.9999,glare
+49,b8cff548-cc30b88a.jpg,-0.1266,snowy,city street,dawn/dusk,gate,0.8861,no
+50,bdae005f-1c0f2e8b.jpg,-0.1863,overcast,city street,dawn/dusk,blob,0.0031,no
+51,be22622e-20122a8f.jpg,0.2249,overcast,city street,daytime,heuristic,0.0252,no
+52,ca095e13-ac7f314a.jpg,0.2269,overcast,city street,dawn/dusk,heuristic,0.0000,no
+53,bdaa98a5-d23583cb.jpg,0.0963,clear,city street,daytime,blob,0.0000,no
+54,b5fe17dd-b6648364.jpg,-0.1037,overcast,highway,daytime,gate,0.7526,no
+55,c11c833f-e77889aa.jpg,-0.1752,clear,city street,dawn/dusk,gate,0.9253,no
+56,b42fdaf1-0925c561.jpg,0.2641,overcast,city street,daytime,heuristic,0.0000,no
+57,c1207647-f966579a.jpg,-0.1071,snowy,city street,dawn/dusk,gate,0.9576,no
+58,b386d34e-a6a9ea07.jpg,0.0572,rainy,residential,dawn/dusk,gate,0.9945,glare
+59,c5a84acc-baf6323a.jpg,-0.1176,clear,city street,dawn/dusk,gate,0.9534,no
+60,c37b9726-a567227e.jpg,-0.0984,snowy,city street,daytime,gate,0.9293,no
+61,c0717263-73ccb048.jpg,-0.1842,overcast,residential,dawn/dusk,gate,0.9933,no
+62,c0aa83ea-5e7cbb16.jpg,-0.1286,clear,city street,daytime,gate,0.9999,glare
+63,b557d9d0-bff2bed2.jpg,0.2245,overcast,city street,dawn/dusk,heuristic,0.0039,no
+64,b61212a0-44b799c0.jpg,-0.1058,clear,city street,dawn/dusk,gate,0.9997,no
+65,c179d309-8939ab37.jpg,0.1257,rainy,residential,daytime,gate,0.9147,no
+66,c3bfdcda-bfdd5fdb.jpg,-0.1321,clear,residential,daytime,gate,0.9668,no
+67,b9a0d48b-a89007f6.jpg,0.3667,overcast,highway,daytime,heuristic,0.0000,no
+68,b729d050-af382d96.jpg,-0.0878,undefined,highway,daytime,gate,0.9980,no
+69,c8573105-4f2e7c11.jpg,-0.1393,partly cloudy,highway,dawn/dusk,gate,0.8357,glare
+70,bf8feaf5-cf2b6195.jpg,-0.0886,clear,city street,daytime,gate,1.0000,glare
+71,c8a3369c-d264119b.jpg,0.2853,undefined,highway,daytime,heuristic+blob,0.0102,no
+72,b332df78-6765dddc.jpg,-0.2125,clear,residential,dawn/dusk,gate,0.9475,no
+73,c1a61e43-1fe7e02e.jpg,0.0270,undefined,highway,daytime,gate,0.9934,no
+74,bb61c2ee-35ca0081.jpg,-0.1104,clear,city street,dawn/dusk,gate,0.9973,no
+75,c457d18a-610011a8.jpg,-0.0858,partly cloudy,highway,daytime,gate,0.9763,no
+76,b9fc97df-397f8a5d.jpg,-0.0495,undefined,city street,daytime,gate,0.7501,glare
+77,b70b7cdc-c4dcd88b.jpg,-0.1550,partly cloudy,highway,daytime,gate,0.8546,no
+78,b216243d-ad4306b9.jpg,-0.1063,clear,city street,dawn/dusk,gate,0.9413,no
+79,bb5620b4-1b9fa58e.jpg,0.2170,snowy,highway,daytime,heuristic,0.0000,no
+80,c1b16eee-4d40da01.jpg,-0.0419,rainy,city street,daytime,gate,0.9611,no
+81,bfe587eb-d21baba4.jpg,0.2252,overcast,city street,daytime,heuristic,0.0000,no
+82,c352d9c5-d0019b8b.jpg,-0.1398,clear,city street,daytime,gate,0.7718,no
+83,b394dd7a-db2b62a1.jpg,-0.1451,clear,city street,dawn/dusk,gate,0.9807,glare
+84,bf9e3b67-2d5736bc.jpg,-0.0336,undefined,city street,daytime,gate,0.8495,no
+85,b2fa3e5f-8c4b06d0.jpg,0.0197,undefined,city street,daytime,gate,0.8904,no
+86,b4b07c88-3e6d65a0.jpg,-0.0907,clear,city street,daytime,gate,0.9987,glare
+87,c7c5969b-c0899dbc.jpg,-0.2590,clear,highway,daytime,gate,0.8173,no
+88,c7c5969b-4fdfe484.jpg,-0.2583,overcast,city street,daytime,gate,0.7729,no
+89,c878b7e1-a736922b.jpg,-0.0966,rainy,city street,daytime,gate,0.9780,glare
+90,b5548481-6ffc0c74.jpg,-0.1883,snowy,residential,dawn/dusk,gate,0.9999,glare
+91,c60144b6-ddad5125.jpg,-0.0791,clear,city street,daytime,gate,0.9995,no
+92,c45cf21f-d6bc94ba.jpg,-0.1009,clear,city street,dawn/dusk,gate,0.9995,no
+93,bc97328c-1869fa3c.jpg,-0.0957,clear,city street,dawn/dusk,gate,0.9441,glare
+94,b332df78-d6228140.jpg,0.0965,undefined,city street,dawn/dusk,gate,0.9856,no
+95,c9106ec8-62580195.jpg,-0.1945,clear,city street,dawn/dusk,gate,1.0000,glare
+96,b39dd7ca-a740454f.jpg,0.0658,undefined,undefined,daytime,gate,0.7809,no
+97,b61aec41-7b16e55c.jpg,0.2917,overcast,city street,daytime,heuristic,0.0000,no
+98,ba467364-d5d97e59.jpg,0.2093,overcast,highway,daytime,gate,0.9557,no
+99,bcb111bb-fed9e9ca.jpg,-0.0427,clear,highway,dawn/dusk,blob,0.0048,no
+100,b3674f80-8070d692.jpg,0.2255,overcast,city street,daytime,heuristic,0.0003,no
+101,c60f0eb4-bb0d650b.jpg,0.2896,undefined,city street,daytime,heuristic,0.0202,no
+102,bf77e9b1-33a1b81e.jpg,0.4296,overcast,highway,daytime,heuristic,0.2431,no
+103,b9a0d48b-c9dfdd87.jpg,0.2716,overcast,highway,daytime,heuristic,0.0000,no
+104,c3c0f47b-cccf82b7.jpg,-0.0065,undefined,city street,dawn/dusk,gate,0.7972,no
+105,c26b9b25-a8bbf0b5.jpg,0.0175,clear,residential,daytime,gate,0.8059,glare
+106,b5465c6e-45c537f7.jpg,-0.0985,snowy,city street,daytime,gate,0.9511,no
+107,bf8463c9-7f1810d4.jpg,-0.2203,partly cloudy,city street,daytime,blob,0.0122,no
+108,c90b5398-d042ec34.jpg,0.2117,undefined,city street,daytime,heuristic,0.0014,no
+109,b8a795ee-c1ce7ac0.jpg,0.3056,overcast,city street,dawn/dusk,heuristic,0.0000,no
+110,ca479701-2ab57f9a.jpg,-0.0418,clear,city street,dawn/dusk,gate,0.9763,no
+111,c1a2f331-c407620f.jpg,0.2275,overcast,city street,daytime,heuristic,0.6245,no
+112,c0fce69f-42d06912.jpg,0.2796,undefined,residential,daytime,heuristic,0.0044,no
+113,bd92c756-d4b30972.jpg,-0.1330,clear,city street,dawn/dusk,gate,0.8885,no
+114,c877c1e3-b9b26376.jpg,0.3575,undefined,residential,daytime,heuristic,0.0001,no
+115,c696b1c8-4e0accee.jpg,0.2144,overcast,city street,daytime,heuristic,0.0239,no
+116,c12e6924-6d6ef77c.jpg,0.2602,rainy,city street,daytime,heuristic,0.0000,no
+117,c0771fb7-d03aa33e.jpg,-0.0944,rainy,city street,dawn/dusk,gate,0.9933,no
+118,ba362b8d-2855bf4e.jpg,0.2234,undefined,highway,daytime,heuristic,0.0002,no
+119,c55dde26-9a4d91e4.jpg,-0.1195,clear,city street,dawn/dusk,gate,0.7597,no
+120,b8b2be1e-4c0bf0b9.jpg,0.4793,undefined,city street,daytime,heuristic+gate,1.0000,glare
+121,bd989210-d2369f97.jpg,0.3931,undefined,city street,daytime,heuristic,0.4999,no
+122,b747a85e-9e012bdf.jpg,-0.1499,overcast,city street,dawn/dusk,gate,0.9979,no
+123,bb1b7e42-48b281a3.jpg,0.2242,overcast,city street,daytime,heuristic,0.0001,no
+124,b94daedc-7045933e.jpg,0.3000,clear,highway,daytime,heuristic,0.0000,no
+125,c48ba79f-d8e0bf32.jpg,-0.1045,overcast,highway,daytime,gate,0.8547,no
+126,c0be0e03-3ab88509.jpg,0.2304,overcast,highway,daytime,heuristic,0.0000,no
+127,c96ab7ea-2770185c.jpg,-0.1022,clear,highway,dawn/dusk,gate,0.9979,no
+128,b9d12c48-d855b440.jpg,0.2379,undefined,city street,daytime,heuristic,0.0141,no
+129,bfe587eb-9394a16a.jpg,-0.0214,clear,highway,dawn/dusk,blob,0.0293,no
+130,b86413b9-c5b79892.jpg,-0.1818,clear,residential,dawn/dusk,blob,0.0000,no
+131,c9c778b5-86bddb7e.jpg,-0.1705,partly cloudy,city street,daytime,blob,0.0000,no
+132,c37b9726-c2532aba.jpg,-0.1040,snowy,city street,daytime,gate,0.9431,no
+133,b5dc7a6d-8ef7e8b8.jpg,-0.0884,partly cloudy,city street,dawn/dusk,gate,0.9722,glare
+134,b533db8e-4abfcb54.jpg,-0.1387,clear,city street,dawn/dusk,gate,0.9873,no
+135,b344266e-2e034c1e.jpg,0.1300,clear,city street,daytime,gate,0.9994,glare
+136,c71751ee-b6f43370.jpg,-0.1228,overcast,highway,dawn/dusk,gate,0.9974,no
+137,c4a9c191-20e1a3c3.jpg,0.2371,clear,residential,daytime,heuristic,0.0008,no
+138,b5b2f593-63606879.jpg,0.2684,undefined,city street,daytime,heuristic,0.0020,no
+139,b9ca8abd-dc5cd337.jpg,0.2805,partly cloudy,highway,dawn/dusk,heuristic,0.0000,no
+140,be554fed-d4a627d0.jpg,0.2439,partly cloudy,highway,dawn/dusk,heuristic+blob,0.0064,no
+141,bfea6630-09edb925.jpg,-0.1466,snowy,city street,daytime,gate,0.9880,no
+142,bae92945-99223ba6.jpg,-0.0209,overcast,residential,daytime,gate,0.9890,glare
+143,ba4adf3d-27e3cae5.jpg,-0.1505,undefined,city street,daytime,gate,0.7666,glare
+144,b3ee5ba2-6cc0565d.jpg,-0.0709,clear,city street,dawn/dusk,gate,0.9322,no
+145,b2bee3e1-80c787bd.jpg,0.0844,overcast,city street,dawn/dusk,blob,0.6995,no
+146,c2050b3c-55dd8c44.jpg,-0.0802,clear,highway,daytime,gate,0.8459,no
+147,b6ffe7bd-f7d2cdce.jpg,-0.0605,clear,city street,dawn/dusk,gate,0.8588,no
+148,bda60c48-07ab78ed.jpg,0.3744,undefined,highway,daytime,heuristic,0.0105,no
+149,c66c630d-50cda53e.jpg,0.0742,rainy,city street,daytime,gate,0.7797,no
+150,bcbb5180-96cfedbe.jpg,-0.1184,partly cloudy,residential,dawn/dusk,blob,0.6036,no
+151,c9f5283d-71e7d62c.jpg,-0.1118,clear,residential,daytime,gate,0.8724,no
+152,c5a0ad25-32da84bb.jpg,0.2271,clear,residential,daytime,heuristic,0.0000,no
+153,b855a117-5b67fec3.jpg,-0.1548,partly cloudy,city street,dawn/dusk,gate,1.0000,glare
+154,beff1d1c-faff23dd.jpg,0.4910,undefined,residential,daytime,heuristic,0.0093,no
+155,c8bd76fd-68d847b3.jpg,-0.0462,rainy,highway,dawn/dusk,gate,0.9731,no
+156,c0a6cfd6-3b25543a.jpg,-0.1590,partly cloudy,city street,dawn/dusk,blob,0.0000,no
+157,c019c1f1-883ea964.jpg,0.7962,undefined,highway,daytime,heuristic+gate,0.9926,glare
+158,bad5a7e9-b1d91b1a.jpg,-0.0947,overcast,city street,dawn/dusk,blob,0.0064,no
+159,ca068cb6-1418f2fb.jpg,0.4545,overcast,highway,daytime,heuristic,0.0235,no
+160,be6fd6ac-35af61fd.jpg,0.0928,overcast,residential,dawn/dusk,blob,0.3351,no
+161,bda3c743-b1fd3647.jpg,0.1548,rainy,highway,daytime,blob,0.0592,no
+162,bbce5b2c-df2c682b.jpg,0.3215,overcast,city street,dawn/dusk,heuristic,0.0004,no
+163,c53385ee-1fe07e21.jpg,-0.0901,overcast,city street,daytime,gate,0.9966,no
+164,c5e41dc2-b8afddfc.jpg,-0.1182,partly cloudy,highway,daytime,gate,0.9077,no
+165,bbc357f2-ddaa5e79.jpg,-0.0754,undefined,city street,daytime,gate,0.8650,glare
+166,b394dd7a-fe45748a.jpg,0.2213,undefined,residential,dawn/dusk,heuristic+gate,0.9995,glare
+167,bd2fd996-71e2a020.jpg,-0.1254,clear,residential,daytime,gate,0.9707,no
+168,c2341eec-16d212b8.jpg,0.7807,undefined,city street,daytime,heuristic,0.0052,glare
+169,c8eeb9c9-cdadaee2.jpg,-0.1966,clear,city street,dawn/dusk,gate,0.9997,glare
+170,b9fc97df-9b839325.jpg,0.0503,rainy,city street,dawn/dusk,gate,0.9658,glare
+171,b97124d9-bea19450.jpg,0.3495,rainy,highway,daytime,heuristic+blob,0.0157,no
+172,c874ddc1-78b9084d.jpg,-0.0830,snowy,city street,daytime,gate,0.9195,no
+173,c70a8ace-931896fd.jpg,0.0026,rainy,city street,dawn/dusk,gate,0.9674,no
+174,b97b9ee8-ea15f29a.jpg,-0.0836,overcast,city street,dawn/dusk,gate,0.9999,glare
+175,be7783b0-b44ff154.jpg,-0.0529,snowy,city street,daytime,gate,0.8160,no
+176,bf7f98e7-026008d3.jpg,-0.1426,snowy,city street,dawn/dusk,gate,0.9982,glare
+177,b6e4a55e-0684fdec.jpg,0.3719,snowy,city street,daytime,heuristic,0.0000,no
+178,c47fb4ff-92db68d6.jpg,0.2436,clear,highway,daytime,heuristic,0.0004,no
+179,bd5ff552-c187e5df.jpg,-0.0551,clear,city street,dawn/dusk,gate,0.9725,no
+180,c44d8c58-cca1e1a3.jpg,-0.1611,snowy,residential,daytime,gate,0.9685,no
+181,c9708ee8-31f4eece.jpg,-0.1813,clear,city street,dawn/dusk,gate,0.9847,glare
+182,c874ddc1-0aee57cf.jpg,-0.0798,snowy,city street,dawn/dusk,gate,0.9684,no
+183,c4eb5462-ebd248b7.jpg,0.1443,clear,city street,daytime,gate,0.7926,no
+184,b421c89a-c7cdebb4.jpg,-0.1130,clear,highway,dawn/dusk,gate,0.8270,no
+185,c45fbe22-2c182907.jpg,-0.1581,clear,residential,dawn/dusk,blob,0.0030,no
+186,c741a3b6-17ca1b7e.jpg,-0.2133,partly cloudy,highway,dawn/dusk,gate,0.9903,glare
+187,c0e6d0ec-254d2aac.jpg,-0.1120,clear,residential,daytime,gate,0.9947,no
+188,b6d0b9d1-bfbc7861.jpg,-0.0565,rainy,city street,dawn/dusk,gate,0.9113,no
+189,b555790d-d715196b.jpg,0.1118,overcast,city street,daytime,blob,0.0122,no
+190,c8ef6556-8ea04157.jpg,-0.0387,undefined,city street,daytime,gate,0.8826,no
+191,c5def92b-a0699b4e.jpg,-0.1922,partly cloudy,highway,daytime,blob,0.0001,no
+192,c43052f6-d337ba62.jpg,-0.0894,clear,highway,daytime,gate,0.9999,glare
+193,c78f9fc6-efac7090.jpg,-0.2061,foggy,highway,daytime,gate,0.8372,no
+194,bdf8fcad-dfe047d1.jpg,-0.1386,undefined,highway,daytime,gate,1.0000,no
+195,c874ddc1-ff4e2b39.jpg,-0.0790,snowy,city street,daytime,gate,0.9997,no
+196,b279bc06-b7bc42a9.jpg,0.0346,overcast,residential,daytime,blob+gate,0.7866,no
+197,c83c10de-0d2047c8.jpg,0.1470,undefined,undefined,daytime,blob+gate,0.9961,glare
+198,c45c7487-c44e6bab.jpg,-0.0770,partly cloudy,city street,dawn/dusk,gate,0.9909,glare
+199,c3c0f47b-7f004614.jpg,0.0150,overcast,city street,daytime,gate,0.9942,no
+200,c19681f6-26f7aa52.jpg,0.2712,clear,city street,daytime,heuristic,0.0000,no
+201,c41585dc-6fe06ca1.jpg,0.2106,overcast,city street,daytime,heuristic,0.0001,no
+202,c33251a6-e75f8824.jpg,-0.0599,clear,city street,dawn/dusk,gate,0.9985,no
+203,c49c8353-859a1bd7.jpg,-0.0668,undefined,city street,daytime,gate,0.9985,no
+204,baf29436-f6375fa4.jpg,0.0095,overcast,city street,daytime,blob,0.0001,no
+205,b27688b6-1af27060.jpg,-0.0934,undefined,highway,daytime,gate,0.9730,no
+206,bbf2ad0f-5458cb78.jpg,-0.1561,clear,highway,dawn/dusk,blob,0.0101,no
+207,b8b69c99-e0c0b8bb.jpg,-0.1833,snowy,city street,daytime,gate,0.7977,no
+208,bf474631-7bf7833c.jpg,0.3816,overcast,highway,daytime,heuristic+blob,0.0243,no
+209,c47f172b-42e86c73.jpg,-0.1729,clear,city street,dawn/dusk,gate,0.8260,no
+210,c11c833f-3673eff3.jpg,-0.1048,clear,highway,dawn/dusk,gate,0.8438,no
+211,ba64e51b-f88ab62e.jpg,0.2246,undefined,city street,daytime,heuristic,0.0001,no
+212,b9e6660b-bc8236e7.jpg,0.3067,undefined,city street,daytime,heuristic,0.0000,no
+213,bd3bd3ab-8e38f822.jpg,-0.1322,clear,city street,daytime,gate,0.9968,glare
+214,bdf8fcad-f9afb0af.jpg,-0.1737,clear,city street,dawn/dusk,gate,0.9994,no
+215,c700966a-608d05b4.jpg,0.0163,clear,city street,daytime,gate,0.9975,no
+216,bdcd6f24-0b1af2bf.jpg,-0.1763,clear,city street,dawn/dusk,gate,0.8178,no
+217,b9a2146e-1fcf3af6.jpg,0.0202,partly cloudy,residential,daytime,gate,0.8951,no
+218,c4e96efa-ea5f524b.jpg,0.0524,rainy,city street,daytime,gate,0.7836,no
+219,b336bdb9-ed5d2cc3.jpg,0.0838,rainy,city street,daytime,gate,0.7584,no
+220,c477c67b-89221134.jpg,-0.1275,rainy,highway,dawn/dusk,gate,0.8840,no
+221,c1fbed4d-18be096c.jpg,-0.2182,partly cloudy,residential,daytime,blob,0.0001,no
+222,c57cda5b-7ca48687.jpg,2.1710,undefined,highway,daytime,heuristic+blob,0.1515,glare
+223,b97b9ee8-0dfbbe35.jpg,0.5161,undefined,residential,daytime,heuristic,0.2607,glare
+224,bb9712ba-8ec90d89.jpg,0.2380,undefined,city street,dawn/dusk,heuristic,0.0032,no
+225,be3e9c45-d47775f3.jpg,-0.1531,clear,residential,daytime,gate,0.8891,glare
+226,c52f53f8-1df973bb.jpg,-0.0121,clear,highway,daytime,gate,1.0000,glare
+227,c3ee5975-0eb73316.jpg,0.0001,clear,highway,dawn/dusk,blob,0.0013,no
+228,c202c860-fbf85ab9.jpg,-0.0515,clear,highway,daytime,gate,0.9790,glare
+229,c132df41-509fc403.jpg,0.5714,undefined,highway,daytime,heuristic+blob,0.7069,no
+230,c8478dfd-74b4ed62.jpg,-0.1026,clear,city street,dawn/dusk,blob,0.0000,no
+231,b7ad4512-5b2510d8.jpg,-0.1778,rainy,residential,daytime,blob,0.0242,no
+232,c0de5178-dd9fe4fb.jpg,-0.1250,clear,residential,dawn/dusk,gate,0.9991,glare
+233,c536c7e6-f9b2808f.jpg,-0.1149,clear,highway,dawn/dusk,gate,0.9984,glare
+234,bfaca2bb-30af2110.jpg,0.0398,clear,city street,daytime,gate,0.7932,glare
+235,ba2e8c76-d7ca505e.jpg,0.2778,overcast,residential,daytime,heuristic,0.0019,no
+236,c8f6f631-a1eb5133.jpg,0.2519,undefined,city street,daytime,heuristic+gate,0.9674,glare
+237,bf03faea-d6b6f567.jpg,-0.0161,snowy,highway,daytime,gate,0.9682,no
+238,bb3bb8c0-2ef3abc6.jpg,-0.2383,snowy,highway,dawn/dusk,gate,0.9217,glare
+239,b305fc0b-ec8916d5.jpg,-0.1195,overcast,highway,dawn/dusk,gate,0.9875,glare
+240,c633cafb-496ee40f.jpg,0.3067,undefined,city street,daytime,heuristic,0.0450,no
+241,b2b2f563-ec318c61.jpg,-0.0221,rainy,highway,daytime,blob,0.0000,no
+242,c1c8cf02-3ada98f8.jpg,-0.2283,overcast,highway,dawn/dusk,blob,0.0245,no
+243,c6a922ec-c98fe832.jpg,0.3438,undefined,city street,daytime,heuristic,0.0001,no
+244,b332df78-28a61de0.jpg,0.2343,undefined,city street,dawn/dusk,heuristic,0.0002,no
+245,c359f52e-d1916e72.jpg,-0.1379,clear,residential,daytime,gate,0.7999,no
+246,bdd2e58a-f9784bf8.jpg,-0.1256,clear,highway,dawn/dusk,gate,0.9184,no
+247,b7db31d1-fa13a84a.jpg,0.3181,undefined,residential,daytime,heuristic,0.0137,no
+248,b85420e2-ea146a8a.jpg,0.2258,overcast,city street,daytime,heuristic,0.0023,no
+249,c4494f87-59e5c703.jpg,-0.0804,clear,city street,dawn/dusk,gate,0.9901,no
+250,b35f4a74-bd3dd74f.jpg,0.2901,overcast,highway,daytime,heuristic,0.0365,no
+251,bb53a532-a6465a0b.jpg,0.1212,undefined,residential,daytime,gate,0.9314,no
+252,bb9a3460-97d249c3.jpg,0.2567,clear,highway,daytime,heuristic,0.0006,no
+253,c6da9a5f-4f00039a.jpg,0.2637,partly cloudy,highway,daytime,heuristic+blob,0.0499,no
+254,b700e409-b6515113.jpg,-0.1427,rainy,city street,dawn/dusk,blob,0.0000,no
+255,bd355fcc-bbe3eda5.jpg,0.3831,clear,highway,daytime,heuristic,0.0000,no
+256,b975a665-66f04c31.jpg,0.2160,overcast,highway,daytime,heuristic,0.0000,no
+257,c5584f14-cba77967.jpg,-0.1955,overcast,city street,dawn/dusk,gate,0.9986,no
+258,c4b610ae-f75d91a9.jpg,-0.0084,rainy,highway,daytime,gate,0.9706,no
+259,be839b4c-fba3ea45.jpg,0.2377,overcast,city street,daytime,heuristic,0.0003,no
+260,c9815999-f1a3d95a.jpg,-0.0461,undefined,city street,daytime,gate,0.9027,no
+261,b99aea27-68a2c988.jpg,-0.0253,clear,residential,dawn/dusk,gate,0.9940,glare
+262,b5661732-3684230b.jpg,0.2565,overcast,city street,daytime,heuristic,0.0000,no
+263,c1bd9a5f-8706ae26.jpg,0.2759,undefined,residential,dawn/dusk,heuristic+gate,0.9801,no
+264,ca28f275-df2e6ad2.jpg,-0.1082,clear,residential,dawn/dusk,gate,0.9948,no
+265,c65c2462-96e8ae92.jpg,0.2857,overcast,highway,daytime,heuristic,0.0082,no
+266,c91a84db-b08249fc.jpg,-0.0224,undefined,highway,daytime,gate,0.9886,no
+267,be62c9ed-cfe00d7a.jpg,-0.0492,clear,city street,daytime,blob,0.0000,no
+268,b742a9e3-7fbcedaa.jpg,-0.1304,clear,highway,dawn/dusk,gate,0.7487,no
+269,c1c2aba5-5d0757aa.jpg,-0.1558,partly cloudy,city street,dawn/dusk,gate,0.9535,no
+270,c76e42a3-362b5166.jpg,0.3942,rainy,highway,daytime,heuristic,0.1091,no
+271,c4dbd719-26df8369.jpg,-0.2015,partly cloudy,city street,daytime,gate,0.8727,no
+272,c769da9c-f1ad8284.jpg,-0.0662,clear,city street,dawn/dusk,blob,0.0429,no
+273,bb95526b-ceac3ace.jpg,-0.0024,snowy,city street,daytime,gate,0.9522,no
+274,b701e0ad-0179d536.jpg,0.0384,clear,city street,dawn/dusk,gate,0.9999,glare
+275,c5121aec-f19f3e8d.jpg,-0.1204,clear,highway,dawn/dusk,gate,0.9991,glare
+276,bd57e60e-f3226561.jpg,-0.0638,clear,residential,dawn/dusk,gate,0.9982,no
+277,c77bc56d-491f85ad.jpg,-0.0734,partly cloudy,residential,dawn/dusk,gate,0.8654,no
+278,b6ba23a1-98fd0d6b.jpg,0.0251,overcast,residential,daytime,blob,0.0419,no
+279,c5584f14-7fcc4797.jpg,-0.1694,clear,highway,daytime,gate,0.9998,no
+280,c639e1c0-2eb71da1.jpg,0.2889,undefined,city street,daytime,heuristic,0.0046,no
+281,c56915dc-1eb8abe1.jpg,0.0409,clear,highway,daytime,gate,0.7482,no
+282,b7a8e795-ff80fddf.jpg,0.2254,overcast,city street,daytime,heuristic,0.0071,no
+283,b907b620-74e79e9c.jpg,0.0859,rainy,residential,daytime,blob,0.0005,no
+284,bf54973d-ad129b06.jpg,-0.1138,clear,city street,dawn/dusk,gate,0.8116,no
+285,bb21e706-33f63a66.jpg,-0.1073,overcast,city street,daytime,blob,0.0038,no
+286,bd989210-ecdee00d.jpg,0.0027,undefined,city street,daytime,blob,0.2830,glare
+287,b1d10d08-5b108225.jpg,-0.0765,clear,city street,dawn/dusk,gate,0.9987,no
+288,bbf2bd83-1f5c87da.jpg,-0.1142,partly cloudy,city street,dawn/dusk,gate,0.9895,glare
+289,c29829cf-a9e05937.jpg,0.7417,partly cloudy,highway,daytime,heuristic,0.0740,no
+290,b857eb06-7ec70e8b.jpg,-0.0097,snowy,highway,daytime,gate,0.9836,no
+291,beb712cc-ee31a67b.jpg,-0.1597,partly cloudy,city street,daytime,gate,0.9972,glare
+292,c7331983-36418bf8.jpg,-0.0631,snowy,residential,dawn/dusk,gate,0.8941,no
+293,c7c5969b-3d72de47.jpg,-0.2531,overcast,highway,daytime,gate,0.9832,no
+294,b5fc1373-94aaab40.jpg,-0.0007,clear,residential,daytime,gate,0.9728,no
+295,b47262a4-aa7a5ad9.jpg,0.0682,clear,city street,daytime,blob+gate,0.9991,glare
+296,b77d2f48-020ecd39.jpg,-0.0061,clear,city street,dawn/dusk,blob,0.0001,no
+297,c9df3b7e-bb72e430.jpg,-0.2088,clear,residential,dawn/dusk,gate,0.8623,no
+298,c1ba5ee6-1a00a269.jpg,0.8768,partly cloudy,highway,daytime,heuristic,0.0001,no
+299,b869965a-f5ff417c.jpg,-0.0777,clear,highway,daytime,gate,0.9996,glare
+300,b8f0315c-0fb7602c.jpg,0.0729,clear,city street,dawn/dusk,blob,0.0153,no
+301,c0e8fdda-cc0a57e4.jpg,0.0906,undefined,city street,daytime,gate,0.9267,no
+302,c3fd58b6-04bcbef3.jpg,0.1446,overcast,city street,daytime,gate,0.8315,no
+303,b7446774-2faa796d.jpg,-0.2211,partly cloudy,city street,dawn/dusk,blob,0.0000,no
+304,b6f77fda-33d2260f.jpg,-0.0625,undefined,city street,daytime,gate,0.9952,no
+305,bc0932fb-f2731c60.jpg,-0.0967,rainy,city street,dawn/dusk,gate,0.9878,no
+306,bf5b423c-eb2447d8.jpg,-0.0897,clear,highway,daytime,gate,0.9993,glare
+307,c9dedfc8-b23ac57e.jpg,-0.1233,overcast,highway,daytime,blob,0.0002,no
+308,beea0870-130c4849.jpg,0.1871,clear,city street,dawn/dusk,gate,0.9999,glare
+309,b818033e-f4657ed3.jpg,0.2510,overcast,residential,daytime,heuristic,0.0012,no
+310,be3147c4-1f271e92.jpg,0.0257,undefined,city street,daytime,gate,0.9058,no
+311,c66a2cb5-80c469d8.jpg,0.2408,undefined,highway,daytime,heuristic,0.0001,no
+312,bc24e2f5-b39b7137.jpg,-0.0447,rainy,city street,dawn/dusk,gate,0.9989,no
+313,b93a8e92-e5a0589d.jpg,0.2894,overcast,residential,daytime,heuristic,0.0000,no
+314,c070f253-79cd771d.jpg,0.2665,overcast,city street,daytime,heuristic,0.0001,no
+315,bf9aa573-01b4b4f8.jpg,-0.0524,overcast,highway,dawn/dusk,gate,0.9995,glare
+316,c1af705e-dfb1664f.jpg,0.2326,snowy,city street,dawn/dusk,heuristic,0.0003,no
+317,b570f833-dd98c0f2.jpg,0.3736,overcast,residential,daytime,heuristic,0.0092,no
+318,b6decb24-3f0404d4.jpg,-0.0492,snowy,city street,dawn/dusk,gate,0.8321,glare
+319,b5859b97-9d5532a9.jpg,-0.1022,clear,city street,daytime,gate,0.8204,glare
+320,bd507fe5-c54d7cb2.jpg,0.0672,rainy,city street,daytime,gate,0.8997,no
+321,c37b8378-9c23f3b3.jpg,-0.0715,partly cloudy,city street,dawn/dusk,blob,0.0116,no
+322,b1f022d3-45162c67.jpg,0.2480,undefined,city street,daytime,heuristic,0.0028,no
+323,b6b047b4-3fccc761.jpg,-0.1212,snowy,highway,dawn/dusk,gate,0.9962,glare
+324,bf2fac72-133aa7bd.jpg,-0.0696,rainy,residential,dawn/dusk,gate,0.9954,no
+325,c31c9630-58e757e5.jpg,0.0013,snowy,city street,dawn/dusk,gate,0.9794,no
+326,c2680d40-90d19d17.jpg,0.0598,rainy,city street,daytime,gate,0.7591,no
+327,c96d4996-d78b1b88.jpg,0.2477,overcast,city street,daytime,heuristic,0.0049,no
+328,bd812175-d418c63b.jpg,0.0538,rainy,highway,daytime,gate,0.8527,no
+329,bee5ec8b-493be8dd.jpg,-0.0766,partly cloudy,highway,daytime,blob,0.0010,no
+330,bd1bdca8-3cc740b7.jpg,-0.1674,overcast,city street,daytime,blob,0.0001,no
+331,b1d7b3ac-2a92e19f.jpg,-0.0602,clear,residential,dawn/dusk,gate,0.9997,glare
+332,bee09035-01100c39.jpg,-0.0024,undefined,city street,daytime,gate,0.9789,glare
+333,b89886bb-e171a804.jpg,-0.1976,clear,highway,dawn/dusk,blob,0.0000,no
+334,c1d9edc8-8986da55.jpg,-0.1319,partly cloudy,city street,daytime,gate,0.9941,glare
+335,b857eb06-434af6c0.jpg,0.2460,rainy,city street,daytime,heuristic,0.0000,no
+336,c0d3128e-7887e513.jpg,0.0197,clear,highway,dawn/dusk,blob+gate,0.7708,no
+337,b4e97132-0dbc3f9f.jpg,-0.2098,overcast,city street,daytime,blob,0.0051,no
+338,b501bb52-7282ae0d.jpg,-0.0385,clear,city street,dawn/dusk,gate,0.8398,glare

@@ -1,0 +1,33 @@
+{
+  "bdd_to_kitti_id": {
+    "car": 0,
+    "truck": 2,
+    "pedestrian": 3,
+    "person": 3,
+    "rider": 5,
+    "train": 6
+  },
+  "kitti_names": {
+    "0": "car",
+    "2": "truck",
+    "3": "pedestrian",
+    "5": "cyclist",
+    "6": "tram"
+  },
+  "dropped_bdd_classes": [
+    "bus",
+    "bicycle",
+    "motorcycle",
+    "bike",
+    "motor",
+    "traffic light",
+    "traffic sign",
+    "other person",
+    "other vehicle",
+    "trailer"
+  ],
+  "eval_prediction_merge": {
+    "van (1)": "car (0)"
+  },
+  "note": "fixed before any BDD evaluation; BDD 'rider' includes motorcyclists"
+}

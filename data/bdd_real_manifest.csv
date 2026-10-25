@@ -1,0 +1,145 @@
+name,is_glared,weather,scene,n_objects
+b4ecb933-08326feb.jpg,1,clear,city street,18
+bc8c555a-5f402650.jpg,1,undefined,city street,14
+c9403737-3743ae01.jpg,1,partly cloudy,city street,6
+bd31fb8b-28ae6a12.jpg,1,undefined,city street,13
+c72b8356-0bac66a5.jpg,1,clear,city street,20
+c680eea3-5a7f9086.jpg,1,clear,highway,13
+bc24f222-dad76e37.jpg,1,clear,highway,7
+b4b07c88-e71768f1.jpg,1,clear,city street,14
+b9782b2a-681c4b4d.jpg,1,clear,residential,15
+b4c89ab1-5c72cd7d.jpg,1,partly cloudy,city street,19
+c1bb60fd-24b6cf0b.jpg,1,clear,city street,4
+b386d34e-a6a9ea07.jpg,1,rainy,residential,10
+c0aa83ea-5e7cbb16.jpg,1,clear,city street,10
+c8573105-4f2e7c11.jpg,1,partly cloudy,highway,20
+bf8feaf5-cf2b6195.jpg,1,clear,city street,13
+b9fc97df-397f8a5d.jpg,1,undefined,city street,24
+b394dd7a-db2b62a1.jpg,1,clear,city street,11
+b4b07c88-3e6d65a0.jpg,1,clear,city street,13
+c878b7e1-a736922b.jpg,1,rainy,city street,8
+b5548481-6ffc0c74.jpg,1,snowy,residential,9
+bc97328c-1869fa3c.jpg,1,clear,city street,31
+c9106ec8-62580195.jpg,1,clear,city street,22
+c26b9b25-a8bbf0b5.jpg,1,clear,residential,11
+b8b2be1e-4c0bf0b9.jpg,1,undefined,city street,12
+b5dc7a6d-8ef7e8b8.jpg,1,partly cloudy,city street,20
+b344266e-2e034c1e.jpg,1,clear,city street,19
+bae92945-99223ba6.jpg,1,overcast,residential,8
+ba4adf3d-27e3cae5.jpg,1,undefined,city street,9
+b855a117-5b67fec3.jpg,1,partly cloudy,city street,20
+c019c1f1-883ea964.jpg,1,undefined,highway,5
+bbc357f2-ddaa5e79.jpg,1,undefined,city street,16
+b394dd7a-fe45748a.jpg,1,undefined,residential,15
+c2341eec-16d212b8.jpg,1,undefined,city street,11
+c8eeb9c9-cdadaee2.jpg,1,clear,city street,10
+b9fc97df-9b839325.jpg,1,rainy,city street,14
+b97b9ee8-ea15f29a.jpg,1,overcast,city street,15
+bf7f98e7-026008d3.jpg,1,snowy,city street,12
+c9708ee8-31f4eece.jpg,1,clear,city street,23
+c741a3b6-17ca1b7e.jpg,1,partly cloudy,highway,12
+c43052f6-d337ba62.jpg,1,clear,highway,19
+c83c10de-0d2047c8.jpg,1,undefined,undefined,4
+c45c7487-c44e6bab.jpg,1,partly cloudy,city street,10
+bd3bd3ab-8e38f822.jpg,1,clear,city street,5
+c57cda5b-7ca48687.jpg,1,undefined,highway,10
+b97b9ee8-0dfbbe35.jpg,1,undefined,residential,3
+be3e9c45-d47775f3.jpg,1,clear,residential,18
+c52f53f8-1df973bb.jpg,1,clear,highway,20
+c202c860-fbf85ab9.jpg,1,clear,highway,12
+c0de5178-dd9fe4fb.jpg,1,clear,residential,19
+c536c7e6-f9b2808f.jpg,1,clear,highway,12
+bfaca2bb-30af2110.jpg,1,clear,city street,18
+c8f6f631-a1eb5133.jpg,1,undefined,city street,15
+bb3bb8c0-2ef3abc6.jpg,1,snowy,highway,40
+b305fc0b-ec8916d5.jpg,1,overcast,highway,2
+b99aea27-68a2c988.jpg,1,clear,residential,17
+b701e0ad-0179d536.jpg,1,clear,city street,8
+c5121aec-f19f3e8d.jpg,1,clear,highway,4
+bd989210-ecdee00d.jpg,1,undefined,city street,7
+bbf2bd83-1f5c87da.jpg,1,partly cloudy,city street,11
+beb712cc-ee31a67b.jpg,1,partly cloudy,city street,27
+b47262a4-aa7a5ad9.jpg,1,clear,city street,17
+b869965a-f5ff417c.jpg,1,clear,highway,4
+bf5b423c-eb2447d8.jpg,1,clear,highway,8
+beea0870-130c4849.jpg,1,clear,city street,8
+bf9aa573-01b4b4f8.jpg,1,overcast,highway,2
+b6decb24-3f0404d4.jpg,1,snowy,city street,13
+b5859b97-9d5532a9.jpg,1,clear,city street,22
+b6b047b4-3fccc761.jpg,1,snowy,highway,5
+b1d7b3ac-2a92e19f.jpg,1,clear,residential,5
+bee09035-01100c39.jpg,1,undefined,city street,4
+c1d9edc8-8986da55.jpg,1,partly cloudy,city street,11
+b501bb52-7282ae0d.jpg,1,clear,city street,8
+ca18c314-eec8974d.jpg,0,clear,city street,11
+c0309dda-23a5c949.jpg,0,clear,city street,20
+bcbb5f4d-93c5f35d.jpg,0,clear,city street,9
+c02d91b8-8b1bdadc.jpg,0,clear,city street,27
+bd2dfe52-a557f832.jpg,0,clear,city street,15
+b8e63e55-1b48cdef.jpg,0,clear,city street,7
+b84eef86-eb4bb6e0.jpg,0,clear,city street,11
+c752e922-918d3afc.jpg,0,clear,city street,9
+bc5e32e9-f71674c4.jpg,0,clear,city street,13
+c427410f-07d5dfe7.jpg,0,clear,city street,6
+c447f74e-64671040.jpg,0,clear,city street,26
+c993615f-20359e85.jpg,0,clear,city street,23
+c4bfc4c7-98ed20f8.jpg,0,clear,city street,8
+c927d51b-92852659.jpg,0,clear,city street,12
+b398327e-f873cb8b.jpg,0,clear,city street,5
+c3cae07c-b1c025cf.jpg,0,clear,city street,23
+be651ed5-5ee1f563.jpg,0,clear,city street,11
+c366973d-c03525b0.jpg,0,clear,city street,4
+b4ff6bda-27a63ee8.jpg,0,clear,city street,6
+bcbfab33-5add26c9.jpg,0,clear,city street,16
+bd1e9944-4fd7ac70.jpg,0,clear,highway,10
+b7bd8b85-9f43d43e.jpg,0,clear,highway,6
+c95f4860-7342216b.jpg,0,clear,highway,18
+c5a170ce-85355a1b.jpg,0,clear,highway,7
+bf70a9e2-55b26931.jpg,0,clear,highway,7
+b570f833-3bd87d01.jpg,0,clear,highway,11
+b459e707-2d208c56.jpg,0,clear,highway,8
+c39a0a67-dcf8ab72.jpg,0,clear,highway,14
+b89bf84d-d2c2e5a7.jpg,0,clear,highway,16
+b2f4a409-5adcc4f0.jpg,0,clear,residential,7
+b1d7b3ac-9e14f05f.jpg,0,clear,residential,8
+b1d4b62c-60aab822.jpg,0,clear,residential,13
+b557283b-705f9d96.jpg,0,clear,residential,29
+c71de7ef-ad5d9110.jpg,0,clear,residential,7
+b3a238e3-ede6d45d.jpg,0,clear,residential,21
+c5def92b-7c703f2f.jpg,0,overcast,city street,2
+c1707ab9-102247cf.jpg,0,overcast,highway,6
+bf7e1159-054559d2.jpg,0,overcast,highway,10
+b93bd867-726d338b.jpg,0,overcast,residential,19
+bdf19076-c53d74c5.jpg,0,partly cloudy,city street,2
+bd656105-bfcf9d5c.jpg,0,partly cloudy,city street,33
+c690ecdd-4d7973ad.jpg,0,partly cloudy,city street,18
+b85fb98d-41e7213c.jpg,0,partly cloudy,city street,14
+b8685330-d275b328.jpg,0,partly cloudy,city street,14
+baeb920c-a950cb02.jpg,0,partly cloudy,city street,14
+ba9baf3d-415342a2.jpg,0,partly cloudy,city street,17
+c4e926af-43c5f8d3.jpg,0,partly cloudy,city street,14
+bd9dbebc-30ccb9f3.jpg,0,partly cloudy,highway,9
+bedcfa26-e2d45cac.jpg,0,partly cloudy,highway,20
+bc328c1f-28b41b8d.jpg,0,rainy,city street,19
+bfdd9ffd-3943106e.jpg,0,rainy,city street,11
+b64e7cbc-d7dba7f9.jpg,0,rainy,residential,12
+c37b9726-5056fc28.jpg,0,snowy,city street,8
+b2e54795-698ce97f.jpg,0,snowy,city street,10
+b8c3f870-db0f236f.jpg,0,snowy,highway,13
+c732f53b-304559b2.jpg,0,snowy,highway,3
+b3450139-9dcaced8.jpg,0,snowy,residential,13
+b4a23106-80491109.jpg,0,undefined,city street,8
+bec7b5c0-177923dd.jpg,0,undefined,city street,12
+b4e7cde5-3ae908a3.jpg,0,undefined,city street,5
+b533db8e-afb2e60c.jpg,0,undefined,city street,23
+bb429905-efd7b1aa.jpg,0,undefined,city street,4
+c0be0e03-063c7cf7.jpg,0,undefined,city street,2
+c4f65761-4cdc3348.jpg,0,undefined,city street,5
+b5b94ff0-26c04398.jpg,0,undefined,city street,8
+bbc19191-6e9a792b.jpg,0,undefined,city street,24
+b6f2176b-fcca7545.jpg,0,undefined,city street,15
+c5530340-6ca6f8bc.jpg,0,undefined,highway,18
+bf77e9b1-ebc57a82.jpg,0,undefined,highway,2
+c6148dad-03eb1951.jpg,0,undefined,residential,2
+bbcf4d70-162ec709.jpg,0,undefined,residential,12
+c02d414a-44e52614.jpg,0,clear,city street,11
